@@ -26,34 +26,26 @@ Nota: per dettagli sull’implementazione dell’interattività, controlla `scri
 
 ---
 
-## Eseguire e testare in locale ▶️
+## Funzionalità ✅
 
-1. Anteprima statica:
-     - Apri `index.html` direttamente nel browser, oppure
-     - Avvia un semplice server statico:
-         ```
-         python -m http.server 8000
-         ```
-         e visita `http://localhost:8000`.
+- Sito statico con pagine HTML, CSS e JS ottimizzate per contenuti informativi.  
+- Layout responsivo e accessibile per dispositivi mobili e desktop.  
+- Galleria immagini e sezioni evento aggiornabili dai file di contenuto.  
+- Interattività client-side (menu, slider, form) gestita da `script.js`.  
+- Integrazione con backend esterno per funzioni dinamiche (API, invio form, salvataggio dati) tramite chiamate HTTP.  
+- Organizzazione degli asset in cartelle dedicate (immagini, icone, CSS, JS).  
+- Facile personalizzazione dei testi e degli stili tramite `index.html` e `style.css`.  
 
-2. Backend:
-     - GitHub Pages non esegue codice server-side. Esegui `backend2.py` su un server esterno (VPS, Railway, Heroku, ecc.) o in locale usando l’ambiente Python adeguato (Flask/FastAPI, se utilizzati).
-     - Configura l’URL dell’API nel frontend (`script.js`) per puntare al backend attivo.
+## Vantaggi 🌟
 
----
-
-## Aggiornare il sito 📦
-
-- Modifica i file HTML/CSS/JS nella root o nelle sottocartelle.
-- Esempio di flusso Git:
-    ```
-    git add .
-    git commit -m "Aggiornamento contenuti"
-    git push origin main
-    ```
-- Dopo il push, GitHub Pages aggiorna il sito pubblico (tempo di propagazione variabile).
-
----
+- Deploy semplice e gratuito con GitHub Pages per contenuti statici.  
+- Prestazioni elevate e caricamento rapido grazie all’assenza di render server-side.  
+- Bassi costi di gestione; backend separato solo se necessario.  
+- Maggiore sicurezza mantenendo credenziali e logica sensibile sul server esterno.  
+- Facilità di manutenzione e contributi: workflow Git standard (commit/push).  
+- Compatibilità SEO e con i principali browser.  
+- Scalabilità: il frontend rimane statico mentre le funzionalità avanzate possono crescere lato backend.  
+- Semplice ambiente di test locale prima del deploy pubblico.
 
 ## Limitazioni e consigli ⚠️
 
