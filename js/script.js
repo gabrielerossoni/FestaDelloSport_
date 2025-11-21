@@ -579,29 +579,39 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Update active nav link on scroll
+// Rendi il nav dinamico e robusto su scroll/click/load
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-link");
 
-window.addEventListener("scroll", () => {
-  let current = "";
-
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-
-    if (window.scrollY >= sectionTop - 200) {
-      current = section.getAttribute("id");
+function updateActiveNavLink() {
+  let activeId = "";
+  const scrollPos = window.scrollY + window.innerHeight / 3; // trigger zone
+  sections.forEach(section => {
+    if (
+      scrollPos >= section.offsetTop &&
+      scrollPos < section.offsetTop + section.offsetHeight
+    ) {
+      activeId = section.getAttribute("id");
     }
   });
-
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === `#${current}`) {
+  navLinks.forEach(link => {
+    if (link.getAttribute("href") === `#${activeId}`) {
       link.classList.add("active");
+    } else {
+      link.classList.remove("active");
     }
   });
+}
+
+// Scroll + click
+window.addEventListener("scroll", updateActiveNavLink);
+navLinks.forEach(link => {
+  link.addEventListener("click", () =>
+    setTimeout(updateActiveNavLink, 350)
+  );
 });
+document.addEventListener("DOMContentLoaded", updateActiveNavLink);
+
 
 setTimeout(() => {
   const messages = [
