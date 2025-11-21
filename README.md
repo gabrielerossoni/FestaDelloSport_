@@ -8,11 +8,11 @@ Benvenuti nella documentazione del sito della Festa dello Sport di Capralba. Que
 
 - Tipo di sito: statico (HTML, CSS, JS) pubblicato tramite GitHub Pages.  
 - URL di esempio: `https://gabrielerossoni.github.io/FestaDelloSport_/`  
-- File principali:
-    - `index.html` — pagina principale 🏠  
-    - `style.css` — stili e layout 🎨  
-    - `script.js` — interattività e comportamenti client-side ⚙️  
-    - `backend2.py` — backend (non eseguito su GitHub Pages) 🧩
+- File principali
+  - `index.html` — pagina principale 🏠  
+  - `style.css` — stili e layout 🎨  
+  - `script.js` — interattività e comportamenti client-side ⚙️  
+  - `backend2.py` — backend (non eseguito su GitHub Pages) 🧩
 
 ---
 
