@@ -1,50 +1,72 @@
-# Festa dello Sport - Sito Ufficiale
+# Festa dello Sport — Sito ufficiale 🚩
 
-Questo progetto ospita il sito web ufficiale della Festa dello Sport di Capralba, con informazioni aggiornate su eventi, cucina, musica e altro ancora.
-
----
-
-## Funzionamento del sito
-
-Il sito è principalmente un sito statico, costruito con HTML, CSS e JavaScript, pubblicato tramite GitHub Pages. Ecco come funziona nel dettaglio:
-
-### Struttura del sito
-
-- La pagina principale è `index.html`, che viene caricata automaticamente all’apertura del sito.
-- Il file `style.css` contiene tutti gli stili grafici e il layout, per garantire un’esperienza visiva coerente su diversi dispositivi.
-- Il file `script.js` gestisce tutta l’interattività, come menu dinamici, animazioni e caricamento di contenuti.
-- Le immagini e altri asset sono organizzati in cartelle dedicate per facilitare la manutenzione.
-
-### Backend
-
-- Il backend Python (`backend2.py`) non è eseguito su GitHub Pages, che supporta solo contenuti statici.
-- Il backend deve essere eseguito su un server esterno e può fornire funzionalità avanzate, come la gestione di dati dinamici o API per il frontend.
-- Attualmente, il sito funziona principalmente in modo statico. Funzionalità dinamiche saranno abilitate collegando il frontend al backend ospitato altrove.
-
-### Uso e navigazione
-
-- Gli utenti accedono al sito tramite URL GitHub Pages (es. https://gabrielerossoni.github.io/FestaDelloSport_/).
-- La navigazione è semplice e intuitiva, grazie a menu chiari e ben organizzati.
-- Il sito è responsivo e si adatta a diversi dispositivi (desktop, tablet, smartphone).
-
-### Come aggiornare il sito
-
-- Per aggiornare contenuti, modifica il file `index.html` o gli altri file HTML nella root o sottocartelle.
-- Aggiorna i file CSS e JS per modificare l’aspetto o il comportamento.
-- Dopo le modifiche, effettua il commit e il push su GitHub per aggiornare il sito online.
-- Eventuali cambiamenti backend devono essere gestiti separatamente e integrati tramite API o servizi esterni.
-
-### Limitazioni
-
-- GitHub Pages non può eseguire codice server-side come Python, quindi il backend deve essere separato.
-- Per ora, il sito è principalmente statico. Funzionalità dinamiche richiedono un backend attivo.
+Benvenuti nella documentazione del sito della Festa dello Sport di Capralba. Questo repository contiene il sito statico e alcuni file di supporto per funzionalità dinamiche.
 
 ---
 
-## Contatti
+## Panoramica ✨
 
-Per problemi, suggerimenti o contributi, contattare: [tuo indirizzo email]
+- Tipo di sito: statico (HTML, CSS, JS) pubblicato tramite GitHub Pages.  
+- URL di esempio: `https://gabrielerossoni.github.io/FestaDelloSport_/`  
+- File principali:
+    - `index.html` — pagina principale 🏠  
+    - `style.css` — stili e layout 🎨  
+    - `script.js` — interattività e comportamenti client-side ⚙️  
+    - `backend2.py` — backend (non eseguito su GitHub Pages) 🧩
 
 ---
 
-*Grazie per l’attenzione e buona navigazione!*
+## Come funziona il sito 🛠️
+
+- Il sito è pensato per essere statico: i contenuti vengono serviti direttamente come file HTML/CSS/JS.
+- Le risorse (immagini, icone, asset) sono organizzate in cartelle dedicate per facilità di manutenzione.
+- Per funzionalità dinamiche (es. API, salvataggio dati) il frontend si collega a un backend esterno tramite chiamate HTTP (fetch/AJAX).
+
+Nota: per dettagli sull’implementazione dell’interattività, controlla `script.js`; per lo stile, controlla `style.css`; per la logica server-side, apri `backend2.py`.
+
+---
+
+## Eseguire e testare in locale ▶️
+
+1. Anteprima statica:
+     - Apri `index.html` direttamente nel browser, oppure
+     - Avvia un semplice server statico:
+         ```
+         python -m http.server 8000
+         ```
+         e visita `http://localhost:8000`.
+
+2. Backend:
+     - GitHub Pages non esegue codice server-side. Esegui `backend2.py` su un server esterno (VPS, Railway, Heroku, ecc.) o in locale usando l’ambiente Python adeguato (Flask/FastAPI, se utilizzati).
+     - Configura l’URL dell’API nel frontend (`script.js`) per puntare al backend attivo.
+
+---
+
+## Aggiornare il sito 📦
+
+- Modifica i file HTML/CSS/JS nella root o nelle sottocartelle.
+- Esempio di flusso Git:
+    ```
+    git add .
+    git commit -m "Aggiornamento contenuti"
+    git push origin main
+    ```
+- Dopo il push, GitHub Pages aggiorna il sito pubblico (tempo di propagazione variabile).
+
+---
+
+## Limitazioni e consigli ⚠️
+
+- GitHub Pages supporta solo contenuti statici: il backend deve essere separato.
+- Autenticazione, database o elaborazioni server-side richiedono un servizio esterno.
+- Per sicurezza, non inserire credenziali direttamente nei file pubblici.
+
+---
+
+## Contatti ✉️
+
+Per problemi, suggerimenti o contributi: gby.rosso7@gmail.com
+
+---
+
+Grazie per il contributo e buona navigazione! 🎉
