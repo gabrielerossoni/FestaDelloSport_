@@ -200,3 +200,10 @@ body {
   transform: scale(1.08);
   z-index: 2;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #222933 !important;
+    color: #f0f0f0 !important;
+  }
+}
