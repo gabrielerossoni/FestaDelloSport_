@@ -26,27 +26,31 @@ body {
   position: relative;
   z-index: 1;
 }
+
 .nav-link {
   position: relative;
-  transition: color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
+
 .nav-link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: linear-gradient(90deg, #f8b400, #2563eb);
-  transition: width 0.3s;
+  display: none;
 }
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
+
 .nav-link.active {
-  color: #f8b400 !important;
+  color: #f8b400;
+  -webkit-text-stroke: 1.5px rgba(248, 180, 0, 0.6);
+  filter: drop-shadow(0 0 8px rgba(248, 180, 0, 0.7)) 
+          drop-shadow(0 0 15px rgba(37, 99, 235, 0.4));
+  font-weight: 700;
 }
+
+.nav-link:hover {
+  filter: drop-shadow(0 0 6px rgba(248, 180, 0, 0.5));
+  color: #f8b400;
+}
+
 .calendar-day {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1.5px solid #f8b4001a;
