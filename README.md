@@ -57,7 +57,7 @@ Nota: per dettagli sull’implementazione dell’interattività, controlla `scri
 
 ## Contatti ✉️
 
-Per problemi, suggerimenti o contributi: inviare una mail a [gby.rosso7@gmail.com](mailto:gby.rosso7@gmail.com)
+Per problemi, suggerimenti o contributi: inviare una mail a `gby.rosso7@gmail.com`
 
 ---
 
