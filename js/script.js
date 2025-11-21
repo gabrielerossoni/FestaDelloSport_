@@ -581,11 +581,12 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 
 // Update active nav link on scroll - VERSIONE ROBUSTA
+// Update active nav link on scroll - VERSIONE ROBUSTA FIX COMPLETO
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-link");
+const navLinks = document.querySelectorAll(".nav-link, #mobile-menu a[href^='#']");
 
 function updateActiveNavLink() {
-  const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+  const scrollPosition = window.scrollY + window.innerHeight * 0.25;
   let activeId = "";
   
   sections.forEach(section => {
@@ -599,7 +600,7 @@ function updateActiveNavLink() {
   
   navLinks.forEach(link => {
     link.classList.remove("active");
-    const href = link.getAttribute("href").substring(1); // Rimuovi il #
+    const href = link.getAttribute("href").substring(1);
     if (href === activeId) {
       link.classList.add("active");
     }
@@ -609,10 +610,12 @@ function updateActiveNavLink() {
 window.addEventListener("scroll", updateActiveNavLink);
 navLinks.forEach(link => {
   link.addEventListener("click", () => {
-    setTimeout(updateActiveNavLink, 300);
+    setTimeout(updateActiveNavLink, 100);
   });
 });
-document.addEventListener("DOMContentLoaded", updateActiveNavLink);
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(updateActiveNavLink, 50);
+});
 
 
 setTimeout(() => {
