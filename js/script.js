@@ -579,36 +579,38 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Rendi il nav dinamico e robusto su scroll/click/load
-const sections = document.querySelectorAll("section");
+
+// Update active nav link on scroll - VERSIONE ROBUSTA
+const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".nav-link");
 
 function updateActiveNavLink() {
+  const scrollPosition = window.scrollY + window.innerHeight * 0.3;
   let activeId = "";
-  const scrollPos = window.scrollY + window.innerHeight / 3; // trigger zone
+  
   sections.forEach(section => {
     if (
-      scrollPos >= section.offsetTop &&
-      scrollPos < section.offsetTop + section.offsetHeight
+      scrollPosition >= section.offsetTop &&
+      scrollPosition < section.offsetTop + section.offsetHeight
     ) {
       activeId = section.getAttribute("id");
     }
   });
+  
   navLinks.forEach(link => {
-    if (link.getAttribute("href") === `#${activeId}`) {
+    link.classList.remove("active");
+    const href = link.getAttribute("href").substring(1); // Rimuovi il #
+    if (href === activeId) {
       link.classList.add("active");
-    } else {
-      link.classList.remove("active");
     }
   });
 }
 
-// Scroll + click
 window.addEventListener("scroll", updateActiveNavLink);
 navLinks.forEach(link => {
-  link.addEventListener("click", () =>
-    setTimeout(updateActiveNavLink, 350)
-  );
+  link.addEventListener("click", () => {
+    setTimeout(updateActiveNavLink, 300);
+  });
 });
 document.addEventListener("DOMContentLoaded", updateActiveNavLink);
 
