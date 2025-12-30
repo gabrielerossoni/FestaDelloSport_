@@ -2349,27 +2349,43 @@
             </div>
             
             <div class="mt-8 pt-8 border-t border-blue-800">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="h-64 rounded-lg overflow-hidden">
-
-    <!-- Google Maps placeholder -->
-    <div class="w-full h-96">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1793.14066069155!2d9.645812633888227!3d45.445994936718144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sit!4v1750318550173!5m2!1sen!2sit"
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="yes" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-    </div>
-                    <div margin-left="20px">
-                        <h3 class="text-xl font-semibold mb-4">Come Raggiungerci</h3>
-                        <p class="mb-4">L'Oratorio di Capralba si trova in via Caravaggio, 10, facilmente raggiungibile in auto.</p>
-                        <p class="mb-4"><strong>Dove Parcheggiare:</strong> Il parcheggio gratuito è disponibile presso l'oratorio e in tutte le vie circostanti, facendo attenzione ai divieti di sosta.</p>
-                        <p class="mb-4">L'accesso alla festa è aperto a tutti e senza difficoltà: l'area è facilmente accessibile anche per famiglie, bambini e persone con mobilità ridotta.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                    <!-- Google Maps -->
+                    <div class="footer-map-container">
+                        <div class="footer-map-wrapper">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1793.14066069155!2d9.645812633888227!3d45.445994936718144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sit!4v1750318550173!5m2!1sen!2sit"
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="yes" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="footer-map-iframe">
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Informazioni Come Raggiungerci -->
+                    <div class="footer-info-container">
+                        <h3 class="text-2xl font-bold mb-6 text-yellow-400">Come Raggiungerci</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-yellow-400 mr-3 mt-1 text-lg"></i>
+                                <p class="text-blue-100 leading-relaxed">L'Oratorio di Capralba si trova in <strong class="text-white">via Caravaggio, 10</strong>, facilmente raggiungibile in auto.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-parking text-yellow-400 mr-3 mt-1 text-lg"></i>
+                                <div>
+                                    <p class="text-blue-100 mb-1"><strong class="text-white">Dove Parcheggiare:</strong></p>
+                                    <p class="text-blue-100 leading-relaxed">Il parcheggio gratuito è disponibile presso l'oratorio e in tutte le vie circostanti, facendo attenzione ai divieti di sosta.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-wheelchair text-yellow-400 mr-3 mt-1 text-lg"></i>
+                                <p class="text-blue-100 leading-relaxed">L'accesso alla festa è aperto a tutti e senza difficoltà: l'area è facilmente accessibile anche per famiglie, bambini e persone con mobilità ridotta.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
