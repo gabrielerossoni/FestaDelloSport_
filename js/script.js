@@ -15,20 +15,58 @@ document.addEventListener("DOMContentLoaded", function () {
   if (closeReminderModal) {
     closeReminderModal.addEventListener("click", () => {
       reminderModal.classList.add("hidden");
-      reminderForm.reset();
-      reminderSuccess.classList.add("hidden");
+      if (reminderForm) reminderForm.reset();
+      if (reminderSuccess) reminderSuccess.classList.add("hidden");
+    });
+  }
+
+  // Chiudi modal cliccando fuori
+  if (reminderModal) {
+    reminderModal.addEventListener("click", function (e) {
+      if (e.target === reminderModal) {
+        reminderModal.classList.add("hidden");
+        if (reminderForm) reminderForm.reset();
+        if (reminderSuccess) reminderSuccess.classList.add("hidden");
+      }
     });
   }
 
   if (reminderForm) {
     reminderForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      reminderSuccess.classList.remove("hidden");
-      reminderForm.reset();
-      setTimeout(() => {
-        reminderModal.classList.add("hidden");
-        reminderSuccess.classList.add("hidden");
-      }, 3500);
+      const contact = reminderForm.querySelector('input[name="contact"]');
+      if (!contact || !contact.value.trim()) {
+        return;
+      }
+
+      // Invio dati al backend
+      fetch("http://localhost:3001/api/reminder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contact: contact.value.trim(),
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            if (reminderSuccess) reminderSuccess.classList.remove("hidden");
+            reminderForm.reset();
+            setTimeout(() => {
+              reminderModal.classList.add("hidden");
+              if (reminderSuccess) reminderSuccess.classList.add("hidden");
+            }, 3500);
+          }
+        })
+        .catch(() => {
+          // In caso di errore, mostra comunque il messaggio di successo per non confondere l'utente
+          if (reminderSuccess) reminderSuccess.classList.remove("hidden");
+          reminderForm.reset();
+          setTimeout(() => {
+            reminderModal.classList.add("hidden");
+            if (reminderSuccess) reminderSuccess.classList.add("hidden");
+          }, 3500);
+        });
     });
   }
 });
@@ -323,17 +361,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ===== RATING STARS =====
 document.addEventListener("DOMContentLoaded", function () {
-  const ratingStars = document.querySelectorAll(".rating-star");
+  const feedbackForm = document.getElementById("feedback-form");
   const ratingInput = document.getElementById("rating");
 
-  if (ratingInput) {
+  if (feedbackForm && ratingInput) {
+    // Seleziona solo le stelle all'interno del form feedback
+    const ratingStars = feedbackForm.querySelectorAll(".rating-star");
+
     ratingStars.forEach((star) => {
-      star.addEventListener("click", () => {
-        const rating = parseInt(star.getAttribute("data-rating"));
+      star.addEventListener("click", function () {
+        const rating = parseInt(this.getAttribute("data-rating"));
+        if (isNaN(rating)) return;
+
         ratingInput.value = rating;
 
-        ratingStars.forEach((s, index) => {
-          if (index < rating) {
+        // Aggiorna l'aspetto di tutte le stelle nel form
+        ratingStars.forEach((s) => {
+          const starRating = parseInt(s.getAttribute("data-rating"));
+          if (starRating <= rating) {
             s.classList.remove("text-gray-300");
             s.classList.add("text-yellow-500");
           } else {
@@ -400,4 +445,443 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+});
+
+// ===== FEEDBACK FORM =====
+document.addEventListener("DOMContentLoaded", function () {
+  const feedbackForm = document.getElementById("feedback-form");
+  const feedbackSuccess = document.getElementById("feedback-success");
+  const feedbackError = document.getElementById("feedback-error");
+  const errorMessage = document.getElementById("error-message");
+  const submitText = document.getElementById("submit-text");
+  const loadingText = document.getElementById("loading-text");
+  const feedbackList = document.getElementById("feedback-list");
+  const feedbackLoading = document.getElementById("feedback-loading");
+  const noFeedback = document.getElementById("no-feedback");
+
+  // Carica feedback esistenti
+  function loadFeedbacks() {
+    if (!feedbackList) return;
+
+    fetch("http://localhost:3001/api/feedback?limit=10")
+      .then((res) => res.json())
+      .then((data) => {
+        if (feedbackLoading) feedbackLoading.classList.add("hidden");
+
+        if (data.success && data.data && data.data.length > 0) {
+          feedbackList.innerHTML = "";
+          data.data.forEach((feedback) => {
+            const feedbackItem = document.createElement("div");
+            feedbackItem.className =
+              "bg-gray-50 p-4 rounded-lg border border-gray-200";
+            feedbackItem.innerHTML = `
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <p class="font-semibold text-gray-800">${
+                    feedback.nome || "Anonimo"
+                  }</p>
+                  <p class="text-xs text-gray-500">
+                    ${new Date(feedback.timestamp).toLocaleDateString("it-IT", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+                <div class="flex">
+                  ${Array.from({ length: 5 }, (_, i) => {
+                    return `<span class="${
+                      i < feedback.rating ? "text-yellow-500" : "text-gray-300"
+                    }">★</span>`;
+                  }).join("")}
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">${feedback.message}</p>
+            `;
+            feedbackList.appendChild(feedbackItem);
+          });
+          feedbackList.classList.remove("hidden");
+          if (noFeedback) noFeedback.classList.add("hidden");
+        } else {
+          feedbackList.classList.add("hidden");
+          if (noFeedback) noFeedback.classList.remove("hidden");
+        }
+      })
+      .catch(() => {
+        if (feedbackLoading) feedbackLoading.classList.add("hidden");
+        feedbackList.classList.add("hidden");
+        if (noFeedback) noFeedback.classList.remove("hidden");
+      });
+  }
+
+  // Carica feedback all'avvio
+  loadFeedbacks();
+
+  // Gestione invio feedback
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const ratingInput = document.getElementById("rating");
+      const messageInput = document.getElementById("feedback-message");
+      const nameInput = document.getElementById("feedback-name");
+
+      if (!ratingInput || !messageInput) return;
+
+      const rating = parseInt(ratingInput.value) || 0;
+      const message = messageInput.value.trim();
+      const name = nameInput ? nameInput.value.trim() : "";
+
+      if (rating === 0) {
+        if (feedbackError && errorMessage) {
+          errorMessage.textContent =
+            "Per favore, seleziona una valutazione prima di inviare.";
+          feedbackError.classList.remove("hidden");
+        }
+        return;
+      }
+
+      if (!message) {
+        if (feedbackError && errorMessage) {
+          errorMessage.textContent = "Il messaggio è obbligatorio.";
+          feedbackError.classList.remove("hidden");
+        }
+        return;
+      }
+
+      // Mostra stato di caricamento
+      if (submitText) submitText.classList.add("hidden");
+      if (loadingText) loadingText.classList.remove("hidden");
+      if (feedbackError) feedbackError.classList.add("hidden");
+
+      // Invio dati al backend
+      fetch("http://localhost:3001/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: name || "Anonimo",
+          rating: rating,
+          message: message,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (submitText) submitText.classList.remove("hidden");
+          if (loadingText) loadingText.classList.add("hidden");
+
+          if (data.success) {
+            feedbackForm.reset();
+            // Reset solo le stelle del form feedback
+            const ratingStars = feedbackForm.querySelectorAll(".rating-star");
+            ratingStars.forEach((star) => {
+              star.classList.remove("text-yellow-500");
+              star.classList.add("text-gray-300");
+            });
+            if (ratingInput) ratingInput.value = "0";
+
+            if (feedbackSuccess) feedbackSuccess.classList.remove("hidden");
+            if (feedbackError) feedbackError.classList.add("hidden");
+
+            // Ricarica la lista feedback
+            setTimeout(() => {
+              loadFeedbacks();
+              if (feedbackSuccess) feedbackSuccess.classList.add("hidden");
+            }, 2000);
+          } else {
+            if (feedbackError && errorMessage) {
+              errorMessage.textContent =
+                data.error || "Errore nell'invio del feedback.";
+              feedbackError.classList.remove("hidden");
+            }
+          }
+        })
+        .catch(() => {
+          if (submitText) submitText.classList.remove("hidden");
+          if (loadingText) loadingText.classList.add("hidden");
+          if (feedbackError && errorMessage) {
+            errorMessage.textContent =
+              "Errore di connessione al server. Riprova più tardi.";
+            feedbackError.classList.remove("hidden");
+          }
+        });
+    });
+  }
+});
+
+// ===== DOWNLOAD MENU =====
+document.addEventListener("DOMContentLoaded", function () {
+  // Trova tutti i link che contengono "Scarica il menu"
+  document.querySelectorAll("a").forEach((link) => {
+    if (
+      link.textContent.includes("Scarica il menu") ||
+      link.textContent.includes("menu completo")
+    ) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        downloadMenu();
+      });
+    }
+  });
+});
+
+function downloadMenu() {
+  const menuSection = document.getElementById("menu");
+  if (!menuSection) return;
+
+  // Clona la sezione e mostra tutti i contenuti
+  const clonedSection = menuSection.cloneNode(true);
+  const menuContents = clonedSection.querySelectorAll(".menu-content");
+  menuContents.forEach((content) => {
+    content.classList.remove("hidden");
+  });
+
+  // Rimuovi i tab buttons dalla versione stampabile
+  const tabsContainer = clonedSection.querySelector(".mb-8");
+  if (tabsContainer) tabsContainer.remove();
+
+  // Crea una nuova finestra per la stampa
+  const printWindow = window.open("", "_blank");
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Menu - Festa dello Sport</title>
+      <meta charset="UTF-8">
+      <style>
+        @media print {
+          @page { margin: 1cm; }
+        }
+        body {
+          font-family: 'Montserrat', Arial, sans-serif;
+          padding: 20px;
+          max-width: 800px;
+          margin: 0 auto;
+          color: #1f2937;
+        }
+        h1 {
+          text-align: center;
+          color: #1e40af;
+          margin-bottom: 30px;
+          font-size: 2.5em;
+        }
+        h2 {
+          color: #2563eb;
+          border-bottom: 2px solid #2563eb;
+          padding-bottom: 10px;
+          margin-top: 30px;
+          font-size: 1.5em;
+        }
+        .menu-content {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+          margin-top: 20px;
+        }
+        .menu-item {
+          margin-bottom: 20px;
+          padding: 15px;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          background: #fff;
+        }
+        .menu-item h3 {
+          margin: 0 0 10px 0;
+          color: #1f2937;
+          font-size: 1.2em;
+        }
+        .menu-item p {
+          margin: 0;
+          color: #6b7280;
+          font-size: 0.95em;
+        }
+        .hidden {
+          display: none !important;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Menu - Festa dello Sport di Capralba</h1>
+      ${clonedSection.innerHTML}
+    </body>
+    </html>
+  `);
+  printWindow.document.close();
+  setTimeout(() => {
+    printWindow.print();
+  }, 250);
+}
+
+// ===== DOWNLOAD PROGRAMMA =====
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("a").forEach((link) => {
+    if (
+      link.textContent.includes("Scarica il programma") ||
+      link.textContent.includes("programma completo")
+    ) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        downloadProgramma();
+      });
+    }
+  });
+});
+
+function downloadProgramma() {
+  const eventsSection = document.getElementById("events");
+  if (!eventsSection) return;
+
+  // Clona la sezione e mostra tutti i contenuti degli eventi
+  const clonedSection = eventsSection.cloneNode(true);
+  const eventContents = clonedSection.querySelectorAll(".event-day-content");
+  eventContents.forEach((content) => {
+    content.classList.remove("hidden");
+  });
+
+  // Rimuovi i tab buttons dalla versione stampabile
+  const tabsContainer = clonedSection.querySelector(".mb-8");
+  if (tabsContainer) tabsContainer.remove();
+
+  const printWindow = window.open("", "_blank");
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Programma Eventi - Festa dello Sport</title>
+      <meta charset="UTF-8">
+      <style>
+        @media print {
+          @page { margin: 1cm; }
+        }
+        body {
+          font-family: 'Montserrat', Arial, sans-serif;
+          padding: 20px;
+          max-width: 800px;
+          margin: 0 auto;
+          color: #1f2937;
+        }
+        h1 {
+          text-align: center;
+          color: #1e40af;
+          margin-bottom: 30px;
+          font-size: 2.5em;
+        }
+        h2 {
+          color: #2563eb;
+          border-bottom: 2px solid #2563eb;
+          padding-bottom: 10px;
+          margin-top: 30px;
+          font-size: 1.5em;
+        }
+        .event-day-content {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+          margin-top: 20px;
+        }
+        .calendar-day {
+          margin-bottom: 20px;
+          padding: 15px;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          background: #f9fafb;
+        }
+        .calendar-day h3 {
+          margin: 0 0 10px 0;
+          color: #1f2937;
+          font-size: 1.2em;
+        }
+        .calendar-day p {
+          margin: 5px 0;
+          color: #6b7280;
+          font-size: 0.95em;
+        }
+        .hidden {
+          display: none !important;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Programma Eventi - Festa dello Sport di Capralba</h1>
+      ${clonedSection.innerHTML}
+    </body>
+    </html>
+  `);
+  printWindow.document.close();
+  setTimeout(() => {
+    printWindow.print();
+  }, 250);
+}
+
+// ===== BACK TO TOP BUTTON =====
+document.addEventListener("DOMContentLoaded", function () {
+  const backToTopBtn = document.getElementById("back-to-top");
+
+  if (backToTopBtn) {
+    // Mostra/nascondi button in base allo scroll
+    window.addEventListener("scroll", function () {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.remove("opacity-0", "invisible");
+        backToTopBtn.classList.add("opacity-100", "visible");
+      } else {
+        backToTopBtn.classList.add("opacity-0", "invisible");
+        backToTopBtn.classList.remove("opacity-100", "visible");
+      }
+    });
+
+    // Click per tornare in cima
+    backToTopBtn.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+});
+
+// ===== ATTENTION POPUP (dopo 1 minuto di inattività) =====
+document.addEventListener("DOMContentLoaded", function () {
+  const attentionPopup = document.getElementById("attention-popup");
+  const closeAttentionPopup = document.getElementById("close-attention-popup");
+  const attentionMessage = document.getElementById("attention-message");
+
+  if (!attentionPopup || !closeAttentionPopup) return;
+
+  const messages = [
+    "Stai ancora qui? Non perdere l'occasione di prenotare un tavolo! 🍽️",
+    "La Festa dello Sport ti aspetta! Controlla il programma eventi! ⚽",
+    "Hai visto il nostro menu? C'è qualcosa di delizioso per tutti! 🍕",
+    "Non dimenticare di prenotare il tuo tavolo per non perdere il tuo posto! 🎉",
+    "Scopri tutti gli eventi in programma per la Festa dello Sport! 🎊",
+  ];
+
+  let inactivityTimer;
+  let hasShownPopup = false;
+
+  function resetTimer() {
+    clearTimeout(inactivityTimer);
+    if (!hasShownPopup) {
+      inactivityTimer = setTimeout(() => {
+        if (attentionMessage) {
+          attentionMessage.textContent =
+            messages[Math.floor(Math.random() * messages.length)];
+        }
+        attentionPopup.classList.remove("hidden");
+        hasShownPopup = true;
+      }, 60000); // 1 minuto
+    }
+  }
+
+  // Reset timer su eventi utente
+  const events = ["mousedown", "keydown", "scroll", "touchstart"];
+  events.forEach((event) => {
+    document.addEventListener(event, resetTimer, { passive: true });
+  });
+
+  // Chiudi popup
+  closeAttentionPopup.addEventListener("click", () => {
+    attentionPopup.classList.add("hidden");
+  });
+
+  // Inizia il timer
+  resetTimer();
 });
