@@ -219,6 +219,14 @@ document.addEventListener("DOMContentLoaded", function () {
               btn.title = `${disponibili} posti disponibili`;
             }
           });
+        } else {
+          // Reset buttons if API response is unsuccessful
+          tableBtns.forEach((btn) => {
+            btn.style.opacity = "1";
+            btn.classList.remove("booked");
+            btn.disabled = false;
+            btn.title = "Errore nel caricamento, riprova";
+          });
         }
       })
       .catch((err) => {
