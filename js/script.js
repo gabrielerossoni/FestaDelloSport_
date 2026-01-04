@@ -1090,7 +1090,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// ===== ATTENTION POPUP (dopo 1 minuto di inattività) =====
+// ===== ATTENTION POPUP (dopo 5 minutI di inattività) =====
 document.addEventListener("DOMContentLoaded", function () {
   const attentionPopup = document.getElementById("attention-popup");
   const closeAttentionPopup = document.getElementById("close-attention-popup");
@@ -1119,7 +1119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         attentionPopup.classList.remove("hidden");
         hasShownPopup = true;
-      }, 60000); // 1 minuto
+      }, 300000); // 5 minuto
     }
   }
 

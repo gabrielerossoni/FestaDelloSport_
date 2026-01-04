@@ -4,11 +4,14 @@
 
 1. Installa le dipendenze:
 pip install -r requirements.txt2. Avvia in sviluppo:
-python backend2.py3. Avvia in produzione:
+python backend.py3. Avvia in produzione:
+
 # Con Gunicorn (raccomandato)
-gunicorn -w 4 -b 0.0.0.0:3001 backend2:app
+
+gunicorn -w 4 -b 0.0.0.0:3001 backend:app
 
 # Oppure usa lo script
+
 ./start_production.sh  # Linux/Mac
 start_production.bat   # Windows## Backup Database
 
@@ -24,7 +27,7 @@ python backup_db.pyPer backup automatici, configura un cron job (Linux/Mac):
 
 ## Note Produzione
 
-- Usa sempre Gunicorn in produzione (non `python backend2.py`)
-- Configura CORS in `backend2.py` con i domini autorizzati
+- Usa sempre Gunicorn in produzione (non `python backend.py`)
+- Configura CORS in `backend.py` con i domini autorizzati
 - Esegui backup regolari del database
 - Monitora i log per errori

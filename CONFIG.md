@@ -40,7 +40,7 @@
    pip install flask flask-cors
    3. Avvia il server:
    cd backend
-   python backend2.py
+   python backend.py
    4. Per produzione, usa un servizio come:
    - Heroku
    - Railway
@@ -50,7 +50,7 @@
 ## File di Configurazione
 
 - `js/config.js` - Configurazione frontend (URL API)
-- `backend/backend2.py` - Configurazione backend (PORT, DB_PATH)
+- `backend/backend.py` - Configurazione backend (PORT, DB_PATH)
 - `index.html` - Meta tag, titoli, descrizioni
 
 ## Troubleshooting
