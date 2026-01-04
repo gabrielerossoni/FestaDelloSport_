@@ -649,14 +649,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ratingInput.value = rating;
 
-        // Aggiorna l'aspetto di tutte le stelle nel form
+        // Aggiorna l'aspetto di tutte le stelle nel form — usa classe "selected" per maggiore specificità
         ratingStars.forEach((s) => {
           const starRating = parseInt(s.getAttribute("data-rating"));
           if (starRating <= rating) {
+            s.classList.add("selected");
             s.classList.remove("text-gray-300");
-            s.classList.add("text-yellow-500");
           } else {
-            s.classList.remove("text-yellow-500");
+            s.classList.remove("selected");
             s.classList.add("text-gray-300");
           }
         });

@@ -464,9 +464,9 @@ body {
     color: #92400e !important;
   }
   .rating-star {
-    color: #273347 !important;
+    color: inherit;
   }
-  .rating-star.active {
+  .rating-star.selected {
     color: #fac420 !important;
   }
   .modal,
