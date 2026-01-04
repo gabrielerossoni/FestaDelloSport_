@@ -12,7 +12,7 @@ Benvenuti nella documentazione del sito della Festa dello Sport di Capralba. Que
   - `index.html` — pagina principale 🏠  
   - `style.css` — stili e layout 🎨  
   - `script.js` — interattività e comportamenti client-side ⚙️  
-  - `backend2.py` — backend (non eseguito su GitHub Pages) 🧩
+  - `backend.py` — backend (non eseguito su GitHub Pages) 🧩
 
 ---
 
@@ -22,7 +22,7 @@ Benvenuti nella documentazione del sito della Festa dello Sport di Capralba. Que
 - Le risorse (immagini, icone, asset) sono organizzate in cartelle dedicate per facilità di manutenzione.
 - Per funzionalità dinamiche (es. API, salvataggio dati) il frontend si collega a un backend esterno tramite chiamate HTTP (fetch/AJAX).
 
-Nota: per dettagli sull’implementazione dell’interattività, controlla `script.js`; per lo stile, controlla `style.css`; per la logica server-side, apri `backend2.py`.
+Nota: per dettagli sull’implementazione dell’interattività, controlla `script.js`; per lo stile, controlla `style.css`; per la logica server-side, apri `backend.py`.
 
 ---
 
