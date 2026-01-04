@@ -35,17 +35,38 @@ document.addEventListener("DOMContentLoaded", function () {
     reminderForm.addEventListener("submit", function (e) {
       e.preventDefault();
       const contact = reminderForm.querySelector('input[name="contact"]');
+      const reminderError = document.getElementById("reminder-error");
+      if (reminderError) reminderError.classList.add("hidden");
+
       if (!contact || !contact.value.trim()) {
+        if (reminderError) {
+          reminderError.textContent = "Inserisci un'email o un numero di telefono.";
+          reminderError.classList.remove("hidden");
+        }
         return;
       }
 
-      // Invio dati al backend
+      const rawContact = contact.value.trim();
+      const isEmail = rawContact.includes("@");
+
+      // Se non è email, trattalo come numero e validalo
+      if (!isEmail) {
+        if (!validatePhone(rawContact)) {
+          if (reminderError) {
+            reminderError.textContent = "Numero di telefono non valido. Usa formato 3331234567, +393331234567 o 00393331234567.";
+            reminderError.classList.remove("hidden");
+          }
+          contact.focus();
+          return;
+        }
+      }
+
       // Invio dati al backend con retry
       fetchWithRetry(`${CONFIG.API_BASE_URL}/api/reminder`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contact: contact.value.trim(),
+          contact: rawContact,
         }),
       })
         .then((res) => {
