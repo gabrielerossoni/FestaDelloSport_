@@ -1,20 +1,46 @@
+// ================================
+// CONFIGURAZIONE BACKEND URL
+// ================================
+// IMPORTANTE: Configura l'URL del backend di produzione qui sotto
+// Esempi:
+//   - Heroku: 'https://tuo-app.herokuapp.com'
+//   - Railway: 'https://tuo-app.railway.app'
+//   - Render: 'https://tuo-app.onrender.com'
+//   - Server proprio: 'https://api.tuodominio.com'
+const PRODUCTION_API_URL = null; // <-- MODIFICA QUESTO con il tuo URL di produzione
+
 const CONFIG = {
   API_BASE_URL: (() => {
-    // Se siamo in localhost o 127.0.0.1, usa il backend locale
     const hostname = window.location.hostname;
-    if (
-      hostname === "localhost" ||
-      hostname === "127.0.0.1" ||
-      hostname === ""
-    ) {
+    const isLocal =
+      hostname === "localhost" || hostname === "127.0.0.1" || hostname === "";
+
+    // In sviluppo locale, usa sempre localhost
+    if (isLocal) {
       return "http://localhost:3001";
     }
-    // Altrimenti usa l'URL di produzione (modifica con il tuo URL reale)
-    // Esempio: return 'https://tuo-backend.herokuapp.com';
-    // Per ora, se non sei in locale, prova comunque localhost (per test)
-    console.warn(
-      "ATTENZIONE: Configura l'URL del backend di produzione in config.js"
-    );
-    return "http://localhost:3001";
+
+    // In produzione, richiedi configurazione esplicita
+    if (!PRODUCTION_API_URL || PRODUCTION_API_URL === null) {
+      const errorMsg = `
+╔══════════════════════════════════════════════════════════════╗
+║  ERRORE: Backend URL non configurato per produzione          ║
+╠══════════════════════════════════════════════════════════════╣
+║  Apri js/config.js e configura PRODUCTION_API_URL con        ║
+║  l'URL del tuo backend di produzione.                        ║
+║                                                              ║
+║  Esempio:                                                    ║
+║  const PRODUCTION_API_URL = 'https://tuo-backend.com';       ║
+╚══════════════════════════════════════════════════════════════╝
+      `;
+      console.error(errorMsg);
+      // Lancia un errore che impedisce l'esecuzione
+      throw new Error(
+        "Backend URL non configurato per produzione. " +
+          "Configura PRODUCTION_API_URL in js/config.js"
+      );
+    }
+
+    return PRODUCTION_API_URL;
   })(),
 };

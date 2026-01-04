@@ -5,8 +5,12 @@
 1. **Configurazione Backend URL**
 
    - Apri `js/config.js`
-   - Modifica `API_BASE_URL` per l'ambiente di produzione:ascript
-     API_BASE_URL: 'https://tuo-backend-url.com'
+   - **IMPORTANTE**: Configura `PRODUCTION_API_URL` con l'URL del tuo backend di produzione
+   - Esempio:
+     ```javascript
+     const PRODUCTION_API_URL = 'https://tuo-backend.herokuapp.com';
+     ```
+   - **ATTENZIONE**: Se non configuri `PRODUCTION_API_URL`, il sito lancerà un errore in produzione invece di fallire silenziosamente
  
      ## Variabili d'Ambiente
 
