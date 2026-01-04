@@ -247,12 +247,12 @@ body {
     color: #e0e3ef !important;
     box-shadow: 0 4px 20px -10px #222c3e61;
   }
-  section#menu {
-    background: #10141a !important;
-  }
-  section#info,
+  section#menu,
   section#events,
   section#faq {
+    background: #10141a !important;
+  }
+  section#info {
     background: #182034 !important;
   }
   h1,
@@ -455,7 +455,7 @@ body {
 
   /* Footer e separatori */
   footer {
-    background-color: #0d1117 !important;
+    background-color: #182034 !important;
     border-top: 1.5px solid #222e3a !important;
     color: #e5e7eb !important;
     box-shadow: 0 -3px 12px -8px #222e3a74;
@@ -639,10 +639,6 @@ body {
   .footer-info-container h3 {
     font-size: 1.5rem;
     margin-bottom: 1.25rem;
-  }
-
-  .footer-info-container .space-y-5 > * + * {
-    margin-top: 1rem;
   }
 }
 
