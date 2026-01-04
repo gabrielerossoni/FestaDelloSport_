@@ -590,8 +590,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const eventDayBtns = document.querySelectorAll(".event-day-btn");
   const eventDayContents = document.querySelectorAll(".event-day-content");
 
-  eventDayBtns.forEach((btn) => {
+  eventDayBtns.forEach((btn, idx) => {
     btn.addEventListener("click", () => {
+      // Toggle active classes on buttons
       eventDayBtns.forEach((b) => {
         b.classList.remove("active", "bg-blue-700", "text-white");
         b.classList.add("bg-gray-200");
@@ -600,15 +601,36 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.classList.add("active", "bg-blue-700", "text-white");
       btn.classList.remove("bg-gray-200");
 
+      // Hide all contents
       eventDayContents.forEach((content) => {
         content.classList.add("hidden");
       });
 
+      // Prefer content by matching id `events-<data-day>`,
+      // fallback to the content with the same index in the DOM
       const day = btn.getAttribute("data-day");
-      const content = document.getElementById(`events-${day}`);
-      if (content) content.classList.remove("hidden");
+      const byId = document.getElementById(`events-${day}`);
+      if (byId) {
+        byId.classList.remove("hidden");
+      } else if (eventDayContents[idx]) {
+        eventDayContents[idx].classList.remove("hidden");
+      }
     });
   });
+
+  // Sync initial active button with visible content
+  (function syncInitialEventTab() {
+    const btns = Array.from(eventDayBtns);
+    const activeIndex = btns.findIndex((b) => b.classList.contains("active"));
+    if (activeIndex === -1) return;
+    const activeBtn = btns[activeIndex];
+    const day = activeBtn.getAttribute("data-day");
+    const byId = document.getElementById(`events-${day}`);
+    eventDayContents.forEach((c) => c.classList.add("hidden"));
+    if (byId) byId.classList.remove("hidden");
+    else if (eventDayContents[activeIndex])
+      eventDayContents[activeIndex].classList.remove("hidden");
+  })();
 });
 
 // ===== RATING STARS =====
@@ -1151,3 +1173,33 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
+
+// ===== HERO BACKGROUND: switch desktop/mobile =====
+document.addEventListener("DOMContentLoaded", function () {
+  const hero = document.querySelector(".hero-section");
+  if (!hero) return;
+
+  const mq = window.matchMedia("(max-width: 640px)");
+
+  function applyHeroClass() {
+    if (mq.matches) {
+      hero.classList.add("hero-mobile");
+      hero.classList.remove("hero-desktop");
+    } else {
+      hero.classList.add("hero-desktop");
+      hero.classList.remove("hero-mobile");
+    }
+  }
+
+  applyHeroClass();
+
+  // Supporta sia addEventListener('change') che addListener per compatibilità
+  if (typeof mq.addEventListener === "function") {
+    mq.addEventListener("change", applyHeroClass);
+  } else if (typeof mq.addListener === "function") {
+    mq.addListener(applyHeroClass);
+  }
+
+  window.addEventListener("orientationchange", applyHeroClass);
+  window.addEventListener("resize", applyHeroClass);
+});

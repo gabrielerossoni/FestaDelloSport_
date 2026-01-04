@@ -598,7 +598,7 @@ def start_server():
         print(f"[CONFIG] Configurazione tavoli: {len(TAVOLI_CONFIG['standard'])} prenotabili, {len(TAVOLI_CONFIG['riservati'])} riservati")
         
         # Per produzione, usa Gunicorn invece di app.run()
-        # Comando: gunicorn -w 4 -b 0.0.0.0:3001 backend2:app
+        # Comando: gunicorn -w 4 -b 0.0.0.0:3001 backend:app
         # Per sviluppo locale, usa app.run()
         if os.environ.get('FLASK_ENV') == 'development':
             app.run(host='0.0.0.0', port=PORT, debug=False, threaded=True)
