@@ -5,9 +5,17 @@
     <!---->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Festa dello Sport di Capralba - Programma, menu e prenotazioni">
-    <meta property="og:title" content="Festa dello Sport 2026">
-    <meta property="og:image" content="URL_immagine">
+    <meta name="description" content="Festa dello Sport di Capralba 2026 - Programma eventi, menu completo e prenotazione tavoli. Unisciti a noi per una celebrazione di sport, cibo e divertimento!">
+    <meta property="og:title" content="Festa dello Sport 2026 - Capralba">
+    <meta property="og:description" content="Unisciti a noi per una celebrazione di sport, cibo e divertimento per tutta la comunità! Programma eventi, menu completo e prenotazione tavoli.">
+    <meta property="og:image" content="https://gabrielerossoni.github.io/FestaDelloSport_/assets/images/fcapralbese-Photoroom.png">
+    <meta property="og:url" content="https://gabrielerossoni.github.io/FestaDelloSport_/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Festa dello Sport 2026 - Capralba">
+    <meta name="twitter:description" content="Programma eventi, menu completo e prenotazione tavoli per la Festa dello Sport di Capralba">
+    <meta name="twitter:image" content="https://gabrielerossoni.github.io/FestaDelloSport_/assets/images/fcapralbese-Photoroom.png">
     <meta name="color-scheme" content="light dark">
 
     <!---->
@@ -18,12 +26,8 @@
     <meta name="apple-mobile-web-app-title" content="FestaDelloSport" />
     <link rel="manifest" href="favicon/site.webmanifest" />
 
-    <!---->
+    <!--Titolo e Font-->
     <title>Festa dello Sport di Capralba</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -34,18 +38,21 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gradient-to-br from-blue-50 via-yellow-50 to-white text-gray-800 antialiased">
-    <!-- Navigation -->
+    <!-- Skip link per accessibilità - visibile solo quando si naviga con Tab -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-blue-700 focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        Salta al contenuto principale
+    </a>
     <nav id="navbar" class="fixed w-full bg-white/80 backdrop-blur-md shadow-lg z-50 transition-all duration-300 border-b border-blue-100">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center gap-2">
                 <a href="#home" class="flex items-center gap-2">
-                    <img src="assets/images/fcapralbese-Photoroom.png" class="w-12 h-12 object-cover rounded-full border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-200" alt="Logo Festa dello Sport" />
+                    <img src="assets/images/fcapralbese-Photoroom.png" class="w-12 h-12 object-cover rounded-full border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-200" alt="Logo Festa dello Sport"/>
                     <span class="text-2xl font-extrabold text-blue-900 playfair tracking-tight drop-shadow">Festa dello Sport</span>
                 </a>
             </div>
             <!-- Mobile menu button -->
-            <button id="menu-toggle" class="md:hidden focus:outline-none rounded-full p-2 hover:bg-blue-100 transition">
+            <button id="menu-toggle" class="md:hidden focus:outline-none rounded-full p-2 hover:bg-blue-100 transition" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobile-menu">
                 <svg class="w-7 h-7 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -72,7 +79,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section min-h-[90vh] flex items-center justify-center text-white pt-20 relative">
+    <section id="home" class="hero-section min-h-[90vh] flex items-center justify-center text-white pt-20 relative" id="main-content">
         <div class="container mx-auto px-4 text-center relative z-10">
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6 playfair drop-shadow-lg tracking-tight animate-fade-in-down">Festa dello Sport di Capralba</h1>
             <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-medium bg-white/20 rounded-xl px-6 py-4 shadow-lg backdrop-blur-md animate-fade-in-up">
@@ -202,7 +209,7 @@
             <!-- Card 1 -->
             <div class="group relative flex flex-col items-center bg-white/80 rounded-2xl shadow-xl p-8 border-t-4 border-yellow-400 w-72 transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-gray-50/90">
                 <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-yellow-400 via-blue-300 to-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg border-4 border-white group-hover:scale-110 transition-transform duration-300">
-                    <img src="assets/images/fcapralbese-Photoroom.png" alt="U.S. Capralbese" class="object-contain max-h-16 drop-shadow-lg">
+                    <img src="assets/images/fcapralbese-Photoroom.png" alt="U.S. Capralbese" class="object-contain max-h-16 drop-shadow-lg" loading="lazy" loading="lazy">
                 </div>
                 <div class="mt-16 text-xl font-bold text-blue-900 mb-1 tracking-wide">U.S. Capralbese</div>
                 <div class="text-sm text-gray-600 text-center mb-2">Associazione Sportiva</div>
@@ -1846,14 +1853,15 @@
                     <form id="reservation-form" class="bg-white rounded-xl shadow p-6 mb-8 space-y-6">
                         <!-- ...resto del form invariato... -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome e Cognome</label>
-                                <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            </div>
-                            <div>
-                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefono</label>
-                                <input type="tel" id="phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            </div>
+                           <!-- Nome -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome e Cognome</label>
+                        <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefono</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -1892,7 +1900,7 @@
                         </div>
                        <div class="flex flex-col items-center">
   <!-- Messaggio errore -->
-  <div id="reservation-error" class="hidden text-red-600 font-semibold text-center mb-4"></div>
+  <div id="reservation-error" class="hidden text-red-600 font-semibold text-center mb-4" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
   <!-- Bottone -->
   <button id="btnPrenota" type="submit"
@@ -1916,10 +1924,9 @@
   .shake {
     animation: shake 0.4s;
   }
-</style>
-                        
+</style>                  
                     </form>
-                    <div id="reservation-success" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-md">
+                    <div id="reservation-success" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-md" role="status" aria-live="polite" aria-atomic="true">
                         <p class="font-medium">Prenotazione ricevuta con successo!</p>
                         <p>Ti contatteremo presto per confermare la tua prenotazione.</p>
                     </div>
@@ -1932,63 +1939,63 @@
                             <div class="flex flex-row gap-4 justify-center items-start w-max mx-auto">
                                 <!-- Colonna aggiuntiva a sinistra: 6 file x 3 tavoli -->
                                 <div class="grid grid-cols-4 gap-6 float-left mr-12">
-                                    <button class="table2d-btn" data-table="48">48</button>
-                                    <button class="table2d-btn" data-table="47">47</button>
-                                    <button class="table2d-btn" data-table="46">46</button>
-                                    <button class="table2d-btn" data-table="45">45</button>
-                                    <button class="table2d-btn" data-table="40">40</button>
-                                    <button class="table2d-btn" data-table="39">39</button>
-                                    <button class="table2d-btn" data-table="38">38</button>
+                                    <button class="table2d-btn" data-table="48" aria-label="Tavolo 48 - Seleziona per prenotare" type="button">48</button>
+                                    <button class="table2d-btn" data-table="47" aria-label="Tavolo 47 - Seleziona per prenotare" type="button">47</button>
+                                    <button class="table2d-btn" data-table="46" aria-label="Tavolo 46 - Seleziona per prenotare" type="button">46</button>
+                                    <button class="table2d-btn" data-table="45" aria-label="Tavolo 45 - Seleziona per prenotare" type="button">45</button>
+                                    <button class="table2d-btn" data-table="40" aria-label="Tavolo 40 - Seleziona per prenotare" type="button">40</button>
+                                    <button class="table2d-btn" data-table="39" aria-label="Tavolo 39 - Seleziona per prenotare" type="button">39</button>
+                                    <button class="table2d-btn" data-table="38" aria-label="Tavolo 38 - Seleziona per prenotare" type="button">38</button>
                                     <span></span>
-                                    <button class="table2d-btn" data-table="33">33</button>
-                                    <button class="table2d-btn" data-table="32">32</button>
-                                    <button class="table2d-btn" data-table="31">31</button>
+                                    <button class="table2d-btn" data-table="33" aria-label="Tavolo 33 - Seleziona per prenotare" type="button">33</button>
+                                    <button class="table2d-btn" data-table="32" aria-label="Tavolo 32 - Seleziona per prenotare" type="button">32</button>
+                                    <button class="table2d-btn" data-table="31" aria-label="Tavolo 31 - Seleziona per prenotare" type="button">31</button>
                                     <span></span>
-                                    <button class="table2d-btn" data-table="26">26</button>
-                                    <button class="table2d-btn" data-table="25">25</button>
-                                    <button class="table2d-btn" data-table="24">24</button>
+                                    <button class="table2d-btn" data-table="26" aria-label="Tavolo 26 - Seleziona per prenotare" type="button">26</button>
+                                    <button class="table2d-btn" data-table="25" aria-label="Tavolo 25 - Seleziona per prenotare" type="button">25</button>
+                                    <button class="table2d-btn" data-table="24" aria-label="Tavolo 24 - Seleziona per prenotare" type="button">24</button>
                                     <span></span>
-                                    <button class="table2d-btn" data-table="18">18</button>
-                                    <button class="table2d-btn" data-table="17">17</button>
-                                    <button class="table2d-btn" data-table="16">16</button>
+                                    <button class="table2d-btn" data-table="18" aria-label="Tavolo 18 - Seleziona per prenotare" type="button">18</button>
+                                    <button class="table2d-btn" data-table="17" aria-label="Tavolo 17 - Seleziona per prenotare" type="button">17</button>
+                                    <button class="table2d-btn" data-table="16" aria-label="Tavolo 16 - Seleziona per prenotare" type="button">16</button>
                                     <span></span>
-                                    <button class="table2d-btn" data-table="12">12</button>
-                                    <button class="table2d-btn" data-table="11">11</button>
-                                    <button class="table2d-btn" data-table="10">10</button>
+                                    <button class="table2d-btn" data-table="12" aria-label="Tavolo 12 - Seleziona per prenotare" type="button">12</button>
+                                    <button class="table2d-btn" data-table="11" aria-label="Tavolo 11 - Seleziona per prenotare" type="button">11</button>
+                                    <button class="table2d-btn" data-table="10" aria-label="Tavolo 10 - Seleziona per prenotare" type="button">10</button>
                                 </div>
                                 <div class="grid grid-cols-4 gap-6">
-                                    <button class="table2d-btn" data-table="44">44</button>
-                                    <button class="table2d-btn" data-table="43">43</button>
-                                    <button class="table2d-btn" data-table="42">42</button>
-                                    <button class="table2d-btn" data-table="41">41</button>
-                                    <button class="table2d-btn" data-table="37">37</button>
-                                    <button class="table2d-btn" data-table="36">36</button>
-                                    <button class="table2d-btn" data-table="35">35</button>
-                                    <button class="table2d-btn" data-table="34">34</button>
-                                    <button class="table2d-btn" data-table="30">30</button>
-                                    <button class="table2d-btn" data-table="29">29</button>
-                                    <button class="table2d-btn" data-table="28">28</button>
-                                    <button class="table2d-btn" data-table="27">27</button>
-                                    <button class="table2d-btn" data-table="23">23</button>
-                                    <button class="table2d-btn" data-table="22">22</button>
-                                    <button class="table2d-btn" data-table="21">21</button>
-                                    <button class="table2d-btn" data-table="20">20</button>
-                                    <button class="table2d-btn" data-table="16">16</button>
-                                    <button class="table2d-btn" data-table="15">15</button>
-                                    <button class="table2d-btn" data-table="14">14</button>
-                                    <button class="table2d-btn" data-table="13">13</button>
-                                    <button class="table2d-btn" data-table="9">9</button>
-                                    <button class="table2d-btn" data-table="8">8</button>
-                                    <button class="table2d-btn" data-table="7">7</button>
-                                    <button class="table2d-btn" data-table="6">6</button>
+                                    <button class="table2d-btn" data-table="44" aria-label="Tavolo 44 - Seleziona per prenotare" type="button">44</button>
+                                    <button class="table2d-btn" data-table="43" aria-label="Tavolo 43 - Seleziona per prenotare" type="button">43</button>
+                                    <button class="table2d-btn" data-table="42" aria-label="Tavolo 42 - Seleziona per prenotare" type="button">42</button>
+                                    <button class="table2d-btn" data-table="41" aria-label="Tavolo 41 - Seleziona per prenotare" type="button">41</button>
+                                    <button class="table2d-btn" data-table="37" aria-label="Tavolo 37 - Seleziona per prenotare" type="button">37</button>
+                                    <button class="table2d-btn" data-table="36" aria-label="Tavolo 36 - Seleziona per prenotare" type="button">36</button>
+                                    <button class="table2d-btn" data-table="35" aria-label="Tavolo 35 - Seleziona per prenotare" type="button">35</button>
+                                    <button class="table2d-btn" data-table="34" aria-label="Tavolo 34 - Seleziona per prenotare" type="button">34</button>
+                                    <button class="table2d-btn" data-table="30" aria-label="Tavolo 30 - Seleziona per prenotare" type="button">30</button>
+                                    <button class="table2d-btn" data-table="29" aria-label="Tavolo 29 - Seleziona per prenotare" type="button">29</button>
+                                    <button class="table2d-btn" data-table="28" aria-label="Tavolo 28 - Seleziona per prenotare" type="button">28</button>
+                                    <button class="table2d-btn" data-table="27" aria-label="Tavolo 27 - Seleziona per prenotare" type="button">27</button>
+                                    <button class="table2d-btn" data-table="23" aria-label="Tavolo 23 - Seleziona per prenotare" type="button">23</button>
+                                    <button class="table2d-btn" data-table="22" aria-label="Tavolo 22 - Seleziona per prenotare" type="button">22</button>
+                                    <button class="table2d-btn" data-table="21" aria-label="Tavolo 21 - Seleziona per prenotare" type="button">21</button>
+                                    <button class="table2d-btn" data-table="20" aria-label="Tavolo 20 - Seleziona per prenotare" type="button">20</button>
+                                    <button class="table2d-btn" data-table="16" aria-label="Tavolo 16 - Seleziona per prenotare" type="button">16</button>
+                                    <button class="table2d-btn" data-table="15" aria-label="Tavolo 15 - Seleziona per prenotare" type="button">15</button>
+                                    <button class="table2d-btn" data-table="14" aria-label="Tavolo 14 - Seleziona per prenotare" type="button">14</button>
+                                    <button class="table2d-btn" data-table="13" aria-label="Tavolo 13 - Seleziona per prenotare" type="button">13</button>
+                                    <button class="table2d-btn" data-table="9" aria-label="Tavolo 9 - Seleziona per prenotare" type="button">9</button>
+                                    <button class="table2d-btn" data-table="8" aria-label="Tavolo 8 - Seleziona per prenotare" type="button">8</button>
+                                    <button class="table2d-btn" data-table="7" aria-label="Tavolo 7 - Seleziona per prenotare" type="button">7</button>
+                                    <button class="table2d-btn" data-table="6" aria-label="Tavolo 6 - Seleziona per prenotare" type="button">6</button>
                                     <span></span>
-                                    <button class="table2d-btn" data-table="3">3</button>
-                                    <button class="table2d-btn" data-table="4">4</button>
-                                    <button class="table2d-btn" data-table="5">5</button>
+                                    <button class="table2d-btn" data-table="3" aria-label="Tavolo 3 - Seleziona per prenotare" type="button">3</button>
+                                    <button class="table2d-btn" data-table="4" aria-label="Tavolo 4 - Seleziona per prenotare" type="button">4</button>
+                                    <button class="table2d-btn" data-table="5" aria-label="Tavolo 5 - Seleziona per prenotare" type="button">5</button>
                                     <span></span>
                                     <span></span>
-                                    <button class="table2d-btn" data-table="1">1</button>
-                                    <button class="table2d-btn" data-table="2">2</button>
+                                    <button class="table2d-btn" data-table="1" aria-label="Tavolo 1 - Seleziona per prenotare" type="button">1</button>
+                                    <button class="table2d-btn" data-table="2" aria-label="Tavolo 2 - Seleziona per prenotare" type="button">2</button>
                                 </div>
                             </div>
                         </div>
@@ -2414,5 +2421,6 @@
 </body>
     <!-- JavaScript -->
     <script src="js/script.js"></script>
+    <script src="js/config.js"></script>
 </body>
 </html>

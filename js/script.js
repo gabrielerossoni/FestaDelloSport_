@@ -40,14 +40,22 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Invio dati al backend
-      fetch("http://localhost:3001/api/reminder", {
+      // Invio dati al backend con retry
+      fetchWithRetry(`${CONFIG.API_BASE_URL}/api/reminder`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contact: contact.value.trim(),
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            return res.json().then((data) => {
+              throw new Error(data.error || `Errore ${res.status}`);
+            });
+          }
+          return res.json();
+        })
         .then((data) => {
           if (data.success) {
             if (reminderSuccess) reminderSuccess.classList.remove("hidden");
@@ -58,7 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 3500);
           }
         })
-        .catch(() => {
+        .catch((error) => {
+          console.error("Errore reminder:", error);
           // In caso di errore, mostra comunque il messaggio di successo per non confondere l'utente
           if (reminderSuccess) reminderSuccess.classList.remove("hidden");
           reminderForm.reset();
@@ -94,23 +103,76 @@ function mostraErrore(msg) {
   );
 }
 
+// ===== FUNZIONI DI VALIDAZIONE =====
+function validatePhone(phone) {
+  // Rimuovi spazi e caratteri speciali per la validazione
+  const cleanPhone = phone.replace(/\s/g, "").replace(/[-\/\(\)]/g, "");
+  // Accetta: 3xxxxxxxxx, +393xxxxxxxxx, 00393xxxxxxxxx
+  // I numeri italiani iniziano con 3 e hanno 10 cifre totali
+  const phoneRegex = /^(\+39|0039)?3\d{9}$/;
+  return phoneRegex.test(cleanPhone);
+}
+
+function validateFutureDate(date) {
+  const selectedDate = new Date(date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset ore per confronto corretto
+  return selectedDate >= today;
+}
+
+function formatPhoneError(phone) {
+  if (!phone.trim()) return "Il telefono è obbligatorio";
+  const cleanPhone = phone.replace(/\s/g, "");
+  if (cleanPhone.length < 10) return "Il numero di telefono è troppo corto";
+  if (!/^[\d\+\s\-\(\)]+$/.test(cleanPhone))
+    return "Il telefono contiene caratteri non validi";
+  return "Il formato del telefono non è valido. Inserisci un numero italiano (es: 3331234567)";
+}
+
+// ===== GESTIONE ERRORI MIGLIORATA =====
+async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, options);
+
+      // Se la risposta è ok, restituiscila
+      if (response.ok) {
+        return response;
+      }
+
+      // Se non è l'ultimo tentativo e l'errore è 5xx (server error), riprova
+      if (i < retries - 1 && response.status >= 500) {
+        await new Promise((resolve) => setTimeout(resolve, delay * (i + 1)));
+        continue;
+      }
+
+      // Altrimenti restituisci la risposta (anche se non ok) per gestire 4xx
+      return response;
+    } catch (error) {
+      // Se è l'ultimo tentativo, lancia l'errore
+      if (i === retries - 1) {
+        throw error;
+      }
+      // Altrimenti aspetta e riprova (errore di rete)
+      await new Promise((resolve) => setTimeout(resolve, delay * (i + 1)));
+    }
+  }
+}
+
+function getErrorMessage(error, defaultMsg = "Errore di connessione") {
+  if (error instanceof TypeError && error.message.includes("fetch")) {
+    return "Errore di connessione. Controlla la tua connessione internet e riprova.";
+  }
+  if (error.message) {
+    return error.message;
+  }
+  return defaultMsg;
+}
+
 // ESEMPIO: richiama la funzione se c'è errore
 // mostraErrore("Compila tutti i campi obbligatori.");
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Demo: tavoli già prenotati (puoi sostituire con dati reali)
-  const bookedTables = [
-    "1",
-    "2",
-    "41",
-    "42",
-    "43",
-    "44",
-    "45",
-    "46",
-    "47",
-    "48",
-  ];
   const tableBtns = document.querySelectorAll(".table2d-btn");
   const selectedTableLabel = document.getElementById("selected-table-label");
   const selectedTableSpan = document.getElementById("selected-table");
@@ -118,21 +180,85 @@ document.addEventListener("DOMContentLoaded", function () {
   const reservationError = document.getElementById("reservation-error");
   const reservationSuccess = document.getElementById("reservation-success");
 
-  // Stato iniziale: libero/prenotato
-  tableBtns.forEach((btn) => {
-    if (bookedTables.includes(btn.dataset.table)) {
-      btn.classList.add("booked");
-      btn.disabled = true;
-      btn.title = "Tavolo già prenotato";
-    } else {
-      btn.title = "Tavolo libero";
+  // Funzione per caricare lo stato dei tavoli dal backend
+  function loadTableStatus(data, ora) {
+    if (!data || !ora) {
+      // Se data/ora non sono selezionate, mostra tutti i tavoli come disponibili
+      tableBtns.forEach((btn) => {
+        btn.classList.remove("booked");
+        btn.disabled = false;
+        btn.title = "Seleziona data e ora per vedere la disponibilità";
+      });
+      return;
     }
-  });
+
+    // Mostra loading state (opzionale)
+    tableBtns.forEach((btn) => {
+      btn.disabled = true;
+      btn.style.opacity = "0.5";
+    });
+
+    fetchWithRetry(`${CONFIG.API_BASE_URL}/api/tavoli?data=${data}&ora=${ora}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          tableBtns.forEach((btn) => {
+            const tableNum = btn.dataset.table;
+            const disponibili = data.data[tableNum] || 0;
+
+            btn.style.opacity = "1";
+
+            // Tavoli riservati (0 posti) o senza disponibilità
+            if (disponibili === 0) {
+              btn.classList.add("booked");
+              btn.disabled = true;
+              btn.title = "Tavolo non disponibile";
+            } else {
+              btn.classList.remove("booked");
+              btn.disabled = false;
+              btn.title = `${disponibili} posti disponibili`;
+            }
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Errore caricamento tavoli:", err);
+        // In caso di errore, abilita tutti i tavoli (fallback)
+        tableBtns.forEach((btn) => {
+          btn.style.opacity = "1";
+          btn.classList.remove("booked");
+          btn.disabled = false;
+          btn.title = "Errore nel caricamento, riprova";
+        });
+      });
+  }
+
+  // Carica lo stato quando vengono selezionate data/ora
+  const dateInput = reservationForm?.querySelector('[name="date"]');
+  const timeInput = reservationForm?.querySelector('[name="time"]');
+
+  if (dateInput && timeInput) {
+    const updateTableStatus = () => {
+      if (dateInput.value && timeInput.value) {
+        loadTableStatus(dateInput.value, timeInput.value);
+      } else {
+        // Reset stato tavoli se data/ora non sono entrambe selezionate
+        tableBtns.forEach((btn) => {
+          btn.classList.remove("booked");
+          btn.disabled = false;
+          btn.style.opacity = "1";
+        });
+      }
+    };
+
+    dateInput.addEventListener("change", updateTableStatus);
+    timeInput.addEventListener("change", updateTableStatus);
+  }
 
   // Gestione selezione tavolo
   tableBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
-      if (btn.classList.contains("booked")) return;
+      if (btn.classList.contains("booked") || btn.disabled) return;
       tableBtns.forEach((b) => b.classList.remove("selected"));
       btn.classList.add("selected");
       selectedTableLabel.classList.remove("hidden");
@@ -154,44 +280,110 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     let errorMsg = "";
 
-    // Controllo tavolo selezionato
+    // Rimuovi tutti gli attributi aria-invalid prima di validare
+    reservationForm.querySelectorAll("[aria-invalid]").forEach((el) => {
+      el.removeAttribute("aria-invalid");
+    });
+
+    // 1. Controllo tavolo selezionato (PRIMA di tutto)
     const tableInput = reservationForm.querySelector('input[name="table"]');
     if (!tableInput || !tableInput.value) {
       errorMsg = "Seleziona un tavolo prima di prenotare!";
+      reservationError.textContent = errorMsg;
+      reservationError.classList.remove("hidden");
+      mostraErrore(errorMsg);
+      return;
     }
 
-    // Controllo campi obbligatori
-    const requiredFields = ["name", "phone", "date", "time", "guests"];
-    requiredFields.forEach((id) => {
-      const el = reservationForm.querySelector(`[name="${id}"]`);
-      if (el && !el.value) {
-        errorMsg = "Compila tutti i campi obbligatori!";
-      }
-    });
+    // 2. Validazione nome
+    const nameInput = reservationForm.querySelector('[name="name"]');
+    if (!nameInput || !nameInput.value.trim()) {
+      errorMsg = "Il nome è obbligatorio";
+      nameInput?.setAttribute("aria-invalid", "true");
+    } else if (nameInput.value.trim().length < 2) {
+      errorMsg = "Il nome deve contenere almeno 2 caratteri";
+      nameInput?.setAttribute("aria-invalid", "true");
+    }
 
+    // 3. Validazione telefono (con formato italiano)
+    const phoneInput = reservationForm.querySelector('[name="phone"]');
+    if (!errorMsg && (!phoneInput || !phoneInput.value.trim())) {
+      errorMsg = "Il telefono è obbligatorio";
+      phoneInput?.setAttribute("aria-invalid", "true");
+    } else if (!errorMsg && !validatePhone(phoneInput.value)) {
+      errorMsg = formatPhoneError(phoneInput.value);
+      phoneInput?.setAttribute("aria-invalid", "true");
+    }
+
+    // 4. Validazione data (deve essere futura)
+    const dateInput = reservationForm.querySelector('[name="date"]');
+    if (!errorMsg && (!dateInput || !dateInput.value)) {
+      errorMsg = "La data è obbligatoria";
+      dateInput?.setAttribute("aria-invalid", "true");
+    } else if (!errorMsg && !validateFutureDate(dateInput.value)) {
+      errorMsg = "La data deve essere oggi o una data futura";
+      dateInput?.setAttribute("aria-invalid", "true");
+    }
+
+    // 5. Validazione ora
+    const timeInput = reservationForm.querySelector('[name="time"]');
+    if (!errorMsg && (!timeInput || !timeInput.value)) {
+      errorMsg = "L'ora è obbligatoria";
+      timeInput?.setAttribute("aria-invalid", "true");
+    }
+
+    // 6. Validazione ospiti
+    const guestsInput = reservationForm.querySelector('[name="guests"]');
+    if (!errorMsg && (!guestsInput || !guestsInput.value)) {
+      errorMsg = "Seleziona il numero di persone";
+      guestsInput?.setAttribute("aria-invalid", "true");
+    }
+
+    // Se ci sono errori, mostra e ferma
     if (errorMsg) {
       reservationError.textContent = errorMsg;
       reservationError.classList.remove("hidden");
+      mostraErrore(errorMsg);
       return;
     } else {
       reservationError.classList.add("hidden");
     }
 
-    // INVIO DATI AL BACKEND
-    fetch("http://localhost:3001/api/prenota", {
+    // Salva data e ora prima del reset (per ricaricare i tavoli dopo)
+    const savedDate = dateInput.value;
+    const savedTime = timeInput.value;
+
+    // INVIO DATI AL BACKEND con retry
+    fetchWithRetry(`${CONFIG.API_BASE_URL}/api/prenota`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        nome: reservationForm.name.value,
-        telefono: reservationForm.phone.value,
-        data: reservationForm.date.value,
-        ora: reservationForm.time.value,
-        ospiti: reservationForm.guests.value,
+        nome: nameInput.value.trim(),
+        telefono: phoneInput.value.trim(),
+        data: dateInput.value,
+        ora: timeInput.value,
+        ospiti: guestsInput.value,
         tavolo: tableInput.value,
-        note: reservationForm.notes.value,
+        note:
+          reservationForm.querySelector('[name="notes"]')?.value.trim() || "",
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        // Controlla se la risposta è ok prima di parsare JSON
+        if (!res.ok) {
+          return res
+            .json()
+            .then((data) => {
+              throw new Error(
+                data.error || `Errore ${res.status}: ${res.statusText}`
+              );
+            })
+            .catch(() => {
+              throw new Error(`Errore ${res.status}: ${res.statusText}`);
+            });
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.success) {
           reservationSuccess.classList.remove("hidden");
@@ -201,6 +393,12 @@ document.addEventListener("DOMContentLoaded", function () {
           selectedTableSpan.textContent = "";
           let input = reservationForm.querySelector('input[name="table"]');
           if (input) input.value = "";
+
+          // Ricarica lo stato dei tavoli dopo una prenotazione riuscita
+          if (savedDate && savedTime) {
+            loadTableStatus(savedDate, savedTime);
+          }
+
           setTimeout(() => {
             reservationSuccess.classList.add("hidden");
           }, 5000);
@@ -208,11 +406,16 @@ document.addEventListener("DOMContentLoaded", function () {
           reservationError.textContent =
             data.error || "Errore nella prenotazione.";
           reservationError.classList.remove("hidden");
+          mostraErrore(reservationError.textContent);
         }
       })
-      .catch(() => {
-        reservationError.textContent = "Errore di connessione al server.";
+      .catch((error) => {
+        reservationError.textContent = getErrorMessage(
+          error,
+          "Errore di connessione al server. Riprova più tardi."
+        );
         reservationError.classList.remove("hidden");
+        mostraErrore(reservationError.textContent);
       });
   });
 });
@@ -255,7 +458,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (menuToggle && mobileMenu) {
     menuToggle.addEventListener("click", () => {
+      const isHidden = mobileMenu.classList.contains("hidden");
       mobileMenu.classList.toggle("hidden");
+      menuToggle.setAttribute("aria-expanded", isHidden ? "true" : "false");
     });
   }
 });
@@ -463,7 +668,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function loadFeedbacks() {
     if (!feedbackList) return;
 
-    fetch("http://localhost:3001/api/feedback?limit=10")
+    fetchWithRetry(`${CONFIG.API_BASE_URL}/api/feedback?limit=10`)
       .then((res) => res.json())
       .then((data) => {
         if (feedbackLoading) feedbackLoading.classList.add("hidden");
@@ -555,7 +760,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (feedbackError) feedbackError.classList.add("hidden");
 
       // Invio dati al backend
-      fetch("http://localhost:3001/api/feedback", {
+      fetchWithRetry(`${CONFIG.API_BASE_URL}/api/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -885,3 +1090,17 @@ document.addEventListener("DOMContentLoaded", function () {
   // Inizia il timer
   resetTimer();
 });
+
+// ===== SERVICE WORKER REGISTRATION =====
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        console.log("Service Worker registrato:", registration.scope);
+      })
+      .catch((error) => {
+        console.log("Service Worker non registrato:", error);
+      });
+  });
+}
