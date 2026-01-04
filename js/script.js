@@ -160,12 +160,32 @@ async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
 }
 
 function getErrorMessage(error, defaultMsg = "Errore di connessione") {
-  if (error instanceof TypeError && error.message.includes("fetch")) {
-    return "Errore di connessione. Controlla la tua connessione internet e riprova.";
+  // Errore di rete o CORS
+  if (error instanceof TypeError) {
+    if (
+      error.message.includes("fetch") ||
+      error.message.includes("Failed to fetch")
+    ) {
+      return "Impossibile connettersi al server. Verifica che il backend sia avviato su http://localhost:3001";
+    }
+    if (error.message.includes("CORS")) {
+      return "Errore CORS: verifica la configurazione del backend.";
+    }
   }
+
+  // Errore di rete generico
+  if (
+    error.message &&
+    (error.message.includes("network") || error.message.includes("Network"))
+  ) {
+    return "Errore di rete. Verifica la connessione e che il backend sia attivo.";
+  }
+
+  // Altri errori con messaggio
   if (error.message) {
     return error.message;
   }
+
   return defaultMsg;
 }
 
@@ -347,6 +367,23 @@ document.addEventListener("DOMContentLoaded", function () {
       guestsInput?.setAttribute("aria-invalid", "true");
     }
 
+    // 7. Validazione consenso privacy
+    const privacyConsent = reservationForm.querySelector("#privacy-consent");
+    const privacyError = document.getElementById("privacy-error");
+    if (!errorMsg && (!privacyConsent || !privacyConsent.checked)) {
+      errorMsg =
+        "Devi accettare la Privacy Policy per completare la prenotazione";
+      if (privacyError) {
+        privacyError.textContent = "Devi accettare la Privacy Policy";
+        privacyError.classList.remove("hidden");
+      }
+      if (privacyConsent) {
+        privacyConsent.setAttribute("aria-invalid", "true");
+      }
+    } else if (privacyError) {
+      privacyError.classList.add("hidden");
+    }
+
     // Se ci sono errori, mostra e ferma
     if (errorMsg) {
       reservationError.textContent = errorMsg;
@@ -418,9 +455,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       })
       .catch((error) => {
+        console.error("Errore prenotazione:", error);
+        console.error("URL tentato:", `${CONFIG.API_BASE_URL}/api/prenota`);
         reservationError.textContent = getErrorMessage(
           error,
-          "Errore di connessione al server. Riprova più tardi."
+          "Errore di connessione al server. Verifica che il backend sia avviato su http://localhost:3001"
         );
         reservationError.classList.remove("hidden");
         mostraErrore(reservationError.textContent);

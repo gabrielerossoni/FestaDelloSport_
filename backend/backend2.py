@@ -12,13 +12,41 @@ import threading
 # CONFIGURAZIONE SERVER
 # ================================
 app = Flask(__name__)
-CORS(app)
+# CORS configurato per produzione - MODIFICA CON IL TUO DOMINIO
+ALLOWED_ORIGINS = [
+    "https://gabrielerossoni.github.io/FestaDelloSport_/",  # GitHub Pages
+    #"https://festa-sport-capralba.it",    Dominio personalizzato (se lo hai)
+    "http://localhost:3000",               # Per test locali
+    "http://localhost:5500",               # Per test locali (Live Server porta 5500)
+    "http://127.0.0.1:5500",              # Per test locali (Live Server)
+    "http://localhost",                    # Per test locali (qualsiasi porta)
+    "http://127.0.0.1",                   # Per test locali (qualsiasi porta)
+]
+
+# Configurazione CORS
+# Per sviluppo locale, puoi temporaneamente usare CORS(app) per permettere tutte le origini
+# ATTENZIONE: Non usare in produzione! Usa sempre ALLOWED_ORIGINS in produzione
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ALLOWED_ORIGINS,
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"],
+        "supports_credentials": False
+    }
+})
 PORT = 3001
 
 # Middleware per logging delle richieste
 @app.before_request
 def log_request():
-    print(f"[REQUEST] {request.method} {request.url}")
+    origin = request.headers.get('Origin', 'N/A')
+    print(f"[REQUEST] {request.method} {request.url} | Origin: {origin}")
+    
+@app.after_request
+def after_request(response):
+    origin = request.headers.get('Origin', 'N/A')
+    print(f"[RESPONSE] {request.method} {request.url} | Status: {response.status_code} | Origin: {origin}")
+    return response
 
 # ================================
 # DATABASE SETUP
@@ -211,6 +239,18 @@ def get_tavoli_info():
             "posti_per_tavolo_standard": 10,
             "totale_tavoli": len(TAVOLI)
         }
+    })
+
+# ================================
+# API ENDPOINTS - TEST/HEALTH
+# ================================
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    """Endpoint per verificare che il backend sia attivo"""
+    return jsonify({
+        "success": True,
+        "message": "Backend attivo",
+        "timestamp": datetime.now().isoformat()
     })
 
 # ================================
@@ -557,7 +597,16 @@ def start_server():
         print(f"[DB] Database SQLite: {DB_PATH}")
         print(f"[CONFIG] Configurazione tavoli: {len(TAVOLI_CONFIG['standard'])} prenotabili, {len(TAVOLI_CONFIG['riservati'])} riservati")
         
-        app.run(host='0.0.0.0', port=PORT, debug=False, threaded=True)
+        # Per produzione, usa Gunicorn invece di app.run()
+        # Comando: gunicorn -w 4 -b 0.0.0.0:3001 backend2:app
+        # Per sviluppo locale, usa app.run()
+        if os.environ.get('FLASK_ENV') == 'development':
+            app.run(host='0.0.0.0', port=PORT, debug=False, threaded=True)
+        else:
+            # In produzione, Gunicorn gestirà il server
+            # Questo codice non verrà eseguito se usi Gunicorn
+            from werkzeug.serving import run_simple
+            run_simple('0.0.0.0', PORT, app, threaded=True)
         
     except Exception as error:
         print(f"[ERROR] Errore nell'avvio del server: {error}")
