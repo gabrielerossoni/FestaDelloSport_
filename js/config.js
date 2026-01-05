@@ -7,7 +7,7 @@
 //   - Railway: 'https://tuo-app.railway.app'
 //   - Render: 'https://tuo-app.onrender.com'
 //   - Server proprio: 'https://api.tuodominio.com'
-const PRODUCTION_API_URL = null; // <-- MODIFICA QUESTO con il tuo URL di produzione
+const PRODUCTION_API_URL = "https://festadellosport.onrender.com/"; // <-- MODIFICA QUESTO con il tuo URL di produzione
 
 const CONFIG = {
   API_BASE_URL: (() => {
@@ -22,17 +22,7 @@ const CONFIG = {
 
     // In produzione, richiedi configurazione esplicita
     if (!PRODUCTION_API_URL || PRODUCTION_API_URL === null) {
-      const errorMsg = `
-╔══════════════════════════════════════════════════════════════╗
-║  ERRORE: Backend URL non configurato per produzione          ║
-╠══════════════════════════════════════════════════════════════╣
-║  Apri js/config.js e configura PRODUCTION_API_URL con        ║
-║  l'URL del tuo backend di produzione.                        ║
-║                                                              ║
-║  Esempio:                                                    ║
-║  const PRODUCTION_API_URL = 'https://tuo-backend.com';       ║
-╚══════════════════════════════════════════════════════════════╝
-      `;
+      const errorMsg = '';
       console.error(errorMsg);
       // Lancia un errore che impedisce l'esecuzione
       throw new Error(
