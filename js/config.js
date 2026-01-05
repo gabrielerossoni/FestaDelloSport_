@@ -7,7 +7,7 @@
 //   - Railway: 'https://tuo-app.railway.app'
 //   - Render: 'https://tuo-app.onrender.com'
 //   - Server proprio: 'https://api.tuodominio.com'
-const PRODUCTION_API_URL = "https://festadellosport.onrender.com/"; // <-- MODIFICA QUESTO con il tuo URL di produzione
+const PRODUCTION_API_URL = "https://festadellosport.onrender.com"; // <-- MODIFICA QUESTO con il tuo URL di produzione
 
 const CONFIG = {
   API_BASE_URL: (() => {
