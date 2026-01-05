@@ -14,6 +14,7 @@ import threading
 app = Flask(__name__)
 # CORS configurato per produzione - MODIFICA CON IL TUO DOMINIO
 ALLOWED_ORIGINS = [
+    "https://gabrielerossoni.github.io",
     "https://gabrielerossoni.github.io/FestaDelloSport_/",  # GitHub Pages
     #"https://festa-sport-capralba.it",    Dominio personalizzato (se lo hai)
     "http://localhost:3000",               # Per test locali
