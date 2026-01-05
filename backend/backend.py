@@ -1,4 +1,3 @@
-import sqlite3
 import json
 import signal
 import sys
@@ -6,7 +5,8 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import threading
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 # ================================
 # CONFIGURAZIONE SERVER
@@ -52,63 +52,76 @@ def after_request(response):
 # ================================
 # DATABASE SETUP
 # ================================
-DB_PATH = os.path.join(os.path.dirname(__file__), "festa_sport.db")
-db_lock = threading.Lock()
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db_connection():
-    """Crea una nuova connessione al database"""
-    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
-    conn.execute("PRAGMA foreign_keys = ON")
-    conn.row_factory = sqlite3.Row  # Per accedere alle colonne per nome
-    return conn
+    """Crea una nuova connessione al database PostgreSQL"""
+    return psycopg2.connect(
+        DATABASE_URL,
+        cursor_factory=RealDictCursor,
+        sslmode="require"
+    )
 
 def init_database():
-    """Inizializza il database SQLite"""
+    """Inizializza il database PostgreSQL"""
     try:
-        print("[CONFIG] Inizializzazione database SQLite...")
+        print("[CONFIG] Inizializzazione database PostgreSQL...")
         
-        with db_lock:
-            conn = get_db_connection()
-            
-            # Crea tabelle se non esistono
-            conn.executescript('''
-                CREATE TABLE IF NOT EXISTS prenotazioni (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nome TEXT NOT NULL,
-                    telefono TEXT NOT NULL,
-                    data TEXT NOT NULL,
-                    ora TEXT NOT NULL,
-                    ospiti INTEGER NOT NULL,
-                    tavolo TEXT NOT NULL,
-                    note TEXT DEFAULT '',
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-                );
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # Crea tabelle se non esistono
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS prenotazioni (
+                id SERIAL PRIMARY KEY,
+                nome TEXT NOT NULL,
+                telefono TEXT NOT NULL,
+                data TEXT NOT NULL,
+                ora TEXT NOT NULL,
+                ospiti INTEGER NOT NULL,
+                tavolo TEXT NOT NULL,
+                note TEXT DEFAULT '',
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+        
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS feedbacks (
+                id SERIAL PRIMARY KEY,
+                nome TEXT DEFAULT 'Anonimo',
+                rating INTEGER NOT NULL CHECK (rating BETWEEN 0 AND 5),
+                message TEXT NOT NULL,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+        
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS reminder_requests (
+                id SERIAL PRIMARY KEY,
+                contact TEXT NOT NULL,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+        
+        # Indici per migliorare le performance
+        cur.execute("""
+            CREATE INDEX IF NOT EXISTS idx_prenotazioni_data_ora ON prenotazioni(data, ora);
+        """)
+        cur.execute("""
+            CREATE INDEX IF NOT EXISTS idx_prenotazioni_tavolo ON prenotazioni(tavolo);
+        """)
+        cur.execute("""
+            CREATE INDEX IF NOT EXISTS idx_feedbacks_timestamp ON feedbacks(timestamp);
+        """)
+        cur.execute("""
+            CREATE INDEX IF NOT EXISTS idx_reminder_timestamp ON reminder_requests(timestamp);
+        """)
+        
+        conn.commit()
+        cur.close()
+        conn.close()
 
-                CREATE TABLE IF NOT EXISTS feedbacks (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nome TEXT DEFAULT 'Anonimo',
-                    rating INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 5),
-                    message TEXT NOT NULL,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-                );
-
-                CREATE TABLE IF NOT EXISTS reminder_requests (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    contact TEXT NOT NULL,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-                );
-
-                -- Indici per migliorare le performance
-                CREATE INDEX IF NOT EXISTS idx_prenotazioni_data_ora ON prenotazioni(data, ora);
-                CREATE INDEX IF NOT EXISTS idx_prenotazioni_tavolo ON prenotazioni(tavolo);
-                CREATE INDEX IF NOT EXISTS idx_feedbacks_timestamp ON feedbacks(timestamp);
-                CREATE INDEX IF NOT EXISTS idx_reminder_timestamp ON reminder_requests(timestamp);
-            ''')
-            
-            conn.commit()
-            conn.close()
-
-        print("[OK] Database SQLite inizializzato correttamente")
+        print("[OK] Database PostgreSQL inizializzato correttamente")
         return True
     except Exception as error:
         print(f"[ERROR] Errore nell'inizializzazione del database: {error}")
@@ -142,31 +155,33 @@ for t in TAVOLI_CONFIG["standard"]:
 def calcola_posti_occupati(data, ora, tavolo=None):
     """Calcola i posti occupati per data/ora specifici"""
     try:
-        with db_lock:
-            conn = get_db_connection()
-            
-            if tavolo:
-                # Calcola posti occupati per un tavolo specifico
-                cursor = conn.execute(
-                    "SELECT SUM(ospiti) as ospiti_totali FROM prenotazioni WHERE data = ? AND ora = ? AND tavolo = ?",
-                    (data, ora, tavolo)
-                )
-                result = cursor.fetchone()
-                ospiti_totali = result["ospiti_totali"] if result["ospiti_totali"] else 0
-                conn.close()
-                return ospiti_totali
-            else:
-                # Calcola posti occupati per tutti i tavoli
-                cursor = conn.execute(
-                    "SELECT tavolo, SUM(ospiti) as ospiti_totali FROM prenotazioni WHERE data = ? AND ora = ? GROUP BY tavolo",
-                    (data, ora)
-                )
-                results = cursor.fetchall()
-                occupati = {}
-                for row in results:
-                    occupati[row["tavolo"]] = row["ospiti_totali"]
-                conn.close()
-                return occupati
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        if tavolo:
+            # Calcola posti occupati per un tavolo specifico
+            cur.execute(
+                "SELECT SUM(ospiti) as ospiti_totali FROM prenotazioni WHERE data = %s AND ora = %s AND tavolo = %s",
+                (data, ora, tavolo)
+            )
+            result = cur.fetchone()
+            ospiti_totali = result["ospiti_totali"] if result["ospiti_totali"] else 0
+            cur.close()
+            conn.close()
+            return ospiti_totali
+        else:
+            # Calcola posti occupati per tutti i tavoli
+            cur.execute(
+                "SELECT tavolo, SUM(ospiti) as ospiti_totali FROM prenotazioni WHERE data = %s AND ora = %s GROUP BY tavolo",
+                (data, ora)
+            )
+            results = cur.fetchall()
+            occupati = {}
+            for row in results:
+                occupati[row["tavolo"]] = row["ospiti_totali"]
+            cur.close()
+            conn.close()
+            return occupati
                 
     except Exception as error:
         print(f"Errore nel calcolo posti occupati: {error}")
@@ -191,10 +206,6 @@ def valida_prenotazione(dati):
         return {"valida": False, "errore": "Questo tavolo non è prenotabile."}
     
     return {"valida": True}
-
-def dict_from_row(row):
-    """Converte una Row di sqlite3 in dizionario"""
-    return {key: row[key] for key in row.keys()}
 
 # ================================
 # API ENDPOINTS - TAVOLI
@@ -301,16 +312,21 @@ def prenota():
             }), 400
         
         # Inserimento prenotazione
-        with db_lock:
-            conn = get_db_connection()
-            cursor = conn.execute(
-                "INSERT INTO prenotazioni (nome, telefono, data, ora, ospiti, tavolo, note) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                (nome.strip(), telefono.strip(), data, ora, posti_richiesti, tavolo, note.strip())
-            )
-            
-            prenotazione_id = cursor.lastrowid
-            conn.commit()
-            conn.close()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            INSERT INTO prenotazioni (nome, telefono, data, ora, ospiti, tavolo, note)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            RETURNING id
+            """,
+            (nome.strip(), telefono.strip(), data, ora, posti_richiesti, tavolo, note.strip())
+        )
+        
+        prenotazione_id = cur.fetchone()["id"]
+        conn.commit()
+        cur.close()
+        conn.close()
         
         nuova_prenotazione = {
             "id": str(prenotazione_id),
@@ -349,24 +365,24 @@ def get_prenotazioni():
         params = []
         
         if data:
-            query += " AND data = ?"
+            query += " AND data = %s"
             params.append(data)
         if ora:
-            query += " AND ora = ?"
+            query += " AND ora = %s"
             params.append(ora)
         if tavolo:
-            query += " AND tavolo = ?"
+            query += " AND tavolo = %s"
             params.append(tavolo)
             
-        query += " ORDER BY data DESC, ora DESC LIMIT ?"
+        query += " ORDER BY data DESC, ora DESC LIMIT %s"
         params.append(limit)
         
-        with db_lock:
-            conn = get_db_connection()
-            cursor = conn.execute(query, params)
-            rows = cursor.fetchall()
-            prenotazioni = [dict_from_row(row) for row in rows]
-            conn.close()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(query, params)
+        prenotazioni = cur.fetchall()
+        cur.close()
+        conn.close()
         
         return jsonify({
             "success": True,
@@ -395,15 +411,20 @@ def post_feedback():
         if rating < 0 or rating > 5:
             return jsonify({"error": "Il rating deve essere tra 0 e 5."}), 400
         
-        with db_lock:
-            conn = get_db_connection()
-            cursor = conn.execute(
-                "INSERT INTO feedbacks (nome, rating, message) VALUES (?, ?, ?)",
-                (nome.strip(), rating, message)
-            )
-            feedback_id = cursor.lastrowid
-            conn.commit()
-            conn.close()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            INSERT INTO feedbacks (nome, rating, message)
+            VALUES (%s, %s, %s)
+            RETURNING id
+            """,
+            (nome.strip(), rating, message)
+        )
+        feedback_id = cur.fetchone()["id"]
+        conn.commit()
+        cur.close()
+        conn.close()
         
         nuovo_feedback = {
             "id": str(feedback_id),
@@ -428,15 +449,15 @@ def get_feedback():
     try:
         limit = min(int(request.args.get('limit', 10)), 50)  # max 50
         
-        with db_lock:
-            conn = get_db_connection()
-            cursor = conn.execute(
-                "SELECT * FROM feedbacks ORDER BY timestamp DESC LIMIT ?",
-                (limit,)
-            )
-            rows = cursor.fetchall()
-            feedbacks = [dict_from_row(row) for row in rows]
-            conn.close()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT * FROM feedbacks ORDER BY timestamp DESC LIMIT %s",
+            (limit,)
+        )
+        feedbacks = cur.fetchall()
+        cur.close()
+        conn.close()
         
         return jsonify({
             "success": True,
@@ -460,15 +481,20 @@ def post_reminder():
         if not contact:
             return jsonify({"error": "Il contatto è obbligatorio."}), 400
         
-        with db_lock:
-            conn = get_db_connection()
-            cursor = conn.execute(
-                "INSERT INTO reminder_requests (contact) VALUES (?)",
-                (contact,)
-            )
-            reminder_id = cursor.lastrowid
-            conn.commit()
-            conn.close()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            INSERT INTO reminder_requests (contact)
+            VALUES (%s)
+            RETURNING id
+            """,
+            (contact,)
+        )
+        reminder_id = cur.fetchone()["id"]
+        conn.commit()
+        cur.close()
+        conn.close()
         
         nuovo_promemoria = {
             "id": str(reminder_id),
@@ -489,14 +515,14 @@ def post_reminder():
 @app.route('/api/reminder', methods=['GET'])
 def get_reminder():
     try:
-        with db_lock:
-            conn = get_db_connection()
-            cursor = conn.execute(
-                "SELECT * FROM reminder_requests ORDER BY timestamp DESC LIMIT 20"
-            )
-            rows = cursor.fetchall()
-            reminders = [dict_from_row(row) for row in rows]
-            conn.close()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT * FROM reminder_requests ORDER BY timestamp DESC LIMIT 20"
+        )
+        reminders = cur.fetchall()
+        cur.close()
+        conn.close()
         
         return jsonify({
             "success": True,
@@ -514,22 +540,23 @@ def get_reminder():
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
     try:
-        with db_lock:
-            conn = get_db_connection()
-            
-            # Stats prenotazioni
-            cursor = conn.execute("SELECT COUNT(*) as totale, SUM(ospiti) as ospiti_totali FROM prenotazioni")
-            stats_prenotazioni = cursor.fetchone()
-            
-            # Stats feedback
-            cursor = conn.execute("SELECT COUNT(*) as totale, AVG(rating) as rating_medio FROM feedbacks")
-            stats_feedback = cursor.fetchone()
-            
-            # Stats reminder
-            cursor = conn.execute("SELECT COUNT(*) as totale FROM reminder_requests")
-            stats_reminder = cursor.fetchone()
-            
-            conn.close()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # Stats prenotazioni
+        cur.execute("SELECT COUNT(*) as totale, SUM(ospiti) as ospiti_totali FROM prenotazioni")
+        stats_prenotazioni = cur.fetchone()
+        
+        # Stats feedback
+        cur.execute("SELECT COUNT(*) as totale, AVG(rating) as rating_medio FROM feedbacks")
+        stats_feedback = cur.fetchone()
+        
+        # Stats reminder
+        cur.execute("SELECT COUNT(*) as totale FROM reminder_requests")
+        stats_reminder = cur.fetchone()
+        
+        cur.close()
+        conn.close()
         
         stats = {
             "prenotazioni": {
@@ -595,7 +622,7 @@ def start_server():
         init_database()
         
         print(f"[SERVER] Backend Festa dello Sport avviato su http://localhost:{PORT}")
-        print(f"[DB] Database SQLite: {DB_PATH}")
+        print(f"[DB] Database PostgreSQL: {DATABASE_URL[:30]}...")
         print(f"[CONFIG] Configurazione tavoli: {len(TAVOLI_CONFIG['standard'])} prenotabili, {len(TAVOLI_CONFIG['riservati'])} riservati")
         
         # Per produzione, usa Gunicorn invece di app.run()
