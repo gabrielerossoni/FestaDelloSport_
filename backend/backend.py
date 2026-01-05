@@ -54,13 +54,26 @@ def after_request(response):
 # ================================
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
+if not DATABASE_URL:
+    print("[ERROR] DATABASE_URL non trovata nelle variabili d'ambiente!")
+    sys.exit(1)
+
+# Fix per Render: postgres:// -> postgresql://
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    print("[FIX] DATABASE_URL convertito da postgres:// a postgresql://")
+
 def get_db_connection():
     """Crea una nuova connessione al database PostgreSQL"""
-    return psycopg2.connect(
-        DATABASE_URL,
-        cursor_factory=RealDictCursor,
-        sslmode="require"
-    )
+    try:
+        return psycopg2.connect(
+            DATABASE_URL,
+            cursor_factory=RealDictCursor,
+            sslmode="require"
+        )
+    except Exception as e:
+        print(f"[ERROR] Impossibile connettersi al database: {e}")
+        raise
 
 def init_database():
     """Inizializza il database PostgreSQL"""
@@ -148,6 +161,18 @@ for t in TAVOLI_CONFIG["riservati"]:
     TAVOLI[t] = 0
 for t in TAVOLI_CONFIG["standard"]:
     TAVOLI[t] = 10
+
+# ================================
+# INIZIALIZZAZIONE DB ALL'AVVIO
+# ================================
+# Esegui init_database quando il modulo viene caricato
+# (sia con app.run che con Gunicorn)
+try:
+    print("[STARTUP] Inizializzazione database in corso...")
+    init_database()
+except Exception as e:
+    print(f"[STARTUP ERROR] Impossibile inizializzare il database: {e}")
+    # Non bloccare l'avvio, le tabelle potrebbero già esistere
 
 # ================================
 # UTILITY FUNCTIONS
@@ -259,10 +284,27 @@ def get_tavoli_info():
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Endpoint per verificare che il backend sia attivo"""
+    db_status = "disconnected"
+    db_error = None
+    
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT 1")
+        cur.close()
+        conn.close()
+        db_status = "connected"
+    except Exception as e:
+        db_error = str(e)
+    
     return jsonify({
         "success": True,
         "message": "Backend attivo",
-        "timestamp": datetime.now().isoformat()
+        "timestamp": datetime.now().isoformat(),
+        "database": {
+            "status": db_status,
+            "error": db_error
+        }
     })
 
 # ================================
@@ -270,6 +312,8 @@ def health_check():
 # ================================
 @app.route('/api/prenota', methods=['POST'])
 def prenota():
+    conn = None
+    cur = None
     try:
         dati = request.get_json()
         print(f"[DEBUG] Ricevuta richiesta prenotazione: {dati}")
@@ -312,8 +356,11 @@ def prenota():
             }), 400
         
         # Inserimento prenotazione
+        print("[DB] Apertura connessione...")
         conn = get_db_connection()
         cur = conn.cursor()
+        
+        print("[DB] Esecuzione INSERT...")
         cur.execute(
             """
             INSERT INTO prenotazioni (nome, telefono, data, ora, ospiti, tavolo, note)
@@ -325,8 +372,7 @@ def prenota():
         
         prenotazione_id = cur.fetchone()["id"]
         conn.commit()
-        cur.close()
-        conn.close()
+        print(f"[OK] Prenotazione inserita con ID: {prenotazione_id}")
         
         nuova_prenotazione = {
             "id": str(prenotazione_id),
@@ -340,8 +386,6 @@ def prenota():
             "timestamp": datetime.now().isoformat()
         }
         
-        print(f"[OK] Prenotazione inserita con ID: {prenotazione_id}")
-        
         return jsonify({
             "success": True,
             "prenotazione": nuova_prenotazione,
@@ -350,7 +394,15 @@ def prenota():
         
     except Exception as error:
         print(f"[ERROR] Errore nella prenotazione: {error}")
-        return jsonify({"error": "Errore interno del server."}), 500
+        print(f"[ERROR] Tipo errore: {type(error).__name__}")
+        import traceback
+        print(f"[ERROR] Traceback: {traceback.format_exc()}")
+        return jsonify({"error": f"Errore interno del server: {str(error)}"}), 500
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 @app.route('/api/prenotazioni', methods=['GET'])
 def get_prenotazioni():
@@ -446,9 +498,12 @@ def post_feedback():
 
 @app.route('/api/feedback', methods=['GET'])
 def get_feedback():
+    conn = None
+    cur = None
     try:
         limit = min(int(request.args.get('limit', 10)), 50)  # max 50
         
+        print(f"[DB] Recupero feedback (limit={limit})...")
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute(
@@ -456,8 +511,6 @@ def get_feedback():
             (limit,)
         )
         feedbacks = cur.fetchall()
-        cur.close()
-        conn.close()
         
         return jsonify({
             "success": True,
@@ -467,7 +520,14 @@ def get_feedback():
         
     except Exception as error:
         print(f"Errore nel recupero feedback: {error}")
-        return jsonify({"error": "Errore interno del server."}), 500
+        import traceback
+        print(f"[ERROR] Traceback: {traceback.format_exc()}")
+        return jsonify({"error": f"Errore interno del server: {str(error)}"}), 500
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 # ================================
 # API ENDPOINTS - PROMEMORIA
@@ -619,8 +679,6 @@ signal.signal(signal.SIGTERM, signal_handler)
 # ================================
 def start_server():
     try:
-        init_database()
-        
         print(f"[SERVER] Backend Festa dello Sport avviato su http://localhost:{PORT}")
         print(f"[DB] Database PostgreSQL: {DATABASE_URL[:30]}...")
         print(f"[CONFIG] Configurazione tavoli: {len(TAVOLI_CONFIG['standard'])} prenotabili, {len(TAVOLI_CONFIG['riservati'])} riservati")
