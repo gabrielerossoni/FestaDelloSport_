@@ -3,4 +3,5 @@
 
 # Backup database
 backend/backups/
+backend/festa_sport.db
 *.db.backup
