@@ -2,16 +2,19 @@ import json
 import signal
 import sys
 from datetime import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session, redirect
 from flask_cors import CORS
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
 
 # ================================
 # CONFIGURAZIONE SERVER
 # ================================
 app = Flask(__name__)
+app.secret_key = 'chiave-segreta-admin-festa-sport'  # CAMBIARE IN PRODUZIONE
 # CORS configurato per produzione - MODIFICA CON IL TUO DOMINIO
 ALLOWED_ORIGINS = [
     "https://gabrielerossoni.github.io",
@@ -30,12 +33,26 @@ ALLOWED_ORIGINS = [
 CORS(app, resources={
     r"/api/*": {
         "origins": ALLOWED_ORIGINS,
-        "methods": ["GET", "POST", "OPTIONS"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type"],
         "supports_credentials": False
     }
 })
 PORT = 3001
+
+# Credenziali admin hardcoded (in produzione, usa file JSON sicuro o DB)
+ADMIN_CREDENTIALS = {
+    'admin': generate_password_hash('password123')  # Cambiare password
+}
+
+# Decorator per richiedere login admin
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'admin_logged_in' not in session:
+            return jsonify({"error": "Accesso negato. Effettua il login."}), 401
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Middleware per logging delle richieste
 @app.before_request
@@ -55,68 +72,165 @@ def after_request(response):
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if not DATABASE_URL:
-    print("[ERROR] DATABASE_URL non trovata nelle variabili d'ambiente!")
-    sys.exit(1)
-
-# Fix per Render: postgres:// -> postgresql://
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-    print("[FIX] DATABASE_URL convertito da postgres:// a postgresql://")
+    print("[CONFIG] Usando SQLite per test locali")
+    DATABASE_URL = "sqlite:///festa_sport.db"
+    USE_SQLITE = True
+else:
+    USE_SQLITE = False
+    # Fix per Render: postgres:// -> postgresql://
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+        print("[FIX] DATABASE_URL convertito da postgres:// a postgresql://")
 
 def get_db_connection():
-    """Crea una nuova connessione al database PostgreSQL"""
+    """Crea una nuova connessione al database"""
     try:
-        return psycopg2.connect(
-            DATABASE_URL,
-            cursor_factory=RealDictCursor,
-            sslmode="require"
-        )
+        if USE_SQLITE:
+            import sqlite3
+            conn = sqlite3.connect(DATABASE_URL.replace("sqlite:///", ""))
+            conn.row_factory = sqlite3.Row  # Per accedere come dict
+            return conn
+        else:
+            return psycopg2.connect(
+                DATABASE_URL,
+                cursor_factory=RealDictCursor,
+                sslmode="require"
+            )
     except Exception as e:
         print(f"[ERROR] Impossibile connettersi al database: {e}")
         raise
 
 def init_database():
-    """Inizializza il database PostgreSQL"""
+    """Inizializza il database"""
     try:
-        print("[CONFIG] Inizializzazione database PostgreSQL...")
+        if USE_SQLITE:
+            print("[CONFIG] Inizializzazione database SQLite...")
+        else:
+            print("[CONFIG] Inizializzazione database PostgreSQL...")
         
         conn = get_db_connection()
         cur = conn.cursor()
         
-        # Crea tabelle se non esistono
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS prenotazioni (
-                id SERIAL PRIMARY KEY,
-                nome TEXT NOT NULL,
-                telefono TEXT NOT NULL,
-                data TEXT NOT NULL,
-                ora TEXT NOT NULL,
-                ospiti INTEGER NOT NULL,
-                tavolo TEXT NOT NULL,
-                note TEXT DEFAULT '',
-                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        """)
+        if USE_SQLITE:
+            # Query per SQLite
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS prenotazioni (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT NOT NULL,
+                    telefono TEXT NOT NULL,
+                    data TEXT NOT NULL,
+                    ora TEXT NOT NULL,
+                    ospiti INTEGER NOT NULL,
+                    tavolo TEXT NOT NULL,
+                    note TEXT DEFAULT '',
+                    timestamp TEXT DEFAULT (datetime('now'))
+                );
+            """)
+            
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS feedbacks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT DEFAULT 'Anonimo',
+                    rating INTEGER NOT NULL,
+                    message TEXT NOT NULL,
+                    timestamp TEXT DEFAULT (datetime('now'))
+                );
+            """)
+            
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS reminder_requests (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    contact TEXT NOT NULL,
+                    timestamp TEXT DEFAULT (datetime('now'))
+                );
+            """)
+            
+            # Tabelle per dashboard admin
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS eventi (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT NOT NULL,
+                    data TEXT NOT NULL,
+                    luogo TEXT NOT NULL,
+                    descrizione TEXT,
+                    created_at TEXT DEFAULT (datetime('now')),
+                    updated_at TEXT DEFAULT (datetime('now'))
+                );
+            """)
+            
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS menu_items (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT NOT NULL,
+                    descrizione TEXT,
+                    prezzo REAL,
+                    categoria TEXT NOT NULL,
+                    disponibile INTEGER DEFAULT 1,
+                    created_at TEXT DEFAULT (datetime('now')),
+                    updated_at TEXT DEFAULT (datetime('now'))
+                );
+            """)
+        else:
+            # Query per PostgreSQL
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS prenotazioni (
+                    id SERIAL PRIMARY KEY,
+                    nome TEXT NOT NULL,
+                    telefono TEXT NOT NULL,
+                    data TEXT NOT NULL,
+                    ora TEXT NOT NULL,
+                    ospiti INTEGER NOT NULL,
+                    tavolo TEXT NOT NULL,
+                    note TEXT DEFAULT '',
+                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
+            
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS feedbacks (
+                    id SERIAL PRIMARY KEY,
+                    nome TEXT DEFAULT 'Anonimo',
+                    rating INTEGER NOT NULL CHECK (rating BETWEEN 0 AND 5),
+                    message TEXT NOT NULL,
+                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
+            
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS reminder_requests (
+                    id SERIAL PRIMARY KEY,
+                    contact TEXT NOT NULL,
+                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
+            
+            # Tabelle per dashboard admin
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS eventi (
+                    id SERIAL PRIMARY KEY,
+                    nome TEXT NOT NULL,
+                    data DATE NOT NULL,
+                    luogo TEXT NOT NULL,
+                    descrizione TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
+            
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS menu_items (
+                    id SERIAL PRIMARY KEY,
+                    nome TEXT NOT NULL,
+                    descrizione TEXT,
+                    prezzo DECIMAL(5,2),
+                    categoria TEXT NOT NULL,
+                    disponibile BOOLEAN DEFAULT TRUE,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
         
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS feedbacks (
-                id SERIAL PRIMARY KEY,
-                nome TEXT DEFAULT 'Anonimo',
-                rating INTEGER NOT NULL CHECK (rating BETWEEN 0 AND 5),
-                message TEXT NOT NULL,
-                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        """)
-        
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS reminder_requests (
-                id SERIAL PRIMARY KEY,
-                contact TEXT NOT NULL,
-                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        """)
-        
-        # Indici per migliorare le performance
+        # Indici per migliorare le performance (compatibili con entrambi)
         cur.execute("""
             CREATE INDEX IF NOT EXISTS idx_prenotazioni_data_ora ON prenotazioni(data, ora);
         """)
@@ -130,11 +244,22 @@ def init_database():
             CREATE INDEX IF NOT EXISTS idx_reminder_timestamp ON reminder_requests(timestamp);
         """)
         
+        # Indici per dashboard admin
+        cur.execute("""
+            CREATE INDEX IF NOT EXISTS idx_eventi_data ON eventi(data);
+        """)
+        cur.execute("""
+            CREATE INDEX IF NOT EXISTS idx_menu_categoria ON menu_items(categoria);
+        """)
+        
         conn.commit()
         cur.close()
         conn.close()
 
-        print("[OK] Database PostgreSQL inizializzato correttamente")
+        if USE_SQLITE:
+            print("[OK] Database SQLite inizializzato correttamente")
+        else:
+            print("[OK] Database PostgreSQL inizializzato correttamente")
         return True
     except Exception as error:
         print(f"[ERROR] Errore nell'inizializzazione del database: {error}")
@@ -645,6 +770,266 @@ def get_stats():
     except Exception as error:
         print(f"Errore nel recupero statistiche: {error}")
         return jsonify({"error": "Errore interno del server."}), 500
+
+# ================================
+# ROUTES ADMIN DASHBOARD
+# ================================
+
+@app.route('/admin-login', methods=['POST'])
+def admin_login():
+    """API login admin"""
+    username = request.form.get('username')
+    password = request.form.get('password')
+    
+    if username in ADMIN_CREDENTIALS and check_password_hash(ADMIN_CREDENTIALS[username], password):
+        session['admin_logged_in'] = True
+        session['admin_username'] = username
+        return redirect('https://gabrielerossoni.github.io/FestaDelloSport_/admin-dashboard.html')
+    else:
+        return jsonify({"error": "Credenziali non valide"}), 401
+
+@app.route('/admin-logout')
+def admin_logout():
+    """Logout admin"""
+    session.pop('admin_logged_in', None)
+    session.pop('admin_username', None)
+    return redirect('https://gabrielerossoni.github.io/FestaDelloSport_/admin-login.html')
+
+# API per CRUD Eventi
+@app.route('/api/admin/eventi', methods=['GET'])
+@admin_required
+def get_eventi():
+    """Ottieni lista eventi"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM eventi ORDER BY data ASC")
+        eventi = cur.fetchall()
+        cur.close()
+        conn.close()
+        return jsonify({"success": True, "data": eventi})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/eventi', methods=['POST'])
+@admin_required
+def create_evento():
+    """Crea nuovo evento"""
+    try:
+        data = request.get_json()
+        nome = data['nome']
+        data_evento = data['data']
+        luogo = data['luogo']
+        descrizione = data.get('descrizione', '')
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO eventi (nome, data, luogo, descrizione)
+            VALUES (%s, %s, %s, %s) RETURNING id
+        """, (nome, data_evento, luogo, descrizione))
+        evento_id = cur.fetchone()['id']
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({"success": True, "id": evento_id})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/eventi/<int:evento_id>', methods=['GET'])
+@admin_required
+def get_evento(evento_id):
+    """Ottieni singolo evento"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM eventi WHERE id=%s", (evento_id,))
+        evento = cur.fetchone()
+        cur.close()
+        conn.close()
+        if evento:
+            return jsonify({"success": True, "data": evento})
+        else:
+            return jsonify({"success": False, "error": "Evento non trovato"}), 404
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/eventi/<int:evento_id>', methods=['PUT'])
+@admin_required
+def update_evento(evento_id):
+    """Aggiorna evento esistente"""
+    try:
+        data = request.get_json()
+        nome = data['nome']
+        data_evento = data['data']
+        luogo = data['luogo']
+        descrizione = data.get('descrizione', '')
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("""
+            UPDATE eventi SET nome=%s, data=%s, luogo=%s, descrizione=%s, updated_at=CURRENT_TIMESTAMP
+            WHERE id=%s
+        """, (nome, data_evento, luogo, descrizione, evento_id))
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/eventi/<int:evento_id>', methods=['DELETE'])
+@admin_required
+def delete_evento(evento_id):
+    """Cancella evento"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM eventi WHERE id=%s", (evento_id,))
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+# API per CRUD Menu
+@app.route('/api/admin/menu', methods=['GET'])
+@admin_required
+def get_menu():
+    """Ottieni lista voci menu"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM menu_items ORDER BY categoria, nome")
+        menu = cur.fetchall()
+        cur.close()
+        conn.close()
+        return jsonify({"success": True, "data": menu})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/menu/<int:item_id>', methods=['GET'])
+@admin_required
+def get_menu_item(item_id):
+    """Ottieni singola voce menu"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM menu_items WHERE id=%s", (item_id,))
+        item = cur.fetchone()
+        cur.close()
+        conn.close()
+        if item:
+            return jsonify({"success": True, "data": item})
+        else:
+            return jsonify({"success": False, "error": "Voce menu non trovata"}), 404
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/menu', methods=['POST'])
+@admin_required
+def create_menu_item():
+    """Crea nuova voce menu"""
+    try:
+        data = request.get_json()
+        nome = data['nome']
+        descrizione = data.get('descrizione', '')
+        prezzo = data.get('prezzo')
+        categoria = data['categoria']
+        disponibile = data.get('disponibile', True)
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO menu_items (nome, descrizione, prezzo, categoria, disponibile)
+            VALUES (%s, %s, %s, %s, %s) RETURNING id
+        """, (nome, descrizione, prezzo, categoria, disponibile))
+        item_id = cur.fetchone()['id']
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({"success": True, "id": item_id})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/menu/<int:item_id>', methods=['PUT'])
+@admin_required
+def update_menu_item(item_id):
+    """Aggiorna voce menu"""
+    try:
+        data = request.get_json()
+        nome = data['nome']
+        descrizione = data.get('descrizione', '')
+        prezzo = data.get('prezzo')
+        categoria = data['categoria']
+        disponibile = data.get('disponibile', True)
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("""
+            UPDATE menu_items SET nome=%s, descrizione=%s, prezzo=%s, categoria=%s, disponibile=%s, updated_at=CURRENT_TIMESTAMP
+            WHERE id=%s
+        """, (nome, descrizione, prezzo, categoria, disponibile, item_id))
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/admin/menu/<int:item_id>', methods=['DELETE'])
+@admin_required
+def delete_menu_item(item_id):
+    """Cancella voce menu"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM menu_items WHERE id=%s", (item_id,))
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+# API per statistiche dashboard
+@app.route('/api/admin/stats', methods=['GET'])
+@admin_required
+def get_admin_stats():
+    """Statistiche per dashboard admin"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # Conteggi
+        cur.execute("SELECT COUNT(*) as totale FROM eventi")
+        eventi_count = cur.fetchone()['totale']
+        
+        cur.execute("SELECT COUNT(*) as totale FROM menu_items")
+        menu_count = cur.fetchone()['totale']
+        
+        cur.execute("SELECT COUNT(*) as totale FROM prenotazioni")
+        prenotazioni_count = cur.fetchone()['totale']
+        
+        cur.close()
+        conn.close()
+        
+        stats = {
+            "eventi": eventi_count,
+            "menu_items": menu_count,
+            "prenotazioni": prenotazioni_count
+        }
+        
+        return jsonify({"success": True, "data": stats})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 # ================================
 # GESTIONE ERRORI GLOBALI
