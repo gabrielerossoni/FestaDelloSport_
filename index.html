@@ -79,7 +79,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section min-h-[90vh] flex items-center justify-center text-white pt-20 relative" id="main-content">
+    <section id="home" class="hero-section min-h-screen flex items-center justify-center text-white pt-20 relative" id="main-content">
         <div class="container mx-auto px-4 text-center relative z-10">
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6 playfair drop-shadow-lg tracking-tight animate-fade-in-down">Festa dello Sport di Capralba</h1>
             <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-medium bg-white/20 rounded-xl px-6 py-4 shadow-lg backdrop-blur-md animate-fade-in-up">
@@ -2433,6 +2433,26 @@
             <h3 class="text-2xl font-bold mb-3 text-blue-900">Ehi! 👋</h3>
             <p id="attention-message" class="text-lg text-gray-800 mb-6"></p>
             <button id="close-attention-popup" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-full shadow transition duration-200">Ok!</button>
+        </div>
+    </div>
+    
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 shadow-lg z-50 hidden">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="mb-4 md:mb-0 md:mr-4">
+                <p class="text-sm">
+                    Utilizziamo cookie per migliorare la tua esperienza sul nostro sito. 
+                    <a href="privacy.html" class="text-yellow-400 hover:text-yellow-300 underline">Scopri di più sulla nostra Privacy Policy</a>.
+                </p>
+            </div>
+            <div class="flex gap-2">
+                <button id="accept-cookies" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full font-semibold transition duration-300">
+                    Accetta Tutti
+                </button>
+                <button id="decline-cookies" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-full font-semibold transition duration-300">
+                    Rifiuta
+                </button>
+            </div>
         </div>
     </div>
     

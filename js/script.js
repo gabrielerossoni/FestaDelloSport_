@@ -1224,3 +1224,31 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("orientationchange", applyHeroClass);
   window.addEventListener("resize", applyHeroClass);
 });
+
+// ===== COOKIE CONSENT =====
+document.addEventListener("DOMContentLoaded", function () {
+  const cookieConsent = document.getElementById("cookie-consent");
+  const acceptBtn = document.getElementById("accept-cookies");
+  const declineBtn = document.getElementById("decline-cookies");
+
+  // Controlla se l'utente ha già deciso
+  const consent = localStorage.getItem("cookie-consent");
+  if (!consent) {
+    // Mostra il banner se non ha deciso
+    cookieConsent.classList.remove("hidden");
+  }
+
+  // Accetta cookies
+  acceptBtn.addEventListener("click", function () {
+    localStorage.setItem("cookie-consent", "accepted");
+    cookieConsent.classList.add("hidden");
+    // Qui puoi abilitare analytics o altri cookie
+  });
+
+  // Rifiuta cookies
+  declineBtn.addEventListener("click", function () {
+    localStorage.setItem("cookie-consent", "declined");
+    cookieConsent.classList.add("hidden");
+    // Disabilita cookie non essenziali
+  });
+});
