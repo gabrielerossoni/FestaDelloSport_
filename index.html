@@ -261,9 +261,9 @@
             <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 rounded-r-lg" data-category="drinks">Bevande</button>
         </div>
     </div>
-    <div class="sm:hidden overflow-x-auto pb-2">
-        <div class="flex gap-2 px-2 justify-start items-start">
-            <button type="button" class="menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition" data-category="primi">Primi</button>
+    <div class="mb-8 sm:hidden overflow-x-auto pb-2">
+        <div class="inline-flex rounded-md shadow-sm flex-wrap w-auto" role="group" style="flex-wrap:nowrap;">
+            <button type="button" class="menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 rounded-full text-white whitespace-nowrap shadow-sm transition" data-category="primi">Primi</button>
             <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="secondi">Secondi</button>
             <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="gnocco">Gnocco Fritto</button>
             <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="panini">Panini</button>
@@ -2095,13 +2095,25 @@
     </section>
 
     <!-- Events Schedule Section -->
-    <section id="events" class="py-20 bg-white">
+    <section id="events" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold mb-12 text-center playfair text-blue-900">Programma Eventi</h2>
             
-            <!--TODO: SISTEMARE BOTTONI (grafica e funzionalità)-->
-            <div class="mb-8 flex justify-center">
-                <div class="inline-flex rounded-md shadow-sm flex-wrap" role="group">
+            <div class="mb-8 hidden sm:flex justify-center">
+                <div class="inline-flex rounded-md shadow-sm flex-wrap w-auto" role="group" style="flex-wrap:nowrap;">
+                    <button type="button" class="event-day-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white" data-day="29">Ven 29/5</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="30">Sab 30/5</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="31">Dom 31/5</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="5">Ven 5/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="6">Sab 6/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="7">Dom 7/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="12">Ven 12/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="13">Sab 13/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="14">Dom 14/6</button>
+                </div>
+            </div>
+            <div class="mb-8 sm:hidden overflow-x-auto pb-2">
+                <div class="inline-flex rounded-md shadow-sm flex-wrap w-auto" role="group" style="flex-wrap:nowrap;">
                     <button type="button" class="event-day-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white" data-day="29">Ven 29/5</button>
                     <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="30">Sab 30/5</button>
                     <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="31">Dom 31/5</button>
@@ -2337,8 +2349,7 @@
             </div>
         </div>
     </section>
-    
-    <!-- TODO:Togliere rettangolo sotto testo lasciando solo il BG-->
+
     <!-- Footer -->
     <footer class="bg-blue-900 text-white py-12">
         <div class="container mx-auto px-4">
