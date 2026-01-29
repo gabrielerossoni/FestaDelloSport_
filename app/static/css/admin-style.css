@@ -2,16 +2,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 :root {
-  --primary-bg: #121212;
-  --secondary-bg: #1e1e1e;
-  --sidebar-bg: #2c2c2c;
-  --header-bg: #333333;
-  --text-primary: #e0e0e0;
-  --text-secondary: #b0b0b0;
-  --accent-color: #4caf50; /* Green like Django success or generic professional */
-  --accent-hover: #43a047;
-  --danger-color: #d32f2f;
-  --border-color: #444;
+  --primary-bg: #0d1117;
+  --secondary-bg: #161b22;
+  --sidebar-bg: #1a2234;
+  --header-bg: #0d1117;
+  --text-primary: #f8fafc;
+  --text-secondary: #bac1d3;
+  --accent-color: #fac420; /* Yellow from public site */
+  --accent-hover: #facc15;
+  --danger-color: #ef4444;
+  --border-color: #2d3653;
+  --primary-blue: #2563eb;
+  --hover-blue: #3165fa;
 }
 
 * {
@@ -42,6 +44,7 @@ body {
 .header h1 {
   font-size: 1.5rem;
   font-weight: 500;
+  color: var(--accent-color);
 }
 
 .user-info {
@@ -54,15 +57,16 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.9rem;
-  padding: 5px 10px;
+  padding: 5px 12px;
   border: 1px solid var(--border-color);
-  border-radius: 4px;
+  border-radius: 6px;
   transition: all 0.2s;
 }
 
 .logout-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--danger-color);
   color: #fff;
+  border-color: var(--danger-color);
 }
 
 /* Container */
@@ -89,25 +93,26 @@ body {
 .sidebar li a {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 14px 20px;
   color: var(--text-secondary);
   text-decoration: none;
   transition:
     background 0.2s,
     color 0.2s;
   font-size: 0.95rem;
+  border-left: 3px solid transparent;
 }
 
 .sidebar li a i {
-  margin-right: 10px;
+  margin-right: 12px;
   width: 20px;
   text-align: center;
 }
 
 .sidebar li a:hover,
 .sidebar li a.active {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  background-color: rgba(250, 196, 32, 0.05);
+  color: var(--accent-color);
   border-left: 3px solid var(--accent-color);
 }
 
@@ -136,10 +141,11 @@ body {
 }
 
 h2 {
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-  font-weight: 400;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  font-weight: 500;
+  color: var(--accent-color);
 }
 
 /* Stats */
@@ -152,11 +158,17 @@ h2 {
 .stat-card {
   background-color: var(--sidebar-bg);
   padding: 1.5rem;
-  border-radius: 4px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
 }
 
 .stat-card h3 {
@@ -169,25 +181,33 @@ h2 {
 
 .stat-card .number {
   font-size: 2.5rem;
-  font-weight: 300;
+  font-weight: 400;
+  color: #fff;
 }
 
 /* Buttons */
 .btn {
-  background-color: var(--accent-color);
+  background-color: var(--primary-blue);
   color: white;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background 0.2s;
+  font-weight: 500;
+  transition: all 0.2s;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--hover-blue);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .btn-danger {
@@ -204,13 +224,14 @@ table {
   border-collapse: collapse;
   margin-top: 1rem;
   background-color: var(--sidebar-bg);
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
+  border: 1px solid var(--border-color);
 }
 
 th,
 td {
-  padding: 12px 15px;
+  padding: 14px 18px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
@@ -296,12 +317,13 @@ input,
 select,
 textarea {
   width: 100%;
-  padding: 10px;
-  background-color: #1e1e1e;
-  border: 1px solid var(--border-color);
+  padding: 12px;
+  background-color: var(--secondary-bg);
+  border: 1.5px solid var(--border-color);
   color: white;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 0.95rem;
+  transition: border-color 0.2s;
 }
 
 input:focus,
@@ -309,6 +331,28 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--accent-color);
+}
+
+#user-role-badge {
+  background: var(--accent-color);
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: 5px;
+  text-transform: uppercase;
+}
+
+.btn-secondary {
+  background-color: var(--sidebar-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
 }
 
 /* Helpers */

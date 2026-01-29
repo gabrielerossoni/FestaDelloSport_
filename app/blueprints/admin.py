@@ -22,7 +22,7 @@ def admin_redirect():
 @admin_bp.route('/admin-dashboard', methods=['GET'])
 @admin_required
 def dashboard():
-    return render_template('admin/dashboard.html')
+    return render_template('admin/dashboard.html', role=session.get('admin_role', 'staff'))
 
 # ================================
 # AUTH
@@ -64,6 +64,8 @@ def logout():
 @admin_bp.route('/api/admin/users', methods=['GET'])
 @admin_required
 def get_users():
+    if session.get('admin_role') != 'admin':
+        return jsonify({"success": False, "error": "Unauthorized"}), 403
     try:
         conn = get_db_connection()
         cur = conn.cursor()
