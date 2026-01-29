@@ -15,3 +15,5 @@ instance/
 # IDE
 .vscode/
 .idea/
+
+CONFIG.md
