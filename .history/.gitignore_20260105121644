@@ -1,7 +1,0 @@
-.history
-.dist
-../backend/festa_sport.db
-
-# Backup database
-backend/backups/
-*.db.backup
