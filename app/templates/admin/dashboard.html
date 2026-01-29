@@ -114,7 +114,6 @@
               <tr>
                 <th>Nome</th>
                 <th>Categoria</th>
-                <th>Prezzo</th>
                 <th>Disponibile</th>
                 <th>Azioni</th>
               </tr>
@@ -256,7 +255,6 @@
                         <tr>
                             <td>${m.nome}</td>
                             <td>${m.categoria}</td>
-                            <td>€${m.prezzo}</td>
                             <td>${m.disponibile ? '<span style="color:var(--accent-color)">Sì</span>' : '<span style="color:var(--danger-color)">No</span>'}</td>
                             <td>
                                 <button class="btn" onclick="openModal('menu', ${m.id})">Edit</button>
@@ -375,12 +373,7 @@
 
           html = `
                     <div class="form-group"><label>Nome</label><input type="text" name="nome" value="${data.nome || ""}" required></div>
-                    <!-- Prezzo rimosso definitivamente -->
-                    <div class="form-group"><label>Allergeni</label>
-                        <div style="display: flex; flex-wrap: wrap; gap: 5px;">
-                            ${allergeniChecks}
-                        </div>
-                    </div>
+                    <div class="form-group"><label>Descrizione</label><textarea name="descrizione" rows="3" placeholder="Es: Pasta fresca fatta in casa...">${data.descrizione || ""}</textarea></div>
                     <div class="form-group"><label>Categoria</label>
                         <select name="categoria">
                             <option value="antipasti" ${data.categoria == "antipasti" ? "selected" : ""}>Antipasti</option>
@@ -394,8 +387,16 @@
                             <option value="pizza" ${data.categoria == "pizza" ? "selected" : ""}>Pizze</option>
                         </select>
                     </div>
-                    <div class="form-group"><label><input type="checkbox" name="disponibile" ${data.disponibile !== false ? "checked" : ""}> Disponibile</label></div>
-                    <button type="button" class="btn" onclick="submitForm('${type}', ${id})">${isEdit ? "Aggiorna" : "Salva"}</button>
+                    <div class="form-group"><label>Allergeni</label>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            ${allergeniChecks}
+                        </div>
+                    </div>
+                    <div class="form-group"><label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" name="disponibile" ${data.disponibile !== false ? "checked" : ""} style="width: auto;"> 
+                        <span>Disponibile per l'ordine</span>
+                    </label></div>
+                    <button type="button" class="btn" onclick="submitForm('${type}', ${id})" style="width: 100%; margin-top: 10px;">${isEdit ? "Aggiorna Prodotto" : "Crea Prodotto"}</button>
                 `;
         } else if (type === "utente") {
           if (isEdit) {

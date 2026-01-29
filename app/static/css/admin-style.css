@@ -345,14 +345,19 @@ textarea:focus {
 }
 
 .btn-secondary {
-  background-color: var(--sidebar-bg);
-  border: 1px solid var(--border-color);
+  background-color: transparent;
+  border: none;
   color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  padding: 8px 0; /* No vertical box */
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent-color);
   color: var(--accent-color);
+  background-color: transparent;
 }
 
 /* Helpers */

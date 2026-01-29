@@ -60,7 +60,9 @@ body {
 }
 .calendar-day:hover {
   transform: translateY(-7px) scale(1.03);
-  box-shadow: 0 12px 24px -6px rgba(37, 99, 235, 0.1), 0 2px 8px 0 #f8b40022;
+  box-shadow:
+    0 12px 24px -6px rgba(37, 99, 235, 0.1),
+    0 2px 8px 0 #f8b40022;
   border-color: #f8b400;
   background: linear-gradient(120deg, #fffbe6 60%, #f8b40022 100%);
 }
@@ -71,7 +73,9 @@ body {
 }
 .menu-item:hover {
   transform: translateY(-7px) scale(1.03);
-  box-shadow: 0 12px 24px -6px rgba(37, 99, 235, 0.1), 0 2px 8px 0 #f8b40022;
+  box-shadow:
+    0 12px 24px -6px rgba(37, 99, 235, 0.1),
+    0 2px 8px 0 #f8b40022;
   border-color: #2563eb;
   background: linear-gradient(120deg, #e0e7ff 60%, #2563eb0a 100%);
 }
@@ -88,7 +92,9 @@ body {
   border: none;
   border-radius: 9999px;
   box-shadow: 0 4px 16px -4px #2563eb33;
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s;
 }
 .modern-btn:hover {
   background: linear-gradient(90deg, #f8b400 0%, #2563eb 100%);
@@ -193,7 +199,11 @@ body {
   background: #e5e7eb;
   color: #374151;
   box-shadow: 0 2px 8px #2563eb22;
-  transition: background 0.2s, color 0.2s, border 0.2s, transform 0.1s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border 0.2s,
+    transform 0.1s;
   margin: 0.2rem;
   outline: none;
   cursor: pointer;
@@ -336,65 +346,68 @@ body {
     box-shadow: 0 10px 22px -8px #3165fa21 !important;
   }
 
-/* Rendere i bottoni degli eventi identici allo stile dei bottoni del menu
+  /* Rendere i bottoni degli eventi identici allo stile dei bottoni del menu
    Non si modificano le regole esistenti dei bottoni del menu; qui si
    applicano regole mirate solo a `.event-day-btn` per replicare l'aspetto. */
-.event-day-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.5rem; /* px-6 py-2 equivalenti */
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 600;
-  border-radius: 0.75rem;
-  background: #e5e7eb;
-  color: #1f2937;
-  border: none;
-  box-shadow: 0 6px 18px -6px rgba(37, 99, 235, 0.12);
-  transition: transform 180ms ease, box-shadow 180ms ease, background 160ms ease;
-}
-
-.event-day-btn:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 26px -8px rgba(37, 99, 235, 0.14);
-}
-
-.event-day-btn.active {
-  background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
-  color: #ffffff;
-  box-shadow: 0 10px 30px -8px rgba(37, 99, 235, 0.25);
-}
-
-@media (max-width: 640px) {
   .event-day-btn {
-    border-radius: 9999px;
-    padding: 0.45rem 1rem;
-    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem; /* px-6 py-2 equivalenti */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600;
+    border-radius: 0.75rem;
+    background: #e5e7eb;
+    color: #1f2937;
+    border: none;
+    box-shadow: 0 6px 18px -6px rgba(37, 99, 235, 0.12);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      background 160ms ease;
   }
-}
 
-/* Rendere i bottoni evento 'attaccati' come gruppo segmentato (come i menu tabs)
+  .event-day-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 26px -8px rgba(37, 99, 235, 0.14);
+  }
+
+  .event-day-btn.active {
+    background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 30px -8px rgba(37, 99, 235, 0.25);
+  }
+
+  @media (max-width: 640px) {
+    .event-day-btn {
+      border-radius: 9999px;
+      padding: 0.45rem 1rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Rendere i bottoni evento 'attaccati' come gruppo segmentato (come i menu tabs)
    - rimuove margin tra i bottoni nel gruppo
    - applica angoli arrotondati solo al primo/ultimo
    - aggiunge separatore sottile tra bottoni per evitare doppio bordo
 */
-.inline-flex[role="group"] > .event-day-btn {
-  margin: 0 !important;
-  border-radius: 0 !important;
-  border-right: 1px solid rgba(0,0,0,0.06);
-}
-.inline-flex[role="group"] > .event-day-btn:first-child {
-  border-top-left-radius: 0.5rem !important;
-  border-bottom-left-radius: 0.5rem !important;
-}
-.inline-flex[role="group"] > .event-day-btn:last-child {
-  border-top-right-radius: 0.5rem !important;
-  border-bottom-right-radius: 0.5rem !important;
-  border-right: none !important;
-}
-.inline-flex[role="group"] > .event-day-btn:hover {
-  z-index: 2;
-}
+  .inline-flex[role="group"] > .event-day-btn {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .inline-flex[role="group"] > .event-day-btn:first-child {
+    border-top-left-radius: 0.5rem !important;
+    border-bottom-left-radius: 0.5rem !important;
+  }
+  .inline-flex[role="group"] > .event-day-btn:last-child {
+    border-top-right-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+    border-right: none !important;
+  }
+  .inline-flex[role="group"] > .event-day-btn:hover {
+    z-index: 2;
+  }
 
   .bg-gradient-to-br,
   .bg-gradient-to-tr {
@@ -490,10 +503,10 @@ body {
   input,
   textarea,
   select {
-    background-color: #232e3b !important;
+    background-color: #1a2234 !important;
     color: #eceff2 !important;
-    border: 1.5px solid #273347 !important;
-    box-shadow: 0 2px 8px 0 #232e3b1a;
+    border: 1.5px solid #2d3653 !important;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   }
   input::placeholder,
   textarea::placeholder {
@@ -502,10 +515,76 @@ body {
   input:focus,
   textarea:focus,
   select:focus {
-    border-color: #3165fa !important;
-    box-shadow: 0 0 0 3px #3165fa1a !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
   }
 
+  /* Segmented Control Tabs (Custom) */
+  .segmented-tabs {
+    display: inline-flex;
+    background: #1a2234; /* Dark blue/gray matching cards */
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid #2d3653;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .tab-item {
+    padding: 10px 24px;
+    color: #bac1d3;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-item:hover:not(.active) {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .tab-item.active {
+    background-color: #2563eb; /* Primary Blue from screenshot */
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  }
+
+  /* Perfected Cards */
+  .perfect-card {
+    background-color: #1a2234 !important;
+    border: 1.5px solid #2d3653 !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .perfect-card h3 {
+    color: #fac420 !important;
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+  }
+
+  /* Event specific */
+  .event-icon-circle {
+    width: 48px;
+    height: 48px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .event-icon-circle i {
+    color: #2563eb !important;
+    font-size: 1.25rem;
+  }
   /* Button: modern e colore */
   .bg-blue-700,
   .modern-btn {
@@ -666,7 +745,9 @@ body {
   box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
   border: none;
   background: #f3f4f6;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .footer-map-wrapper:hover {
@@ -838,4 +919,3 @@ body {
     transform: translateY(0);
   }
 }
-
