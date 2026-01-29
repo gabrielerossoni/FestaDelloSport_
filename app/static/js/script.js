@@ -40,7 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!contact || !contact.value.trim()) {
         if (reminderError) {
-          reminderError.textContent = "Inserisci un'email o un numero di telefono.";
+          reminderError.textContent =
+            "Inserisci un'email o un numero di telefono.";
           reminderError.classList.remove("hidden");
         }
         return;
@@ -53,7 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isEmail) {
         if (!validatePhone(rawContact)) {
           if (reminderError) {
-            reminderError.textContent = "Numero di telefono non valido. Usa formato 3331234567, +393331234567 o 00393331234567.";
+            reminderError.textContent =
+              "Numero di telefono non valido. Usa formato 3331234567, +393331234567 o 00393331234567.";
             reminderError.classList.remove("hidden");
           }
           contact.focus();
@@ -120,7 +122,7 @@ function mostraErrore(msg) {
     () => {
       bottone.classList.remove("shake");
     },
-    { once: true }
+    { once: true },
   );
 }
 
@@ -187,7 +189,7 @@ function getErrorMessage(error, defaultMsg = "Errore di connessione") {
       error.message.includes("fetch") ||
       error.message.includes("Failed to fetch")
     ) {
-      return "Impossibile connettersi al server. Verifica che il backend sia avviato su http://localhost:3001";
+      return "Impossibile connettersi al server. Verifica che il backend sia attivo.";
     }
     if (error.message.includes("CORS")) {
       return "Errore CORS: verifica la configurazione del backend.";
@@ -441,7 +443,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .json()
             .then((data) => {
               throw new Error(
-                data.error || `Errore ${res.status}: ${res.statusText}`
+                data.error || `Errore ${res.status}: ${res.statusText}`,
               );
             })
             .catch(() => {
@@ -480,7 +482,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("URL tentato:", `${CONFIG.API_BASE_URL}/api/prenota`);
         reservationError.textContent = getErrorMessage(
           error,
-          "Errore di connessione al server. Verifica che il backend sia avviato su http://localhost:3001"
+          "Errore di connessione al server.",
         );
         reservationError.classList.remove("hidden");
         mostraErrore(reservationError.textContent);
@@ -570,7 +572,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ticking = true;
       }
     },
-    false
+    false,
   );
 
   navLinks.forEach((link) => {
