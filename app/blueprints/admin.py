@@ -46,13 +46,10 @@ def login():
             session['admin_role'] = user['role']
             return redirect(url_for('admin.dashboard'))
         else:
-            # Handle error appropriately (e.g. return json if ajax or simple error string)
-            # Since the frontend might be expecting JSON or redirect, let's keep it simple for now or match existing behavior
-            # The client side code for login wasn't fully visible but let's assume standard form post or simple fetch
-            return jsonify({"error": "Credenziali non valide"}), 401
+            return render_template('admin/login.html', error="Credenziali non valide")
     except Exception as e:
         print(f"Login error: {e}")
-        return jsonify({"error": "Errore server"}), 500
+        return render_template('admin/login.html', error="Errore server")
 
 @admin_bp.route('/admin-logout')
 def logout():
@@ -262,15 +259,16 @@ def create_menu_item():
         nome = data['nome']
         descrizione = data.get('descrizione', '')
         prezzo = data.get('prezzo')
+        allergeni = data.get('allergeni', '')
         categoria = data['categoria']
         disponibile = data.get('disponibile', True)
         
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("""
-            INSERT INTO menu_items (nome, descrizione, prezzo, categoria, disponibile)
-            VALUES (%s, %s, %s, %s, %s) RETURNING id
-        """, (nome, descrizione, prezzo, categoria, disponibile))
+            INSERT INTO menu_items (nome, descrizione, prezzo, allergeni, categoria, disponibile)
+            VALUES (%s, %s, %s, %s, %s, %s) RETURNING id
+        """, (nome, descrizione, prezzo, allergeni, categoria, disponibile))
         item_id = cur.fetchone()['id']
         conn.commit()
         cur.close()
@@ -287,16 +285,17 @@ def update_menu_item(item_id):
         data = request.get_json()
         nome = data['nome']
         descrizione = data.get('descrizione', '')
-        prezzo = data.get('prezzo')
+        prezzo = data.get('prezzo', 0)
+        allergeni = data.get('allergeni', '')
         categoria = data['categoria']
         disponibile = data.get('disponibile', True)
         
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("""
-            UPDATE menu_items SET nome=%s, descrizione=%s, prezzo=%s, categoria=%s, disponibile=%s, updated_at=CURRENT_TIMESTAMP
+            UPDATE menu_items SET nome=%s, descrizione=%s, prezzo=%s, allergeni=%s, categoria=%s, disponibile=%s, updated_at=CURRENT_TIMESTAMP
             WHERE id=%s
-        """, (nome, descrizione, prezzo, categoria, disponibile, item_id))
+        """, (nome, descrizione, prezzo, allergeni, categoria, disponibile, item_id))
         conn.commit()
         cur.close()
         conn.close()

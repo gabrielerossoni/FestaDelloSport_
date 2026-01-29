@@ -1,4 +1,41 @@
-// ===== REMINDER MODAL =====
+// Mappa allergeni a emoji
+const ALLERGENI_EMOJI = {
+  glutine: "🌾",
+  latte: "🥛",
+  uova: "🥚",
+  "frutta a guscio": "🌰",
+  arachidi: "🥜",
+  soia: "🫘",
+  pesce: "🐟",
+  crostacei: "🦐",
+  molluschi: "🐙",
+  sedano: "🥬",
+  senape: "🌭",
+  sesamo: "🥯",
+  solfiti: "🍷",
+  lupini: "🌼",
+};
+
+function getAllergeniEmojis(allergeniStr) {
+  if (!allergeniStr) return "";
+  const allergeni = allergeniStr
+    .toLowerCase()
+    .split(",")
+    .map((s) => s.trim());
+  return allergeni
+    .map((a) => {
+      // Cerca parziale
+      for (const [key, emoji] of Object.entries(ALLERGENI_EMOJI)) {
+        if (a.includes(key)) return `<span title="${a}">${emoji}</span>`;
+      }
+      return `<span title="${a}">⚠️</span>`;
+    })
+    .join(" ");
+}
+
+// ... existing code ...
+
+// ... existing code ...
 document.addEventListener("DOMContentLoaded", function () {
   const reminderBtn = document.getElementById("reminder-btn");
   const reminderModal = document.getElementById("reminder-modal");
@@ -978,233 +1015,272 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ===== DYNAMIC CONTENT LOADING =====
-document.addEventListener("DOMContentLoaded", function() {
-    loadMenu();
-    loadEvents();
+document.addEventListener("DOMContentLoaded", function () {
+  loadMenu();
+  loadEvents();
 });
 
 async function loadMenu() {
-    try {
-        console.log("Loading menu...");
-        const response = await fetchWithRetry(`${CONFIG.API_BASE_URL}/api/public/menu`);
-        const result = await response.json();
-        
-        if (result.success && result.data) {
-            renderMenu(result.data);
-        } else {
-            console.error("Failed to load menu data", result);
-        }
-    } catch (e) {
-        console.error("Error loading menu:", e);
+  try {
+    console.log("Loading menu...");
+    const response = await fetchWithRetry(
+      `${CONFIG.API_BASE_URL}/api/public/menu`,
+    );
+    const result = await response.json();
+
+    if (result.success && result.data) {
+      renderMenu(result.data);
+    } else {
+      console.error("Failed to load menu data", result);
     }
+  } catch (e) {
+    console.error("Error loading menu:", e);
+  }
 }
 
 function renderMenu(menuData) {
-    const tabsContainer = document.getElementById("menu-tabs");
-    const tabsMobileContainer = document.getElementById("menu-tabs-mobile");
-    const menuContainer = document.getElementById("menu-container");
-    
-    if (!tabsContainer || !menuContainer) return;
-    
-    tabsContainer.innerHTML = "";
-    if (tabsMobileContainer) tabsMobileContainer.innerHTML = "";
-    menuContainer.innerHTML = "";
-    
-    const categories = Object.keys(menuData);
-    if (categories.length === 0) {
-        menuContainer.innerHTML = "<p class='text-center w-full'>Nessun menu disponibile.</p>";
-        return;
-    }
-    
-    // Sort categories precedence if needed, but for now use DB order if possible or just object keys order
-    // Object keys order is not guaranteed, but usually insertion order in modern JS.
-    // Ideally we would have a priority list.
-    
-    let activeCategory = categories[0];
-    
-    const renderActiveCategory = (cat) => {
-        // Update tabs styling
-        document.querySelectorAll(".menu-category-btn").forEach(btn => {
-            if (btn.dataset.category === cat) {
-                btn.className = "menu-category-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white rounded-lg transition-colors duration-200 shadow-md";
-            } else {
-                btn.className = "menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors duration-200";
-            }
-        });
-        renderMenuItems(menuData[cat]);
-    };
+  const tabsContainer = document.getElementById("menu-tabs");
+  const tabsMobileContainer = document.getElementById("menu-tabs-mobile");
+  const menuContainer = document.getElementById("menu-container");
 
-    categories.forEach((cat, index) => {
-        // Desktop Tab
-        const btn = document.createElement("button");
-        btn.dataset.category = cat;
-        btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-        btn.className = index === 0 
-            ? "menu-category-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white rounded-lg transition-colors duration-200 shadow-md"
-            : "menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors duration-200";
-            
-        btn.onclick = () => renderActiveCategory(cat);
-        tabsContainer.appendChild(btn);
-        
-        // Mobile Tab
-        if (tabsMobileContainer) {
-            const mobileBtn = btn.cloneNode(true);
-            mobileBtn.onclick = () => renderActiveCategory(cat);
-            // Ensure classes match
-             mobileBtn.className = index === 0 
-                ? "menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0"
-                : "menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
-            
-            // Override click to update classes specifically for mobile if needed, but reusing logic is fine
-             mobileBtn.onclick = () => {
-                 document.querySelectorAll("#menu-tabs-mobile .menu-category-btn").forEach(b => {
-                     b.className = "menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
-                 });
-                 mobileBtn.className = "menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
-                 
-                 // Also update desktop active state silently
-                 renderMenuItems(menuData[cat]);
-             }
-            tabsMobileContainer.appendChild(mobileBtn);
-        }
+  if (!tabsContainer || !menuContainer) return;
+
+  tabsContainer.innerHTML = "";
+  if (tabsMobileContainer) tabsMobileContainer.innerHTML = "";
+  menuContainer.innerHTML = "";
+
+  const categories = Object.keys(menuData);
+  if (categories.length === 0) {
+    menuContainer.innerHTML =
+      "<p class='text-center w-full'>Nessun menu disponibile.</p>";
+    return;
+  }
+
+  // Sort categories precedence if needed, but for now use DB order if possible or just object keys order
+  // Object keys order is not guaranteed, but usually insertion order in modern JS.
+  // Ideally we would have a priority list.
+
+  let activeCategory = categories[0];
+
+  const renderActiveCategory = (cat) => {
+    // Update tabs styling
+    document.querySelectorAll(".menu-category-btn").forEach((btn) => {
+      if (btn.dataset.category === cat) {
+        btn.className =
+          "menu-category-btn active px-6 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg transition-colors duration-200 shadow-md";
+      } else {
+        btn.className =
+          "menu-category-btn px-6 py-2 text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 rounded-lg transition-colors duration-200";
+      }
     });
+    renderMenuItems(menuData[cat]);
+  };
 
-    renderMenuItems(menuData[activeCategory]);
+  categories.forEach((cat, index) => {
+    // Desktop Tab
+    const btn = document.createElement("button");
+    btn.dataset.category = cat;
+    btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+    btn.className =
+      index === 0
+        ? "menu-category-btn active px-6 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg transition-colors duration-200 shadow-md"
+        : "menu-category-btn px-6 py-2 text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 rounded-lg transition-colors duration-200";
+
+    btn.onclick = () => renderActiveCategory(cat);
+    tabsContainer.appendChild(btn);
+
+    // Mobile Tab
+    if (tabsMobileContainer) {
+      const mobileBtn = btn.cloneNode(true);
+      mobileBtn.onclick = () => renderActiveCategory(cat);
+      // Ensure classes match
+      mobileBtn.className =
+        index === 0
+          ? "menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0"
+          : "menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
+
+      // Override click to update classes specifically for mobile if needed, but reusing logic is fine
+      mobileBtn.onclick = () => {
+        document
+          .querySelectorAll("#menu-tabs-mobile .menu-category-btn")
+          .forEach((b) => {
+            b.className =
+              "menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
+          });
+        mobileBtn.className =
+          "menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
+
+        // Also update desktop active state silently
+        renderMenuItems(menuData[cat]);
+      };
+      tabsMobileContainer.appendChild(mobileBtn);
+    }
+  });
+
+  renderMenuItems(menuData[activeCategory]);
 }
 
 function renderMenuItems(items) {
-    const container = document.getElementById("menu-container");
-    container.innerHTML = "";
-    
-    items.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-100";
-        div.innerHTML = `
-            <div class="flex justify-between items-start mb-2">
-                <h3 class="text-xl font-bold text-blue-900">${item.nome}</h3>
-                <span class="font-bold text-yellow-600 text-lg">€${parseFloat(item.prezzo).toFixed(2)}</span>
+  const container = document.getElementById("menu-container");
+  container.innerHTML = "";
+
+  items.forEach((item) => {
+    const div = document.createElement("div");
+    div.className =
+      "bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-100 flex flex-col justify-between h-full"; // Added flex layout
+    div.innerHTML = `
+            <div>
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-xl font-bold text-yellow-500">${item.nome}</h3>
+                    ${item.prezzo && item.prezzo > 0 ? `<span class="font-bold text-yellow-500 text-lg">€${parseFloat(item.prezzo).toFixed(2)}</span>` : ""}
+                </div>
+                <p class="text-gray-300 text-sm mb-3 italic">${item.descrizione || ""}</p>
             </div>
-            <p class="text-gray-600 text-sm mb-3 italic">${item.descrizione || ''}</p>
+            <div class="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center text-sm text-gray-500">
+                <span>${item.categoria ? item.categoria.charAt(0).toUpperCase() + item.categoria.slice(1) : ""}</span>
+                <div class="text-xl" title="Allergeni: ${item.allergeni || "Nessuno"}">
+                    ${getAllergeniEmojis(item.allergeni)}
+                </div>
+            </div>
         `;
-        container.appendChild(div);
-    });
+    container.appendChild(div);
+  });
 }
 
 async function loadEvents() {
-    try {
-        console.log("Loading events...");
-        const response = await fetchWithRetry(`${CONFIG.API_BASE_URL}/api/public/events`);
-        const result = await response.json();
-        
-        if (result.success && result.data) {
-            renderEvents(result.data);
-        }
-    } catch (e) {
-        console.error("Error loading events:", e);
+  try {
+    console.log("Loading events...");
+    const response = await fetchWithRetry(
+      `${CONFIG.API_BASE_URL}/api/public/events`,
+    );
+    const result = await response.json();
+
+    if (result.success && result.data) {
+      renderEvents(result.data);
     }
+  } catch (e) {
+    console.error("Error loading events:", e);
+  }
 }
 
 function renderEvents(events) {
-    const tabsContainer = document.getElementById("events-tabs");
-    const eventsContainer = document.getElementById("events-container");
-    
-    if (!tabsContainer || !eventsContainer) return;
-    
-    tabsContainer.innerHTML = "";
-    eventsContainer.innerHTML = ""; // Clear
-    
-    // Group events by date
-    const eventsByDate = {};
-    events.forEach(event => {
-        // event.data is YYYY-MM-DD
-        if (!eventsByDate[event.data]) {
-            eventsByDate[event.data] = [];
-        }
-        eventsByDate[event.data].push(event);
-    });
-    
-    const dates = Object.keys(eventsByDate).sort();
-    
-    if (dates.length === 0) {
-        eventsContainer.innerHTML = "<p class='text-center w-full'>Nessun evento in programma.</p>";
-        return;
-    }
-    
-    let activeDate = dates[0];
-    
-    const renderActiveDate = (date) => {
-        // Update tabs
-        document.querySelectorAll(".event-day-btn").forEach(btn => {
-            if (btn.dataset.date === date) {
-                btn.className = "event-day-btn active px-6 py-2 text-sm font-bold bg-blue-700 text-white rounded-md shadow-md transition";
-            } else {
-                btn.className = "event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md transition";
-            }
-        });
-        renderEventItems(eventsByDate[date]);
-    };
+  const tabsContainer = document.getElementById("events-tabs");
+  const eventsContainer = document.getElementById("events-container");
 
-    dates.forEach((date, index) => {
-        // Format date: YYYY-MM-DD -> DD/MM
-        const dateObj = new Date(date);
-        const dayStr = dateObj.toLocaleDateString('it-IT', { day: 'numeric', month: 'numeric' });
-        const weekdayStr = dateObj.toLocaleDateString('it-IT', { weekday: 'short' });
-        const label = `${weekdayStr} ${dayStr}`; // e.g., Ven 29/5
-        
-        const btn = document.createElement("button");
-        btn.dataset.date = date;
-        btn.textContent = label.charAt(0).toUpperCase() + label.slice(1);
-        btn.className = index === 0
-            ? "event-day-btn active px-6 py-2 text-sm font-bold bg-blue-700 text-white rounded-md shadow-md transition"
-            : "event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md transition";
-            
-        btn.onclick = () => renderActiveDate(date);
-        tabsContainer.appendChild(btn);
+  if (!tabsContainer || !eventsContainer) return;
+
+  tabsContainer.innerHTML = "";
+  eventsContainer.innerHTML = ""; // Clear
+
+  // Group events by date
+  const eventsByDate = {};
+  events.forEach((event) => {
+    // event.data is YYYY-MM-DD
+    if (!eventsByDate[event.data]) {
+      eventsByDate[event.data] = [];
+    }
+    eventsByDate[event.data].push(event);
+  });
+
+  const dates = Object.keys(eventsByDate).sort();
+
+  if (dates.length === 0) {
+    eventsContainer.innerHTML =
+      "<p class='text-center w-full'>Nessun evento in programma.</p>";
+    return;
+  }
+
+  let activeDate = dates[0];
+
+  const renderActiveDate = (date) => {
+    // Update tabs
+    document.querySelectorAll(".event-day-btn").forEach((btn) => {
+      if (btn.dataset.date === date) {
+        btn.className =
+          "event-day-btn active px-6 py-2 text-sm font-bold bg-blue-600 text-white rounded-md shadow-md transition";
+      } else {
+        btn.className =
+          "event-day-btn px-6 py-2 text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 rounded-md transition";
+      }
     });
-    
-    renderEventItems(eventsByDate[activeDate]);
+    renderEventItems(eventsByDate[date]);
+  };
+
+  dates.forEach((date, index) => {
+    // Format date: YYYY-MM-DD -> DD/MM
+    const dateObj = new Date(date);
+    const dayStr = dateObj.toLocaleDateString("it-IT", {
+      day: "numeric",
+      month: "numeric",
+    });
+    const weekdayStr = dateObj.toLocaleDateString("it-IT", {
+      weekday: "short",
+    });
+    const label = `${weekdayStr} ${dayStr}`; // e.g., Ven 29/5
+
+    const btn = document.createElement("button");
+    btn.dataset.date = date;
+    btn.textContent = label.charAt(0).toUpperCase() + label.slice(1);
+    btn.className =
+      index === 0
+        ? "event-day-btn active px-6 py-2 text-sm font-bold bg-blue-600 text-white rounded-md shadow-md transition"
+        : "event-day-btn px-6 py-2 text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 rounded-md transition";
+
+    btn.onclick = () => renderActiveDate(date);
+    tabsContainer.appendChild(btn);
+  });
+
+  renderEventItems(eventsByDate[activeDate]);
 }
 
 function renderEventItems(items) {
-    const container = document.getElementById("events-container");
-    container.innerHTML = "";
-    
-    // Grid class is on the container in HTML: class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-    // Wait, the container in my updated HTML has ID events-container.
-    // I should check if it has the grid classes.
-    // In update_index.py I wrote: <div id="events-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    // So yes.
-    
-    items.forEach(event => {
-        const div = document.createElement("div");
-        div.className = "calendar-day bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-blue-100";
-        
-        // Icon based on title or random?
-        let icon = "fa-calendar-alt";
-        const lowerTitle = event.titolo.toLowerCase();
-        if (lowerTitle.includes("calcio") || lowerTitle.includes("torneo")) icon = "fa-futbol";
-        else if (lowerTitle.includes("music") || lowerTitle.includes("dj") || lowerTitle.includes("concerto")) icon = "fa-music";
-        else if (lowerTitle.includes("volley")) icon = "fa-volleyball-ball";
-        else if (lowerTitle.includes("cucina")) icon = "fa-utensils";
-        else if (lowerTitle.includes("corsa")) icon = "fa-running";
-        
-        // Time format HH:MM
-        const timeStr = event.ora ? event.ora.substring(0, 5) : "";
-        
-        div.innerHTML = `
+  const container = document.getElementById("events-container");
+  container.innerHTML = "";
+
+  // Grid class is on the container in HTML: class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+  // Wait, the container in my updated HTML has ID events-container.
+  // I should check if it has the grid classes.
+  // In update_index.py I wrote: <div id="events-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  // So yes.
+
+  items.forEach((event) => {
+    const div = document.createElement("div");
+    // Updated to Dark Theme style to match requirements
+    div.className =
+      "calendar-day bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-700";
+
+    // Icon based on title or random?
+    let icon = "fa-calendar-alt";
+    const lowerTitle = event.titolo.toLowerCase();
+    if (lowerTitle.includes("calcio") || lowerTitle.includes("torneo"))
+      icon = "fa-futbol";
+    else if (
+      lowerTitle.includes("music") ||
+      lowerTitle.includes("dj") ||
+      lowerTitle.includes("concerto")
+    )
+      icon = "fa-music";
+    else if (lowerTitle.includes("volley")) icon = "fa-volleyball-ball";
+    else if (lowerTitle.includes("cucina")) icon = "fa-utensils";
+    else if (lowerTitle.includes("corsa")) icon = "fa-running";
+
+    // Time format HH:MM
+    const timeStr = event.ora ? event.ora.substring(0, 5) : "";
+
+    div.innerHTML = `
             <div class="flex items-center mb-4">
-                <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4 shrink-0">
-                    <i class="fas ${icon} text-xl text-blue-700"></i>
+                <div class="bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mr-4 shrink-0">
+                    <i class="fas ${icon} text-xl text-yellow-500"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold text-blue-900 leading-tight">${event.titolo}</h3>
-                    <p class="text-blue-600 font-semibold text-sm mt-1">
+                    <h3 class="text-xl font-bold text-yellow-500 leading-tight">${event.titolo}</h3>
+                    <p class="text-gray-400 font-semibold text-sm mt-1">
                         <i class="far fa-clock mr-1"></i> ${timeStr}
                     </p>
                 </div>
             </div>
-            <p class="text-gray-700 text-sm leading-relaxed">${event.descrizione || ''}</p>
+            <p class="text-gray-300 text-sm leading-relaxed">${event.descrizione || ""}</p>
         `;
-        container.appendChild(div);
-    });
+    container.appendChild(div);
+  });
 }

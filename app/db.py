@@ -73,8 +73,8 @@ def get_db_connection():
     
     if not database_url:
         # Default fallback
-        database_url = "sqlite:///festa_sport.db"
-        print("[WARN] DATABASE_URL not set. Defaulting to sqlite:///festa_sport.db")
+        database_url = "sqlite:///instance/festa_sport.db"
+        print("[WARN] DATABASE_URL not set. Defaulting to sqlite:///instance/festa_sport.db")
         
     if database_url.startswith("sqlite"):
         db_path = database_url.replace("sqlite:///", "")
@@ -171,6 +171,7 @@ def init_database():
                 nome TEXT NOT NULL,
                 descrizione TEXT,
                 prezzo DECIMAL(5,2),
+                allergeni TEXT,
                 categoria TEXT NOT NULL,
                 disponibile BOOLEAN DEFAULT TRUE,
                 created_at {TIMESTAMP_DEFAULT},
