@@ -13,7 +13,7 @@ admin_bp = Blueprint('admin', __name__)
 def login_page():
     if 'admin_logged_in' in session:
         return redirect(url_for('admin.dashboard'))
-    return render_template('admin/login.html')
+    return render_template('admin-login.html')
 
 @admin_bp.route('/admin')
 def admin_redirect():
@@ -22,7 +22,7 @@ def admin_redirect():
 @admin_bp.route('/admin-dashboard', methods=['GET'])
 @admin_required
 def dashboard():
-    return render_template('admin/dashboard.html')
+    return render_template('admin-dashboard.html')
 
 # ================================
 # AUTH

@@ -582,80 +582,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// ===== MENU CATEGORY TABS =====
-document.addEventListener("DOMContentLoaded", function () {
-  const menuCategoryBtns = document.querySelectorAll(".menu-category-btn");
-  const menuContents = document.querySelectorAll(".menu-content");
-
-  menuCategoryBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      menuCategoryBtns.forEach((b) => {
-        b.classList.remove("active", "bg-blue-700", "text-white");
-        b.classList.add("bg-gray-200");
-      });
-
-      btn.classList.add("active", "bg-blue-700", "text-white");
-      btn.classList.remove("bg-gray-200");
-
-      menuContents.forEach((content) => {
-        content.classList.add("hidden");
-      });
-
-      const category = btn.getAttribute("data-category");
-      const content = document.getElementById(`${category}-menu`);
-      if (content) content.classList.remove("hidden");
-    });
-  });
-});
-
-// ===== EVENT DAY TABS =====
-document.addEventListener("DOMContentLoaded", function () {
-  const eventDayBtns = document.querySelectorAll(".event-day-btn");
-  const eventDayContents = document.querySelectorAll(".event-day-content");
-
-  eventDayBtns.forEach((btn, idx) => {
-    btn.addEventListener("click", () => {
-      // Toggle active classes on buttons
-      eventDayBtns.forEach((b) => {
-        b.classList.remove("active", "bg-blue-700", "text-white");
-        b.classList.add("bg-gray-200");
-      });
-
-      btn.classList.add("active", "bg-blue-700", "text-white");
-      btn.classList.remove("bg-gray-200");
-
-      // Hide all contents
-      eventDayContents.forEach((content) => {
-        content.classList.add("hidden");
-      });
-
-      // Prefer content by matching id `events-<data-day>`,
-      // fallback to the content with the same index in the DOM
-      const day = btn.getAttribute("data-day");
-      const byId = document.getElementById(`events-${day}`);
-      if (byId) {
-        byId.classList.remove("hidden");
-      } else if (eventDayContents[idx]) {
-        eventDayContents[idx].classList.remove("hidden");
-      }
-    });
-  });
-
-  // Sync initial active button with visible content
-  (function syncInitialEventTab() {
-    const btns = Array.from(eventDayBtns);
-    const activeIndex = btns.findIndex((b) => b.classList.contains("active"));
-    if (activeIndex === -1) return;
-    const activeBtn = btns[activeIndex];
-    const day = activeBtn.getAttribute("data-day");
-    const byId = document.getElementById(`events-${day}`);
-    eventDayContents.forEach((c) => c.classList.add("hidden"));
-    if (byId) byId.classList.remove("hidden");
-    else if (eventDayContents[activeIndex])
-      eventDayContents[activeIndex].classList.remove("hidden");
-  })();
-});
-
 // ===== RATING STARS =====
 document.addEventListener("DOMContentLoaded", function () {
   const feedbackForm = document.getElementById("feedback-form");
@@ -905,210 +831,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// ===== DOWNLOAD MENU =====
-document.addEventListener("DOMContentLoaded", function () {
-  // Trova tutti i link che contengono "Scarica il menu"
-  document.querySelectorAll("a").forEach((link) => {
-    if (
-      link.textContent.includes("Scarica il menu") ||
-      link.textContent.includes("menu completo")
-    ) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        downloadMenu();
-      });
-    }
-  });
-});
-
-function downloadMenu() {
-  const menuSection = document.getElementById("menu");
-  if (!menuSection) return;
-
-  // Clona la sezione e mostra tutti i contenuti
-  const clonedSection = menuSection.cloneNode(true);
-  const menuContents = clonedSection.querySelectorAll(".menu-content");
-  menuContents.forEach((content) => {
-    content.classList.remove("hidden");
-  });
-
-  // Rimuovi i tab buttons dalla versione stampabile
-  const tabsContainer = clonedSection.querySelector(".mb-8");
-  if (tabsContainer) tabsContainer.remove();
-
-  // Crea una nuova finestra per la stampa
-  const printWindow = window.open("", "_blank");
-  printWindow.document.write(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Menu - Festa dello Sport</title>
-      <meta charset="UTF-8">
-      <style>
-        @media print {
-          @page { margin: 1cm; }
-        }
-        body {
-          font-family: 'Montserrat', Arial, sans-serif;
-          padding: 20px;
-          max-width: 800px;
-          margin: 0 auto;
-          color: #1f2937;
-        }
-        h1 {
-          text-align: center;
-          color: #1e40af;
-          margin-bottom: 30px;
-          font-size: 2.5em;
-        }
-        h2 {
-          color: #2563eb;
-          border-bottom: 2px solid #2563eb;
-          padding-bottom: 10px;
-          margin-top: 30px;
-          font-size: 1.5em;
-        }
-        .menu-content {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
-          margin-top: 20px;
-        }
-        .menu-item {
-          margin-bottom: 20px;
-          padding: 15px;
-          border: 1px solid #e5e7eb;
-          border-radius: 8px;
-          background: #fff;
-        }
-        .menu-item h3 {
-          margin: 0 0 10px 0;
-          color: #1f2937;
-          font-size: 1.2em;
-        }
-        .menu-item p {
-          margin: 0;
-          color: #6b7280;
-          font-size: 0.95em;
-        }
-        .hidden {
-          display: none !important;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>Menu - Festa dello Sport di Capralba</h1>
-      ${clonedSection.innerHTML}
-    </body>
-    </html>
-  `);
-  printWindow.document.close();
-  setTimeout(() => {
-    printWindow.print();
-  }, 250);
-}
-
-// ===== DOWNLOAD PROGRAMMA =====
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll("a").forEach((link) => {
-    if (
-      link.textContent.includes("Scarica il programma") ||
-      link.textContent.includes("programma completo")
-    ) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        downloadProgramma();
-      });
-    }
-  });
-});
-
-function downloadProgramma() {
-  const eventsSection = document.getElementById("events");
-  if (!eventsSection) return;
-
-  // Clona la sezione e mostra tutti i contenuti degli eventi
-  const clonedSection = eventsSection.cloneNode(true);
-  const eventContents = clonedSection.querySelectorAll(".event-day-content");
-  eventContents.forEach((content) => {
-    content.classList.remove("hidden");
-  });
-
-  // Rimuovi i tab buttons dalla versione stampabile
-  const tabsContainer = clonedSection.querySelector(".mb-8");
-  if (tabsContainer) tabsContainer.remove();
-
-  const printWindow = window.open("", "_blank");
-  printWindow.document.write(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Programma Eventi - Festa dello Sport</title>
-      <meta charset="UTF-8">
-      <style>
-        @media print {
-          @page { margin: 1cm; }
-        }
-        body {
-          font-family: 'Montserrat', Arial, sans-serif;
-          padding: 20px;
-          max-width: 800px;
-          margin: 0 auto;
-          color: #1f2937;
-        }
-        h1 {
-          text-align: center;
-          color: #1e40af;
-          margin-bottom: 30px;
-          font-size: 2.5em;
-        }
-        h2 {
-          color: #2563eb;
-          border-bottom: 2px solid #2563eb;
-          padding-bottom: 10px;
-          margin-top: 30px;
-          font-size: 1.5em;
-        }
-        .event-day-content {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
-          margin-top: 20px;
-        }
-        .calendar-day {
-          margin-bottom: 20px;
-          padding: 15px;
-          border: 1px solid #e5e7eb;
-          border-radius: 8px;
-          background: #f9fafb;
-        }
-        .calendar-day h3 {
-          margin: 0 0 10px 0;
-          color: #1f2937;
-          font-size: 1.2em;
-        }
-        .calendar-day p {
-          margin: 5px 0;
-          color: #6b7280;
-          font-size: 0.95em;
-        }
-        .hidden {
-          display: none !important;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>Programma Eventi - Festa dello Sport di Capralba</h1>
-      ${clonedSection.innerHTML}
-    </body>
-    </html>
-  `);
-  printWindow.document.close();
-  setTimeout(() => {
-    printWindow.print();
-  }, 250);
-}
-
 // ===== BACK TO TOP BUTTON =====
 document.addEventListener("DOMContentLoaded", function () {
   const backToTopBtn = document.getElementById("back-to-top");
@@ -1254,3 +976,235 @@ document.addEventListener("DOMContentLoaded", function () {
     // Disabilita cookie non essenziali
   });
 });
+
+// ===== DYNAMIC CONTENT LOADING =====
+document.addEventListener("DOMContentLoaded", function() {
+    loadMenu();
+    loadEvents();
+});
+
+async function loadMenu() {
+    try {
+        console.log("Loading menu...");
+        const response = await fetchWithRetry(`${CONFIG.API_BASE_URL}/api/public/menu`);
+        const result = await response.json();
+        
+        if (result.success && result.data) {
+            renderMenu(result.data);
+        } else {
+            console.error("Failed to load menu data", result);
+        }
+    } catch (e) {
+        console.error("Error loading menu:", e);
+    }
+}
+
+function renderMenu(menuData) {
+    const tabsContainer = document.getElementById("menu-tabs");
+    const tabsMobileContainer = document.getElementById("menu-tabs-mobile");
+    const menuContainer = document.getElementById("menu-container");
+    
+    if (!tabsContainer || !menuContainer) return;
+    
+    tabsContainer.innerHTML = "";
+    if (tabsMobileContainer) tabsMobileContainer.innerHTML = "";
+    menuContainer.innerHTML = "";
+    
+    const categories = Object.keys(menuData);
+    if (categories.length === 0) {
+        menuContainer.innerHTML = "<p class='text-center w-full'>Nessun menu disponibile.</p>";
+        return;
+    }
+    
+    // Sort categories precedence if needed, but for now use DB order if possible or just object keys order
+    // Object keys order is not guaranteed, but usually insertion order in modern JS.
+    // Ideally we would have a priority list.
+    
+    let activeCategory = categories[0];
+    
+    const renderActiveCategory = (cat) => {
+        // Update tabs styling
+        document.querySelectorAll(".menu-category-btn").forEach(btn => {
+            if (btn.dataset.category === cat) {
+                btn.className = "menu-category-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white rounded-lg transition-colors duration-200 shadow-md";
+            } else {
+                btn.className = "menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors duration-200";
+            }
+        });
+        renderMenuItems(menuData[cat]);
+    };
+
+    categories.forEach((cat, index) => {
+        // Desktop Tab
+        const btn = document.createElement("button");
+        btn.dataset.category = cat;
+        btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        btn.className = index === 0 
+            ? "menu-category-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white rounded-lg transition-colors duration-200 shadow-md"
+            : "menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors duration-200";
+            
+        btn.onclick = () => renderActiveCategory(cat);
+        tabsContainer.appendChild(btn);
+        
+        // Mobile Tab
+        if (tabsMobileContainer) {
+            const mobileBtn = btn.cloneNode(true);
+            mobileBtn.onclick = () => renderActiveCategory(cat);
+            // Ensure classes match
+             mobileBtn.className = index === 0 
+                ? "menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0"
+                : "menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
+            
+            // Override click to update classes specifically for mobile if needed, but reusing logic is fine
+             mobileBtn.onclick = () => {
+                 document.querySelectorAll("#menu-tabs-mobile .menu-category-btn").forEach(b => {
+                     b.className = "menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
+                 });
+                 mobileBtn.className = "menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition flex-shrink-0";
+                 
+                 // Also update desktop active state silently
+                 renderMenuItems(menuData[cat]);
+             }
+            tabsMobileContainer.appendChild(mobileBtn);
+        }
+    });
+
+    renderMenuItems(menuData[activeCategory]);
+}
+
+function renderMenuItems(items) {
+    const container = document.getElementById("menu-container");
+    container.innerHTML = "";
+    
+    items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-100";
+        div.innerHTML = `
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-blue-900">${item.nome}</h3>
+                <span class="font-bold text-yellow-600 text-lg">€${parseFloat(item.prezzo).toFixed(2)}</span>
+            </div>
+            <p class="text-gray-600 text-sm mb-3 italic">${item.descrizione || ''}</p>
+        `;
+        container.appendChild(div);
+    });
+}
+
+async function loadEvents() {
+    try {
+        console.log("Loading events...");
+        const response = await fetchWithRetry(`${CONFIG.API_BASE_URL}/api/public/events`);
+        const result = await response.json();
+        
+        if (result.success && result.data) {
+            renderEvents(result.data);
+        }
+    } catch (e) {
+        console.error("Error loading events:", e);
+    }
+}
+
+function renderEvents(events) {
+    const tabsContainer = document.getElementById("events-tabs");
+    const eventsContainer = document.getElementById("events-container");
+    
+    if (!tabsContainer || !eventsContainer) return;
+    
+    tabsContainer.innerHTML = "";
+    eventsContainer.innerHTML = ""; // Clear
+    
+    // Group events by date
+    const eventsByDate = {};
+    events.forEach(event => {
+        // event.data is YYYY-MM-DD
+        if (!eventsByDate[event.data]) {
+            eventsByDate[event.data] = [];
+        }
+        eventsByDate[event.data].push(event);
+    });
+    
+    const dates = Object.keys(eventsByDate).sort();
+    
+    if (dates.length === 0) {
+        eventsContainer.innerHTML = "<p class='text-center w-full'>Nessun evento in programma.</p>";
+        return;
+    }
+    
+    let activeDate = dates[0];
+    
+    const renderActiveDate = (date) => {
+        // Update tabs
+        document.querySelectorAll(".event-day-btn").forEach(btn => {
+            if (btn.dataset.date === date) {
+                btn.className = "event-day-btn active px-6 py-2 text-sm font-bold bg-blue-700 text-white rounded-md shadow-md transition";
+            } else {
+                btn.className = "event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md transition";
+            }
+        });
+        renderEventItems(eventsByDate[date]);
+    };
+
+    dates.forEach((date, index) => {
+        // Format date: YYYY-MM-DD -> DD/MM
+        const dateObj = new Date(date);
+        const dayStr = dateObj.toLocaleDateString('it-IT', { day: 'numeric', month: 'numeric' });
+        const weekdayStr = dateObj.toLocaleDateString('it-IT', { weekday: 'short' });
+        const label = `${weekdayStr} ${dayStr}`; // e.g., Ven 29/5
+        
+        const btn = document.createElement("button");
+        btn.dataset.date = date;
+        btn.textContent = label.charAt(0).toUpperCase() + label.slice(1);
+        btn.className = index === 0
+            ? "event-day-btn active px-6 py-2 text-sm font-bold bg-blue-700 text-white rounded-md shadow-md transition"
+            : "event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md transition";
+            
+        btn.onclick = () => renderActiveDate(date);
+        tabsContainer.appendChild(btn);
+    });
+    
+    renderEventItems(eventsByDate[activeDate]);
+}
+
+function renderEventItems(items) {
+    const container = document.getElementById("events-container");
+    container.innerHTML = "";
+    
+    // Grid class is on the container in HTML: class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    // Wait, the container in my updated HTML has ID events-container.
+    // I should check if it has the grid classes.
+    // In update_index.py I wrote: <div id="events-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    // So yes.
+    
+    items.forEach(event => {
+        const div = document.createElement("div");
+        div.className = "calendar-day bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-blue-100";
+        
+        // Icon based on title or random?
+        let icon = "fa-calendar-alt";
+        const lowerTitle = event.titolo.toLowerCase();
+        if (lowerTitle.includes("calcio") || lowerTitle.includes("torneo")) icon = "fa-futbol";
+        else if (lowerTitle.includes("music") || lowerTitle.includes("dj") || lowerTitle.includes("concerto")) icon = "fa-music";
+        else if (lowerTitle.includes("volley")) icon = "fa-volleyball-ball";
+        else if (lowerTitle.includes("cucina")) icon = "fa-utensils";
+        else if (lowerTitle.includes("corsa")) icon = "fa-running";
+        
+        // Time format HH:MM
+        const timeStr = event.ora ? event.ora.substring(0, 5) : "";
+        
+        div.innerHTML = `
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4 shrink-0">
+                    <i class="fas ${icon} text-xl text-blue-700"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-blue-900 leading-tight">${event.titolo}</h3>
+                    <p class="text-blue-600 font-semibold text-sm mt-1">
+                        <i class="far fa-clock mr-1"></i> ${timeStr}
+                    </p>
+                </div>
+            </div>
+            <p class="text-gray-700 text-sm leading-relaxed">${event.descrizione || ''}</p>
+        `;
+        container.appendChild(div);
+    });
+}

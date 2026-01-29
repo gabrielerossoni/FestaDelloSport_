@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - Festa dello Sport</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/admin-style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Dashboard Amministrazione</h1>
+      <div class="user-info">
+        <span id="username-display"><i class="fas fa-user"></i> Admin</span>
+        <a href="/admin-logout" class="logout-btn">Esci</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <nav class="sidebar">
+        <ul>
+          <li>
+            <a
+              href="#"
+              onclick="showSection('dashboard')"
+              class="active"
+              id="nav-dashboard"
+              ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showSection('eventi')" id="nav-eventi"
+              ><i class="fas fa-calendar-alt"></i> Eventi</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showSection('menu')" id="nav-menu"
+              ><i class="fas fa-utensils"></i> Menu</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showSection('utenti')" id="nav-utenti"
+              ><i class="fas fa-users-cog"></i> Utenti</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <main class="main-content">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="section" style="display: block">
+          <h2>Panoramica</h2>
+          <div id="stats-grid" class="stats-grid">
+            <!-- Stats loaded via JS -->
+          </div>
+        </div>
+
+        <!-- Eventi Section -->
+        <div id="eventi-section" class="section">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h2>Gestione Eventi</h2>
+            <button class="btn" onclick="openModal('evento')">
+              Aggiungi Evento
+            </button>
+          </div>
+          <table id="eventi-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Luogo</th>
+                <th>Descrizione</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Menu Section -->
+        <div id="menu-section" class="section">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h2>Gestione Menu</h2>
+            <button class="btn" onclick="openModal('menu')">
+              Aggiungi Voce
+            </button>
+          </div>
+          <table id="menu-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Prezzo</th>
+                <th>Disponibile</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Users Section -->
+        <div id="utenti-section" class="section">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h2>Gestione Utenti</h2>
+            <button class="btn" onclick="openModal('utente')">
+              Aggiungi Utente
+            </button>
+          </div>
+          <table id="utenti-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Ruolo</th>
+                <th>Data Creazione</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title">Titolo</h3>
+          <button class="close" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="modal-form">
+          <!-- Injected via JS -->
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE = "";
+      let currentSection = "dashboard";
+
+      function showSection(section) {
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => (s.style.display = "none"));
+        document.getElementById(section + "-section").style.display = "block";
+
+        document
+          .querySelectorAll(".sidebar a")
+          .forEach((a) => a.classList.remove("active"));
+        document.getElementById("nav-" + section).classList.add("active");
+
+        currentSection = section;
+        if (section === "dashboard") loadStats();
+        if (section === "eventi") loadEventi();
+        if (section === "menu") loadMenu();
+        if (section === "utenti") loadUtenti();
+      }
+
+      async function loadStats() {
+        try {
+          const response = await fetch(`${API_BASE}/api/admin/stats`); // Check API path consistency
+          const data = await response.json();
+          if (data.success) {
+            const d = data.data;
+            document.getElementById("stats-grid").innerHTML = `
+                        <div class="stat-card"><h3>Eventi</h3><div class="number">${d.eventi}</div></div>
+                        <div class="stat-card"><h3>Menu Items</h3><div class="number">${d.menu_items}</div></div>
+                        <div class="stat-card"><h3>Prenotazioni</h3><div class="number">${d.prenotazioni}</div></div>
+                    `;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // --- Eventi ---
+      async function loadEventi() {
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/eventi`);
+          const data = await res.json();
+          if (data.success) {
+            document.querySelector("#eventi-table tbody").innerHTML = data.data
+              .map(
+                (e) => `
+                        <tr>
+                            <td>${e.nome}</td>
+                            <td>${e.data}</td>
+                            <td>${e.luogo}</td>
+                            <td>${e.descrizione || "-"}</td>
+                            <td>
+                                <button class="btn" onclick="openModal('evento', ${e.id})">Edit</button>
+                                <button class="btn btn-danger" onclick="deleteItem('eventi', ${e.id})">Delete</button>
+                            </td>
+                        </tr>
+                    `,
+              )
+              .join("");
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // --- Menu ---
+      async function loadMenu() {
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/menu`);
+          const data = await res.json();
+          if (data.success) {
+            document.querySelector("#menu-table tbody").innerHTML = data.data
+              .map(
+                (m) => `
+                        <tr>
+                            <td>${m.nome}</td>
+                            <td>${m.categoria}</td>
+                            <td>€${m.prezzo}</td>
+                            <td>${m.disponibile ? '<span style="color:var(--accent-color)">Sì</span>' : '<span style="color:var(--danger-color)">No</span>'}</td>
+                            <td>
+                                <button class="btn" onclick="openModal('menu', ${m.id})">Edit</button>
+                                <button class="btn btn-danger" onclick="deleteItem('menu', ${m.id})">Delete</button>
+                            </td>
+                        </tr>
+                    `,
+              )
+              .join("");
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // --- Utenti ---
+      async function loadUtenti() {
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/users`);
+          const data = await res.json();
+          if (data.success) {
+            document.querySelector("#utenti-table tbody").innerHTML = data.data
+              .map(
+                (u) => `
+                        <tr>
+                            <td>${u.username}</td>
+                            <td><span style="background:rgba(255,255,255,0.1); padding:2px 6px; borderRadius:4px">${u.role}</span></td>
+                            <td>${new Date(u.created_at).toLocaleDateString()}</td>
+                            <td>
+                                <button class="btn btn-danger" onclick="deleteItem('users', ${u.id})">Delete</button>
+                            </td>
+                        </tr>
+                    `,
+              )
+              .join("");
+          } else {
+            // Handle unauthorized or error (e.g. non-admin viewing)
+            document.querySelector("#utenti-table tbody").innerHTML =
+              `<tr><td colspan="4" style="text-align:center; color: var(--danger-color)">Accesso Negato o Errore: ${data.error}</td></tr>`;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // --- Generic CRUD ---
+      async function deleteItem(type, id) {
+        if (!confirm("Sicuro di voler cancellare?")) return;
+        try {
+          await fetch(`${API_BASE}/api/admin/${type}/${id}`, {
+            method: "DELETE",
+          });
+          if (type === "eventi") loadEventi();
+          if (type === "menu") loadMenu();
+          if (type === "users") loadUtenti();
+        } catch (e) {
+          alert("Errore cancellazione");
+        }
+      }
+
+      async function openModal(type, id = null) {
+        const isEdit = id !== null;
+        document.getElementById("modal-title").innerText =
+          (isEdit ? "Modifica " : "Aggiungi ") + type;
+        const form = document.getElementById("modal-form");
+
+        // Fetch data if edit
+        let data = {};
+        if (isEdit) {
+          const endpointType =
+            type === "evento" ? "eventi" : type === "menu" ? "menu" : "users";
+          const res = await fetch(
+            `${API_BASE}/api/admin/${endpointType}/${id}`,
+          );
+          if (type !== "utente") {
+            const json = await res.json();
+            if (json.success) data = json.data;
+          }
+        }
+
+        let html = "";
+        if (type === "evento") {
+          html = `
+                    <div class="form-group"><label>Nome</label><input type="text" name="nome" value="${data.nome || ""}" required></div>
+                    <div class="form-group"><label>Data</label><input type="date" name="data" value="${data.data || ""}" required></div>
+                    <div class="form-group"><label>Luogo</label><input type="text" name="luogo" value="${data.luogo || ""}" required></div>
+                    <div class="form-group"><label>Descrizione</label><textarea name="descrizione">${data.descrizione || ""}</textarea></div>
+                    <button type="button" class="btn" onclick="submitForm('${type}', ${id})">${isEdit ? "Aggiorna" : "Salva"}</button>
+                `;
+        } else if (type === "menu") {
+          html = `
+                    <div class="form-group"><label>Nome</label><input type="text" name="nome" value="${data.nome || ""}" required></div>
+                    <div class="form-group"><label>Prezzo</label><input type="number" step="0.01" name="prezzo" value="${data.prezzo || ""}"></div>
+                    <div class="form-group"><label>Categoria</label>
+                        <select name="categoria">
+                            <option value="antipasti" ${data.categoria == "antipasti" ? "selected" : ""}>Antipasti</option>
+                            <option value="primi" ${data.categoria == "primi" ? "selected" : ""}>Primi</option>
+                            <option value="secondi" ${data.categoria == "secondi" ? "selected" : ""}>Secondi</option>
+                            <option value="contorni" ${data.categoria == "contorni" ? "selected" : ""}>Contorni</option>
+                            <option value="dolci" ${data.categoria == "dolci" ? "selected" : ""}>Dolci</option>
+                            <option value="bevande" ${data.categoria == "bevande" ? "selected" : ""}>Bevande</option>
+                            <option value="gnocco" ${data.categoria == "gnocco" ? "selected" : ""}>Gnocco Fritto</option>
+                            <option value="panini" ${data.categoria == "panini" ? "selected" : ""}>Panini</option>
+                            <option value="pizza" ${data.categoria == "pizza" ? "selected" : ""}>Pizze</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label><input type="checkbox" name="disponibile" ${data.disponibile !== false ? "checked" : ""}> Disponibile</label></div>
+                    <button type="button" class="btn" onclick="submitForm('${type}', ${id})">${isEdit ? "Aggiorna" : "Salva"}</button>
+                `;
+        } else if (type === "utente") {
+          if (isEdit) {
+            html = "<p>Modifica utente non supportata in questa versione.</p>";
+          } else {
+            html = `
+                        <div class="form-group"><label>Username</label><input type="text" name="username" required></div>
+                        <div class="form-group"><label>Password</label><input type="password" name="password" required></div>
+                        <div class="form-group"><label>Ruolo</label>
+                            <select name="role">
+                                <option value="staff">Staff</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn" onclick="submitForm('${type}', null)">Crea Utente</button>
+                    `;
+          }
+        }
+        form.innerHTML = html;
+        document.getElementById("modal").classList.add("show");
+      }
+
+      function closeModal() {
+        document.getElementById("modal").classList.remove("show");
+      }
+
+      async function submitForm(type, id) {
+        const form = document.getElementById("modal-form");
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        // Fix checkboxes and numbers
+        if (data.prezzo) data.prezzo = parseFloat(data.prezzo);
+        if (type === "menu")
+          data.disponibile = form.querySelector('[name="disponibile"]').checked;
+
+        const isEdit = id !== null;
+        let method = isEdit ? "PUT" : "POST";
+        let endpointType =
+          type === "evento" ? "eventi" : type === "menu" ? "menu" : "users";
+        let url =
+          `${API_BASE}/api/admin/${endpointType}` + (isEdit ? `/${id}` : "");
+
+        try {
+          const res = await fetch(url, {
+            method: method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          const json = await res.json();
+          if (json.success) {
+            closeModal();
+            if (type === "evento") loadEventi();
+            if (type === "menu") loadMenu();
+            if (type === "utente") loadUtenti();
+          } else {
+            alert("Errore: " + json.error);
+          }
+        } catch (e) {
+          console.error(e);
+          alert("Errore di connessione");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadStats);
+    </script>
+  </body>
+</html>
