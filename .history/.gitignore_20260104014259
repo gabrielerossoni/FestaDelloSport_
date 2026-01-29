@@ -1,6 +1,0 @@
-.history
-.dist
-
-# Backup database
-backend/backups/
-*.db.backup
