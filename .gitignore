@@ -5,6 +5,7 @@ __pycache__/
 *$py.class
 venv/
 .env
+.history
 
 # Database
 instance/
