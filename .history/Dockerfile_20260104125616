@@ -1,0 +1,36 @@
+# Dockerfile per Backend Festa dello Sport
+FROM python:3.11-slim
+
+# Imposta directory di lavoro
+WORKDIR /app
+
+# Installa dipendenze di sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copia requirements e installa dipendenze Python
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia codice backend
+COPY backend/ ./backend/
+
+# Crea directory per database e backup
+RUN mkdir -p backend/backups
+
+# Esponi porta
+EXPOSE 3001
+
+# Variabili d'ambiente
+ENV FLASK_ENV=production
+ENV PORT=3001
+ENV PYTHONUNBUFFERED=1
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:3001/api/health')"
+
+# Avvia con Gunicorn (produzione)
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:3001", "--timeout", "120", "backend.backend2:app"]
+

@@ -1,0 +1,2443 @@
+<!DOCTYPE html>
+<!--<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://iltuolink.com" alt="QR Code Take Away" />-->
+<html lang="it">
+<head>
+    <!---->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festa dello Sport di Capralba 2026 - Programma eventi, menu completo e prenotazione tavoli. Unisciti a noi per una celebrazione di sport, cibo e divertimento!">
+    <meta property="og:title" content="Festa dello Sport 2026 - Capralba">
+    <meta property="og:description" content="Unisciti a noi per una celebrazione di sport, cibo e divertimento per tutta la comunità! Programma eventi, menu completo e prenotazione tavoli.">
+    <meta property="og:image" content="https://gabrielerossoni.github.io/FestaDelloSport_/public/images/fcapralbese-Photoroom.png">
+    <meta property="og:url" content="https://gabrielerossoni.github.io/FestaDelloSport_/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Festa dello Sport 2026 - Capralba">
+    <meta name="twitter:description" content="Programma eventi, menu completo e prenotazione tavoli per la Festa dello Sport di Capralba">
+    <meta name="twitter:image" content="https://gabrielerossoni.github.io/FestaDelloSport_/public/images/fcapralbese-Photoroom.png">
+    <meta name="color-scheme" content="light dark">
+
+    <!---->
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="FestaDelloSport" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+
+    <!--Titolo e Font-->
+    <title>Festa dello Sport di Capralba</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- CSS Personalizzato -->
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-yellow-50 to-white text-gray-800 antialiased">
+    <!-- Skip link per accessibilità - visibile solo quando si naviga con Tab -->
+    <a href="#main-content" class="skip-link">
+        Salta al contenuto principale
+    </a>
+    <nav id="navbar" class="fixed w-full bg-white/80 backdrop-blur-md shadow-lg z-50 transition-all duration-300 border-b border-blue-100">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <a href="#home" class="flex items-center gap-2">
+                    <img src="public/" class="w-12 h-12 object-cover rounded-full border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-200" alt="Logo Festa dello Sport"/>
+                    <span class="text-2xl font-extrabold text-blue-900 playfair tracking-tight drop-shadow">Festa dello Sport</span>
+                </a>
+            </div>
+            <!-- Mobile menu button -->
+            <button id="menu-toggle" class="md:hidden focus:outline-none rounded-full p-2 hover:bg-blue-100 transition" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobile-menu">
+                <svg class="w-7 h-7 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex desktop-nav space-x-6 font-semibold text-lg">
+                <a href="#home" class="nav-link active text-blue-900 hover:text-yellow-500 transition">Home</a>
+                <a href="#info" class="nav-link text-blue-900 hover:text-yellow-500 transition">Info</a>
+                <a href="#menu" class="nav-link text-blue-900 hover:text-yellow-500 transition">Menu</a>
+                <a href="#reservation" class="nav-link text-blue-900 hover:text-yellow-500 transition">Prenotazioni</a>
+                <a href="#events" class="nav-link text-blue-900 hover:text-yellow-500 transition">Eventi</a>
+                <a href="#feedback" class="nav-link text-blue-900 hover:text-yellow-500 transition">Feedback</a>
+            </div>
+        </div>
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 px-4 py-2 shadow-lg rounded-b-xl border-t border-blue-100">
+            <a href="#home" class="block py-2 text-blue-900 hover:text-yellow-500 transition nav-link">Home</a>
+            <a href="#info" class="block py-2 text-blue-900 hover:text-yellow-500 transition nav-link">Info</a>
+            <a href="#menu" class="block py-2 text-blue-900 hover:text-yellow-500 transition nav-link">Menu</a>
+            <a href="#reservation" class="block py-2 text-blue-900 hover:text-yellow-500 transition nav-link">Prenotazioni</a>
+            <a href="#events" class="block py-2 text-blue-900 hover:text-yellow-500 transition nav-link">Eventi</a>
+            <a href="#feedback" class="block py-2 text-blue-900 hover:text-yellow-500 transition nav-link">Feedback</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-[90vh] flex items-center justify-center text-white pt-20 relative" id="main-content">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 playfair drop-shadow-lg tracking-tight animate-fade-in-down">Festa dello Sport di Capralba</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-medium bg-white/20 rounded-xl px-6 py-4 shadow-lg backdrop-blur-md animate-fade-in-up">
+                Unisciti a noi per una celebrazione di <span class="text-yellow-400 font-bold">sport</span>, <span class="text-blue-200 font-bold">cibo</span> e <span class="text-yellow-300 font-bold">divertimento</span> per tutta la comunità!
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4 animate-fade-in-up">
+                <a href="#info" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 text-lg rounded-full shadow-xl transition duration-300">Scopri di più</a>
+                <a href="#reservation" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 text-lg rounded-full shadow-xl transition duration-300">Prenota un tavolo</a>
+        </div>
+        <!-- Decorative shapes -->
+        <div class="absolute top-0 left-0 w-40 h-40 bg-yellow-400/30 rounded-full blur-3xl -z-1 animate-float"></div>
+        <div class="absolute bottom-0 right-0 w-56 h-56 bg-blue-400/20 rounded-full blur-3xl -z-1 animate-float2"></div>
+    </section>
+    <!-- Countdown Section -->
+    <section id="countdown" class="py-16 bg-gradient-to-br from-yellow-50 via-blue-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto bg-white/80 rounded-3xl shadow-xl p-10 flex flex-col items-center glass">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-center playfair text-blue-900 tracking-tight drop-shadow-lg">
+                    <span>Countdown 46ª Festa dello Sport</span>
+                </h2>
+                <p class="mb-8 text-lg text-blue-800 text-center">La prossima edizione sarà il <span class="font-bold text-yellow-600">29 Maggio 2026</span>! Mancano:</p>
+                <div id="countdown-timer" class="flex gap-6 justify-center text-center text-2xl md:text-4xl font-bold text-blue-900">
+                    <div>
+                        <span id="cd-days" class="block text-4xl md:text-5xl text-yellow-500">--</span>
+                        <span class="text-base font-medium text-blue-700">Giorni</span>
+                    </div>
+                    <div>
+                        <span id="cd-hours" class="block text-4xl md:text-5xl text-yellow-500">--</span>
+                        <span class="text-base font-medium text-blue-700">Ore</span>
+                    </div>
+                    <div>
+                        <span id="cd-minutes" class="block text-4xl md:text-5xl text-yellow-500">--</span>
+                        <span class="text-base font-medium text-blue-700">Minuti</span>
+                    </div>
+                    <div>
+                        <span id="cd-seconds" class="block text-4xl md:text-5xl text-yellow-500">--</span>
+                        <span class="text-base font-medium text-blue-700">Secondi</span>
+                    </div>
+                </div>
+                <div class="mt-8 text-blue-700 text-center">
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    <span>
+                        <button id="reminder-btn" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-4 py-2 rounded-full shadow transition duration-200">
+                            Segna la data e preparati a festeggiare con noi!
+                        </button>
+                    </span>
+                    <!-- Reminder Modal -->
+                    <div id="reminder-modal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white rounded-xl shadow-xl p-8 max-w-sm w-full relative">
+                            <button id="close-reminder-modal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+                            <h3 class="text-xl font-bold mb-4 text-blue-900">Ricevi un promemoria</h3>
+                            <form id="reminder-form" class="space-y-4">
+                                <label class="block text-sm font-medium text-gray-700">Email o Telefono</label>
+                                <input type="text" id="reminder-contact" name="contact" required placeholder="es. mario@email.it o 3331234567" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <div id="reminder-error" class="hidden mt-2 text-sm text-red-600"></div>
+                                <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-md w-full">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    Salva promemoria
+                                </button>
+                            </form>
+                            <div id="reminder-success" class="hidden mt-4 p-3 bg-green-100 text-green-700 rounded-md text-center">
+                                Promemoria salvato! Riceverai un ricordo una settimana prima dell'evento.
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Info Section -->
+    <section id="info" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-extrabold mb-12 text-center playfair text-blue-900 tracking-tight">Informazioni</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dove -->
+                <div class="relative group bg-gradient-to-br from-blue-100 via-blue-50 to-white p-7 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <div class="absolute -top-6 -right-6 opacity-10 text-blue-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-blue-200 group-hover:border-yellow-400 transition-all duration-300">
+                        <i class="fas fa-map-marker-alt text-2xl text-blue-700"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Dove</h3>
+                    <p class="text-gray-700 leading-relaxed">Oratorio San Pio X,<br>Via Caravaggio, 10<br>Capralba (CR)</p>
+                </div>
+                <!-- Quando -->
+                <div class="relative group bg-gradient-to-br from-yellow-100 via-blue-50 to-white p-6 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <div class="absolute -top-6 -right-6 opacity-10 text-yellow-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-yellow-200 group-hover:border-blue-400 transition-all duration-300">
+                        <i class="fas fa-calendar-alt text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Quando</h3>
+                    <p class="text-gray-700 leading-relaxed">Ultimo week-end di Maggio<br>e i primi 2 di Giugno</p>
+                </div>
+                <!-- Orari -->
+                <div class="relative group bg-gradient-to-br from-blue-50 via-yellow-50 to-white p-6 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <div class="absolute -top-6 -right-6 opacity-10 text-blue-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-blue-200 group-hover:border-yellow-400 transition-all duration-300">
+                        <i class="fas fa-clock text-2xl text-blue-700"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Orari</h3>
+                    <p class="text-gray-700 leading-relaxed">Venerdi, Sabato, Domenica:<br>19:00 - 24:00</p>
+                </div>
+                <!-- Contatti -->
+                <div class="relative group bg-gradient-to-br from-yellow-50 via-blue-50 to-white p-6 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <div class="absolute -top-6 -right-6 opacity-10 text-yellow-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-yellow-200 group-hover:border-blue-400 transition-all duration-300">
+                        <i class="fas fa-phone-alt text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Contatti</h3>
+                    <p class="text-gray-700 leading-relaxed">Tel:  347 8429812<br>Email: info@sportcapralba.it</p>
+                </div>
+            </div>
+            
+    <div class="mt-16 bg-gradient-to-br from-blue-100 via-yellow-50 to-white p-10 rounded-3xl shadow-2xl border border-blue-200/40">
+        <h3 class="text-3xl md:text-4xl font-extrabold mb-10 text-center text-blue-900 playfair tracking-tight drop-shadow-lg">
+            <span">Organizzatori</span>
+        </h3>
+        <div class="flex flex-wrap justify-center gap-12">
+            <!-- Card 1 -->
+            <div class="group relative flex flex-col items-center bg-white/80 rounded-2xl shadow-xl p-8 border-t-4 border-yellow-400 w-72 transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-gray-50/90">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-yellow-400 via-blue-300 to-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg border-4 border-white group-hover:scale-110 transition-transform duration-300">
+                    <img src="assets/images/fcapralbese-Photoroom.png" alt="U.S. Capralbese" class="object-contain max-h-16 drop-shadow-lg" loading="lazy" loading="lazy">
+                </div>
+                <div class="mt-16 text-xl font-bold text-blue-900 mb-1 tracking-wide">U.S. Capralbese</div>
+                <div class="text-sm text-gray-600 text-center mb-2">Associazione Sportiva</div>
+                <div class="flex items-center gap-2 mt-2">
+                    <span class="inline-block bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold shadow">Sport</span>
+                    <span class="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold shadow">Tradizione</span>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="group relative flex flex-col items-center bg-white/80 rounded-2xl shadow-xl p-8 border-t-4 border-yellow-400 w-72 transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-gray-50/90">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-blue-400 via-yellow-200 to-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg border-4 border-white group-hover:scale-110 transition-transform duration-300">
+                    <img src="assets/images/foratorio-Photoroom.png" alt="Oratorio S. Pio" class="object-contain max-h-16 drop-shadow-lg">
+                </div>
+                <div class="mt-16 text-xl font-bold text-blue-900 mb-1 tracking-wide">Oratorio S. Pio</div>
+                <div class="text-sm text-gray-600 text-center mb-2">Unità pastorale Capralba-Farinate</div>
+                <div class="flex items-center gap-2 mt-2">
+                    <span class="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold shadow">Comunità</span>
+                    <span class="inline-block bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold shadow">Famiglia</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 flex justify-center">
+            <span class="inline-flex items-center gap-2 text-blue-700 font-semibold text-lg bg-white/60 px-6 py-3 rounded-full shadow border border-blue-200/40">
+                <i class="fas fa-hands-helping text-yellow-400"></i>
+                Insieme per la Festa dello Sport!
+            </span>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center playfair text-blue-900">Menu</h2>
+            
+            <!-- Menu Category Tabs Responsive -->
+            <div class="mb-8">
+    <div class="hidden sm:flex justify-center">
+        <div class="inline-flex rounded-md shadow-sm flex-wrap w-auto" role="group" style="flex-wrap:nowrap;">
+            <button type="button" class="menu-category-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white rounded-l-lg" data-category="primi">Primi</button>
+            <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-category="secondi">Secondi</button>
+            <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-category="gnocco">Gnocco Fritto</button>
+            <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-category="panini">Panini</button>
+            <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-category="contorni">Contorni</button>
+            <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-category="pizza">Pizze</button>
+            <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-category="dolci">Dolci</button>
+            <button type="button" class="menu-category-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 rounded-r-lg" data-category="drinks">Bevande</button>
+        </div>
+    </div>
+    <div class="sm:hidden overflow-x-auto pb-2">
+        <div class="flex gap-2 px-2 justify-start items-start">
+            <button type="button" class="menu-category-btn active px-4 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full whitespace-nowrap shadow-sm transition" data-category="primi">Primi</button>
+            <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="secondi">Secondi</button>
+            <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="gnocco">Gnocco Fritto</button>
+            <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="panini">Panini</button>
+            <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="contorni">Contorni</button>
+            <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="pizza">Pizze</button>
+            <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="dolci">Dolci</button>
+            <button type="button" class="menu-category-btn px-4 py-2 text-sm font-semibold bg-gray-200 hover:bg-blue-100 text-blue-900 rounded-full whitespace-nowrap shadow-sm transition" data-category="drinks">Bevande</button>
+        </div>
+    </div>
+</div>
+            <!-- Primi Menu -->
+            <div id="primi-menu" class="menu-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Trippa</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Trippa tradizionale con carne di bovino, cotta nel sugo con verdure.</p>
+                    <div class="flex items-center gap-2 mt-3">
+                        <!-- Sedano -->
+                        <span class="relative group">
+                            <span class="inline-block text-lg" title="Contiene Sedano">🥬</span>
+                            <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                Contiene Sedano
+                            </span>
+                        </span>
+                        <!-- soia -->
+                        <span class="relative group">
+                            <span class="inline-block text-lg" title="Contiene Soia">🌱</span>
+                            <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                Contiene Soia
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Tortelli</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€8.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Tortelli dolci con ripieno di amaretti, un primo piatto tradizionale e unico.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!-- Latte -->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!-- Uova -->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Uova">🥚</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Uova e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                </div>
+
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Penne Pomodoro</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€5.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Penne al pomodoro con salsa semplice e profumata</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--sedano-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Sedano">🥬</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Sedano
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Penne Arrabbiata</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€5.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Penne all’arrabbiata con sugo piccante al pomodoro e peperoncino.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Penne Boscaiola</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Penne alla boscaiola cremose con panna e funghi saporiti.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Lattosio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Lattosio">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Spaghetti Pescatora</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€8.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Spaghetti alla pescatora con frutti di mare e sugo di pomodoro</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Pesce-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Pesce">🐟</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Pesce
+                        </span>
+                    </span>
+                    <!--Crostacei-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Crostacei">🦐</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Crostacei
+                        </span>
+                    </span>
+                    <!--Molluschi-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Molluschi">🐚</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Molluschi
+                        </span>
+                    </span>
+                </div>
+                
+                
+            </div>
+            
+            <!-- Secondi Menu -->
+            <div id="secondi-menu" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Arrosto di Vitello</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Arrosto di vitello tenero, cotto lentamente e servito con contorno.</p>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Fritto Misto</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€10.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Frittura mista di pesce croccante.</p>
+                    <!--Molluschi-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Molluschi">🐚</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Molluschi
+                        </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Bresaola con Rucola e Grana</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Bresaola servita con rucola fresca e scaglie di grana padano.</p>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Coppia di Salamelle</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€5.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Due salamelle alla griglia.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Frutta a Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Costata di Roast Beef</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€11.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Costata di manzo cotta alla griglia.</p>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Grigliata Mista di Carne</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€10.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Selezione di carni miste alla griglia.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Insalata di Mare</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€9.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Insalata fredda di mare con molluschi, crostacei e patate.</p>
+                    <!--Molluschi-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Molluschi">🐚</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Molluschi
+                        </span>
+                    </span>
+                    <!--Crostacei-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Crostacei">🦐</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Crostacei
+                        </span>
+                    </span>
+                    <!--Pesce-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Pesce">🐟</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Pesce
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Prosciutto e Melone</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Prosciutto crudo dolce servito con melone fresco.</p>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Spiedini</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€8.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Spiedini misti di carne alla griglia.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Stinco di Maiale con Polenta</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€10.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Stinco di maiale arrosto servito con polenta.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Soia-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Soia">🌱</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Soia
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Piatto Salva Cremasco e Tighe</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€5.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Salva cremasco DOP con peperoncini dolci verdi.</p>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Gnocco Fritto Menu -->
+            <div id="gnocco-menu" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Gnocco Fritto con Salumi</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€10.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Gnocco fritto servito con una selezione di salumi locali.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Gnocco Fritto con Formaggi</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€10.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Gnocco fritto accompagnato da formaggi tipici della zona.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Gnocco Fritto Misto</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€12.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Un mix di gnocco fritto con salumi e formaggi assortiti.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Panini Menu-->
+            <div id="panini-menu" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Panino con Salamella</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€3.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Panino con salamella grigliata.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Panino con Porchetta</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€4.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Panino farcito con porchetta e salsa verde.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                </div>
+
+                
+            </div>
+
+            <!-- Contorni Menu-->
+            <div id="contorni-menu" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Patatine Fritte</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€2.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Patatine fritte croccanti e dorate.</p>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Insalata</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€2.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Insalata mista con verdure fresche di stagione.</p>
+                </div>
+                
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Pomodori</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€2.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodori freschi conditi con olio.</p>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Nervetti</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€3.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Nervetti di vitello conditi con aceto.</p>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Fagioli e Cipolle</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€2.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Fagioli e cipolle stufati.</p>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                    <!--Soia-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Soia">🌱</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Soia
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Pizza Menu -->
+            <div id="pizza-menu" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Margherita -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Margherita</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€5.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Prosciutto -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Prosciutto</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, prosciutto cotto.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+                <!-- Prosciutto e Funghi -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Prosciutto e Funghi</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, prosciutto cotto, funghi.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+                <!-- Pizza al Crudo -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Pizza al Crudo</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€7.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, prosciutto crudo.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+                <!-- Salame Piccante -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Salame Piccante</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, salame piccante.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                </div>
+                <!-- Salame Piccante e Zola -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Salame Piccante e Zola</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€7.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, salame piccante, gorgonzola.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                </div>
+                <!-- Pizza con Patatine -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Pizza con Patatine</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, patatine fritte.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Americana -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Americana</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€7.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, wurstel, patatine fritte.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Quattro Stagioni -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Quattro Stagioni</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, prosciutto, funghi, carciofi.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+                <!-- Quattro Formaggi -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Quattro Formaggi</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€7.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, Mozzarella, gorgonzola, salva, taleggio.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Capricciosa -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Capricciosa </h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€8.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, prosciutto, funghi, carciofi, acciughe e olive.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                    <!--Pesce-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Pesce">🐟</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Pesce
+                        </span>
+                    </span>
+                </div>
+                <!-- Napoli -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Napoli </h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, acciughe, origano.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                    <!--Pesce-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Pesce">🐟</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Pesce
+                        </span>
+                    </span>
+                </div>
+                <!-- Pugliese -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Pugliese </h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, cipolla, olive nere, origano.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Carnivora -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Carnivora <span class="text-xs text-yellow-600 font-bold ml-2">Speciale</span></h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€8.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, salamella, prosciutto cotto, salame piccante.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                </div>
+                <!-- Salamella e Grana -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Salamella e Grana <span class="text-xs text-yellow-600 font-bold ml-2">Speciale</span></h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€7.00</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, salamella, grana.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Cremasca -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Cremasca <span class="text-xs text-yellow-600 font-bold ml-2">Speciale</span></h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€7.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Mozzarella, salva, tighe, olio EVO.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Calzone Liscio -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Calzone Liscio </h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€5.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                </div>
+                <!-- Calzone Farcito -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Calzone Farcito </h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€6.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pomodoro, mozzarella, prosciutto cotto, carciofi e funghi.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Solfiti-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Solfiti
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Desserts Menu -->
+            <div id="dolci-menu" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Profitterol</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€3.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Bignè ripieni di crema e ricoperti di cioccolato.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Uova-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Uova">🥚</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Uova e derivati
+                        </span>
+                    </span>
+                    <!--Arachidi-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Arachidi">🥜</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Arachidi e derivati
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                </div>
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Torta della Nonna</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€3.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Crostata con crema pasticcera e pinoli.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Uova-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Uova">🥚</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Uova e derivati
+                        </span>
+                    </span>
+                    <!--Arachidi-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Arachidi">🥜</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Arachidi e derivati
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                </div>
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Meringata</h3>
+                        <span class="font-bold text-yellow-600" style="visibility:hidden;">€3.50</span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Dolce semifreddo con meringa e panna.</p>
+                    <!--Glutine-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Glutine
+                        </span>
+                    </span>
+                    <!--Latte-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Latte e derivati
+                        </span>
+                    </span>
+                    <!--Uova-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Uova">🥚</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Uova e derivati
+                        </span>
+                    </span>
+                    <!--Arachidi-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Arachidi">🥜</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Arachidi e derivati
+                        </span>
+                    </span>
+                    <!--Frutta Guscio-->
+                    <span class="relative group">
+                        <span class="inline-block text-lg" title="Contiene Frutta a Guscio">🌰</span>
+                        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                            Contiene Frutta a Guscio
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Drinks Menu -->   
+            <div id="drinks-menu" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Acqua -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Acqua</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between"><span>1 litro</span> <span class="font-bold text-yellow-600">€2.00</span></li>
+                        <li class="flex justify-between"><span>1/2 litro</span> <span class="font-bold text-yellow-600">€1.00</span></li>
+                    </ul>
+                </div>
+
+                <!-- Bibite -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Bibite</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Lattina:
+                                <span class="inline-flex flex-wrap gap-1 ml-1">
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Coca Cola</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Aranciata Amara</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Aranciata Dolce</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Lemon Soda</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Tonica</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Chinotto</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Sprite</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Thè Limone</span>
+                                    <span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs font-semibold">Thè Pesca</span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€2.50</span>
+                        </li>
+                        <li class="flex justify-between"><span>Bottiglia Spuma Nera</span> <span class="font-bold text-yellow-600">€3.00</span></li>
+                        <li class="flex justify-between"><span>Bottiglia Ginger</span> <span class="font-bold text-yellow-600">€3.00</span></li>
+                    </ul>
+                </div>
+
+                <!-- Bevande alla Spina -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Bevande alla Spina</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Birra Kuhbacher Bionda 33cl 
+                                <!--Glutine-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Glutine
+                                    </span>
+                                </span>
+                                <!--Lupini-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Lupini">🌰</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Lupini
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€4.00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Birra Kuhbacher Ambrata 33cl
+                                <!--Glutine-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Glutine
+                                    </span>
+                                </span>
+                                <!--Lupini-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Lupini">🌰</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Lupini
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€4.50</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Panachè
+                                <!--Glutine-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Glutine">🍞</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Glutine
+                                    </span>
+                                </span>
+                                <!--Lupini-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Lupini">🌰</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Lupini
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€3.50</span>
+                        </li>
+                        <li class="flex justify-between"><span>Coca Cola 33cl</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                    </ul>
+                </div>
+
+                <!-- Aperitivi -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Aperitivi</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Spritz Aperol
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€4.00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Spritz Campari
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€4.00</span>
+                        </li>
+                        <li class="flex justify-between"><span>Gin Tonic</span> <span class="font-bold text-yellow-600">€6.00</span></li>
+                        <li class="flex justify-between"><span>Gin Lemon</span> <span class="font-bold text-yellow-600">€6.00</span></li>
+                    </ul>
+                </div>
+
+                <!-- Vini in Bottiglia -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Vini in Bottiglia</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Gutturnio Fermo
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€8.00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Gutturnio Frizzante
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€8.00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Syrah
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€12.00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Prosecco Valdobbiadene
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€13.00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Lugana Contadi Castaldi
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€13.00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Franciacorta Contadi Castaldi
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€25.00</span>
+                        </li></ul>
+                </div>
+
+                <!-- Vini Sfusi -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Vini Sfusi</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Bicchiere 20cl
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€1.50</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Mezzo litro
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€3.50</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                1 litro
+                                <!--Solfiti-->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Solfiti">🍷</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Solfiti
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€6.00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Liquori -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Liquori</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between"><span>Amaro Braulio</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Amaro Jägermeister</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Amaro Montenegro</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Grappa ai Mirtilli</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Grappa Julia</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Grappa Nonino</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Limoncello</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Baileys</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Sambuca</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Anima Nera</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                        <li class="flex justify-between"><span>Negroni</span> <span class="font-bold text-yellow-600">€2.50</span></li>
+                    </ul>
+                </div>
+
+                <!-- Caffetteria -->
+                <div class="menu-item bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Caffetteria</h3>
+                    <ul class="text-gray-600 space-y-1">
+                        <li class="flex justify-between"><span>Caffè Liscio</span> <span class="font-bold text-yellow-600">€1.00</span></li>
+                        <li class="flex justify-between"><span>Caffè Corretto</span> <span class="font-bold text-yellow-600">€1.50</span></li>
+                        <li class="flex justify-between"><span>Caffè Decaffeinato</span> <span class="font-bold text-yellow-600">€1.00</span></li>
+                        <li class="flex justify-between items-center">
+                            <span>
+                                Caffè Macchiato
+                                <!-- Latte -->
+                                <span class="relative group ml-2">
+                                    <span class="inline-block text-lg" title="Contiene Latte">🥛</span>
+                                    <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-10">
+                                        Contiene Latte e derivati
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-bold text-yellow-600">€1.00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 text-center">
+                <a href="#" class="inline-block bg-transparent hover:bg-blue-700 text-blue-700 hover:text-white font-bold py-2 px-6 border border-blue-700 hover:border-transparent rounded transition duration-300">
+                    Scarica il menu completo
+                </a>
+            </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center playfair text-blue-900">Prenota un Tavolo</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Form di prenotazione a sinistra -->
+                <div class="md:w-1/2 max-w-[620px]">
+                    <form id="reservation-form" class="bg-white rounded-xl shadow p-6 mb-8 space-y-6">
+                        <!-- ...resto del form invariato... -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <!-- Nome -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome e Cognome</label>
+                        <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefono</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Data</label>
+                                <input type="date" id="date" name="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="time" class="block text-sm font-medium text-gray-700 mb-1">Ora</label>
+                                <input type="time" id="time" name="time" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="guests" class="block text-sm font-medium text-gray-700 mb-1">Numero di persone</label>
+                            <select id="guests" name="guests" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Seleziona</option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 persone</option>
+                                <option value="3">3 persone</option>
+                                <option value="4">4 persone</option>
+                                <option value="5">5 persone</option>
+                                <option value="6">6 persone</option>
+                                <option value="7">7 persone</option>
+                                <option value="8">8 persone</option>
+                                <option value="9">9 persone</option>
+                                <option value="10">10 persone</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Note (opzionale)</label>
+                            <textarea id="notes" name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <div>
+                            <span id="selected-table-label" class="text-lg text-blue-900 font-semibold hidden">
+                                Tavolo selezionato: <span id="selected-table"></span>
+                            </span>
+                        </div>
+                       <div class="flex flex-col items-center">
+  <!-- Messaggio errore -->
+  <div id="reservation-error" class="hidden text-red-600 font-semibold text-center mb-4" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  
+  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+    <label class="flex items-start cursor-pointer">
+        <input type="checkbox" id="privacy-consent" name="privacy-consent" required
+               class="mt-1 mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+        <span class="text-sm text-gray-700">
+            Accetto il trattamento dei miei dati personali secondo la 
+            <a href="privacy.html" target="_blank" class="text-blue-700 hover:text-blue-900 underline font-semibold">Privacy Policy</a>
+            (obbligatorio per completare la prenotazione)
+        </span>
+    </label>
+    <div id="privacy-error" class="hidden text-red-600 text-sm mt-2"></div>
+</div>
+
+  <!-- Bottone -->
+  <button id="btnPrenota" type="submit"
+    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
+    Prenota Ora
+  </button>
+</div>
+
+
+
+<style>
+  /* Animazione per spostare il bottone a dx e sx */
+  @keyframes shake {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-8px); }
+    50%  { transform: translateX(8px); }
+    75%  { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+  }
+
+  .shake {
+    animation: shake 0.4s;
+  }
+</style>                  
+                    </form>
+                    <div id="reservation-success" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-md" role="status" aria-live="polite" aria-atomic="true">
+                        <p class="font-medium">Prenotazione ricevuta con successo!</p>
+                        <p>Ti contatteremo presto per confermare la tua prenotazione.</p>
+                    </div>
+                </div>
+                <!-- Cartina tavoli a destra -->
+                <div class="md:w-3/4 flex justify-center items-start">
+                    <div class="bg-gray-100 rounded-xl shadow p-6 w-full max-w-[800px]">
+                        <h3 class="text-lg font-bold text-blue-900 mb-4 text-center">Mappa Tavoli</h3>
+                        <div class="overflow-x-auto">
+                            <div class="flex flex-row gap-4 justify-center items-start w-max mx-auto">
+                                <!-- Colonna aggiuntiva a sinistra: 6 file x 3 tavoli -->
+                                <div class="grid grid-cols-4 gap-6 float-left mr-12">
+                                    <button class="table2d-btn" data-table="48" aria-label="Tavolo 48 - Seleziona per prenotare" type="button">48</button>
+                                    <button class="table2d-btn" data-table="47" aria-label="Tavolo 47 - Seleziona per prenotare" type="button">47</button>
+                                    <button class="table2d-btn" data-table="46" aria-label="Tavolo 46 - Seleziona per prenotare" type="button">46</button>
+                                    <button class="table2d-btn" data-table="45" aria-label="Tavolo 45 - Seleziona per prenotare" type="button">45</button>
+                                    <button class="table2d-btn" data-table="40" aria-label="Tavolo 40 - Seleziona per prenotare" type="button">40</button>
+                                    <button class="table2d-btn" data-table="39" aria-label="Tavolo 39 - Seleziona per prenotare" type="button">39</button>
+                                    <button class="table2d-btn" data-table="38" aria-label="Tavolo 38 - Seleziona per prenotare" type="button">38</button>
+                                    <span></span>
+                                    <button class="table2d-btn" data-table="33" aria-label="Tavolo 33 - Seleziona per prenotare" type="button">33</button>
+                                    <button class="table2d-btn" data-table="32" aria-label="Tavolo 32 - Seleziona per prenotare" type="button">32</button>
+                                    <button class="table2d-btn" data-table="31" aria-label="Tavolo 31 - Seleziona per prenotare" type="button">31</button>
+                                    <span></span>
+                                    <button class="table2d-btn" data-table="26" aria-label="Tavolo 26 - Seleziona per prenotare" type="button">26</button>
+                                    <button class="table2d-btn" data-table="25" aria-label="Tavolo 25 - Seleziona per prenotare" type="button">25</button>
+                                    <button class="table2d-btn" data-table="24" aria-label="Tavolo 24 - Seleziona per prenotare" type="button">24</button>
+                                    <span></span>
+                                    <button class="table2d-btn" data-table="18" aria-label="Tavolo 18 - Seleziona per prenotare" type="button">18</button>
+                                    <button class="table2d-btn" data-table="17" aria-label="Tavolo 17 - Seleziona per prenotare" type="button">17</button>
+                                    <button class="table2d-btn" data-table="16" aria-label="Tavolo 16 - Seleziona per prenotare" type="button">16</button>
+                                    <span></span>
+                                    <button class="table2d-btn" data-table="12" aria-label="Tavolo 12 - Seleziona per prenotare" type="button">12</button>
+                                    <button class="table2d-btn" data-table="11" aria-label="Tavolo 11 - Seleziona per prenotare" type="button">11</button>
+                                    <button class="table2d-btn" data-table="10" aria-label="Tavolo 10 - Seleziona per prenotare" type="button">10</button>
+                                </div>
+                                <div class="grid grid-cols-4 gap-6">
+                                    <button class="table2d-btn" data-table="44" aria-label="Tavolo 44 - Seleziona per prenotare" type="button">44</button>
+                                    <button class="table2d-btn" data-table="43" aria-label="Tavolo 43 - Seleziona per prenotare" type="button">43</button>
+                                    <button class="table2d-btn" data-table="42" aria-label="Tavolo 42 - Seleziona per prenotare" type="button">42</button>
+                                    <button class="table2d-btn" data-table="41" aria-label="Tavolo 41 - Seleziona per prenotare" type="button">41</button>
+                                    <button class="table2d-btn" data-table="37" aria-label="Tavolo 37 - Seleziona per prenotare" type="button">37</button>
+                                    <button class="table2d-btn" data-table="36" aria-label="Tavolo 36 - Seleziona per prenotare" type="button">36</button>
+                                    <button class="table2d-btn" data-table="35" aria-label="Tavolo 35 - Seleziona per prenotare" type="button">35</button>
+                                    <button class="table2d-btn" data-table="34" aria-label="Tavolo 34 - Seleziona per prenotare" type="button">34</button>
+                                    <button class="table2d-btn" data-table="30" aria-label="Tavolo 30 - Seleziona per prenotare" type="button">30</button>
+                                    <button class="table2d-btn" data-table="29" aria-label="Tavolo 29 - Seleziona per prenotare" type="button">29</button>
+                                    <button class="table2d-btn" data-table="28" aria-label="Tavolo 28 - Seleziona per prenotare" type="button">28</button>
+                                    <button class="table2d-btn" data-table="27" aria-label="Tavolo 27 - Seleziona per prenotare" type="button">27</button>
+                                    <button class="table2d-btn" data-table="23" aria-label="Tavolo 23 - Seleziona per prenotare" type="button">23</button>
+                                    <button class="table2d-btn" data-table="22" aria-label="Tavolo 22 - Seleziona per prenotare" type="button">22</button>
+                                    <button class="table2d-btn" data-table="21" aria-label="Tavolo 21 - Seleziona per prenotare" type="button">21</button>
+                                    <button class="table2d-btn" data-table="20" aria-label="Tavolo 20 - Seleziona per prenotare" type="button">20</button>
+                                    <button class="table2d-btn" data-table="16" aria-label="Tavolo 16 - Seleziona per prenotare" type="button">16</button>
+                                    <button class="table2d-btn" data-table="15" aria-label="Tavolo 15 - Seleziona per prenotare" type="button">15</button>
+                                    <button class="table2d-btn" data-table="14" aria-label="Tavolo 14 - Seleziona per prenotare" type="button">14</button>
+                                    <button class="table2d-btn" data-table="13" aria-label="Tavolo 13 - Seleziona per prenotare" type="button">13</button>
+                                    <button class="table2d-btn" data-table="9" aria-label="Tavolo 9 - Seleziona per prenotare" type="button">9</button>
+                                    <button class="table2d-btn" data-table="8" aria-label="Tavolo 8 - Seleziona per prenotare" type="button">8</button>
+                                    <button class="table2d-btn" data-table="7" aria-label="Tavolo 7 - Seleziona per prenotare" type="button">7</button>
+                                    <button class="table2d-btn" data-table="6" aria-label="Tavolo 6 - Seleziona per prenotare" type="button">6</button>
+                                    <span></span>
+                                    <button class="table2d-btn" data-table="3" aria-label="Tavolo 3 - Seleziona per prenotare" type="button">3</button>
+                                    <button class="table2d-btn" data-table="4" aria-label="Tavolo 4 - Seleziona per prenotare" type="button">4</button>
+                                    <button class="table2d-btn" data-table="5" aria-label="Tavolo 5 - Seleziona per prenotare" type="button">5</button>
+                                    <span></span>
+                                    <span></span>
+                                    <button class="table2d-btn" data-table="1" aria-label="Tavolo 1 - Seleziona per prenotare" type="button">1</button>
+                                    <button class="table2d-btn" data-table="2" aria-label="Tavolo 2 - Seleziona per prenotare" type="button">2</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center gap-4 text-sm">
+                            <span class="inline-flex items-center"><span class="inline-block w-5 h-5 rounded-full bg-green-400 border border-gray-300 mr-1"></span>Libero</span>
+                            <span class="inline-flex items-center"><span class="inline-block w-5 h-5 rounded-full bg-red-400 border border-gray-300 mr-1"></span>Prenotato</span>
+                            <span class="inline-flex items-center"><span class="inline-block w-5 h-5 rounded-full bg-yellow-400 border border-gray-300 mr-1"></span>Selezionato</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4 text-center">Clicca su un tavolo per selezionarlo</p>
+                    </div>
+                </div>
+            </div>
+            <style>
+                @media (max-width: 640px) {
+                    .table2d-btn {
+                        width: 44px !important;
+                        height: 28px !important;
+                        font-size: 0.85rem !important;
+                        margin: 0.08rem !important;
+                    }
+                    /* Riduci padding e margini della mappa tavoli */
+                    .reservation-map-mobile {
+                        padding: 0.5rem !important;
+                    }
+                    /* Rendi la mappa tavoli scrollabile orizzontalmente su mobile */
+                    .reservation-map-mobile .overflow-x-auto {
+                        padding-bottom: 0.5rem;
+                    }
+                }
+            </style>
+            <style>
+                .table2d-btn {
+                    width: 80px;
+                    height: 45px;
+                    border-radius: 1rem;
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                    border: 3px solid #d1d5db;
+                    background: #e5e7eb;
+                    color: #374151;
+                    box-shadow: 0 2px 8px #2563eb22;
+                    transition: background 0.2s, color 0.2s, border 0.2s, transform 0.1s;
+                    margin: 0.2rem;
+                    outline: none;
+                    cursor: pointer;
+                    position: relative;
+                    /* Riduci lo spazio tra colonne */
+                    margin-right: 0.1rem;
+                    margin-left: 0.1rem;
+                }
+                .grid.grid-cols-4 {
+                    column-gap: 0.1rem !important;
+                    /* Puoi ridurre ancora se vuoi meno spazio */
+                }
+                .grid.grid-cols-3 {
+                    column-gap: 0.1rem !important;
+                    /* Puoi ridurre ancora se vuoi meno spazio */
+                }
+                .table2d-btn:hover:not(.booked):not(.selected) {
+                    background: #facc15;
+                    color: #fff;
+                    border-color: #facc15;
+                    transform: scale(1.08);
+                    z-index: 2;
+                }
+                .table2d-btn.booked {
+                    background: #f87171;
+                    color: #fff;
+                    border-color: #b91c1c;
+                    cursor: not-allowed;
+                    opacity: 0.7;
+                }
+                .table2d-btn.selected {
+                    background: #2563eb;
+                    color: #fff;
+                    border-color: #2563eb;
+                    transform: scale(1.08);
+                    z-index: 2;
+                }
+            </style>
+            
+        </div>
+    </section>
+
+    <!-- Events Schedule Section -->
+    <section id="events" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center playfair text-blue-900">Programma Eventi</h2>
+            
+            <!--TODO: SISTEMARE BOTTONI (grafica e funzionalità)-->
+            <div class="mb-8 flex justify-center">
+                <div class="inline-flex rounded-md shadow-sm flex-wrap" role="group">
+                    <button type="button" class="event-day-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white" data-day="29">Ven 29/5</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="30">Sab 30/5</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="31">Dom 31/5</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="5">Ven 5/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="6">Sab 6/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="7">Dom 7/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="12">Ven 12/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="13">Sab 13/6</button>
+                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="14">Dom 14/6</button>
+                </div>
+            </div>
+            
+            <!-- Day 10 Events -->
+            <div id="events-10" class="event-day-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="calendar-day bg-blue-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-futbol text-xl text-blue-700"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Torneo di Calcetto</h3>
+                            <p class="text-gray-600">18:00 - 20:00</p>
+                            <!-- Meteo qui -->
+                            <div class="flex items-center gap-2 mt-1 text-sm text-blue-700">
+                                <i class="fas fa-cloud-sun"></i>
+                                <span id="meteo-10-07">--°C, --</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">Torneo di calcetto a 5 per ragazzi dai 12 ai 16 anni.</p>
+                </div>
+                
+                <div class="calendar-day bg-blue-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-music text-xl text-blue-700"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">DJ Set</h3>
+                            <p class="text-gray-600">21:00 - 24:00</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">Serata musicale con DJ Marco e le hit dell'estate.</p>
+                </div>
+            </div>
+            
+            <!-- Day 11 Events -->
+            <div id="events-11" class="event-day-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="calendar-day bg-blue-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-volleyball-ball text-xl text-blue-700"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Beach Volley</h3>
+                            <p class="text-gray-600">17:00 - 20:00</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">Torneo di beach volley 3vs3 misto.</p>
+                </div>
+                
+                <div class="calendar-day bg-blue-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-guitar text-xl text-blue-700"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Concerto Live</h3>
+                            <p class="text-gray-600">21:30 - 23:30</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">Concerto della band locale "I Girasoli".</p>
+                </div>
+            </div>
+            
+            <!-- Day 12 Events -->
+            <div id="events-12" class="event-day-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="calendar-day bg-blue-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-running text-xl text-blue-700"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Corsa nei Sacchi</h3>
+                            <p class="text-gray-600">17:00 - 18:00</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">Gara divertente per bambini e adulti.</p>
+                </div>
+                
+                <div class="calendar-day bg-blue-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-utensils text-xl text-blue-700"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Gara di Cucina</h3>
+                            <p class="text-gray-600">19:00 - 21:00</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">Sfida tra chef locali. Vieni ad assaggiare e votare!</p>
+                </div>
+            </div>
+            
+            <!-- Days 13-16 Events (hidden by default) -->
+            <div id="events-13" class="event-day-content hidden"></div>
+            <div id="events-14" class="event-day-content hidden"></div>
+            <div id="events-15" class="event-day-content hidden"></div>
+            <div id="events-16" class="event-day-content hidden"></div>
+            
+            <div class="mt-10 text-center">
+                <a href="#" class="inline-block bg-transparent hover:bg-blue-700 text-blue-700 hover:text-white font-bold py-2 px-6 border border-blue-700 hover:border-transparent rounded transition duration-300">
+                    Scarica il programma completo
+                </a>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center playfair text-blue-900">Lascia un Feedback</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold mb-4">La tua opinione è importante</h3>
+                        <p class="mb-6">Aiutaci a migliorare la Festa dello Sport condividendo la tua esperienza!</p>
+                        
+                        <form id="feedback-form" class="space-y-4">
+                            <div>
+                                <label for="feedback-name" class="block text-sm font-medium text-gray-700 mb-1">Nome (opzionale)</label>
+                                <input type="text" id="feedback-name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Valutazione</label>
+                                <div class="flex space-x-2">
+                                    <button type="button" class="rating-star text-2xl text-gray-300 hover:text-yellow-500" data-rating="1">★</button>
+                                    <button type="button" class="rating-star text-2xl text-gray-300 hover:text-yellow-500" data-rating="2">★</button>
+                                    <button type="button" class="rating-star text-2xl text-gray-300 hover:text-yellow-500" data-rating="3">★</button>
+                                    <button type="button" class="rating-star text-2xl text-gray-300 hover:text-yellow-500" data-rating="4">★</button>
+                                    <button type="button" class="rating-star text-2xl text-gray-300 hover:text-yellow-500" data-rating="5">★</button>
+                                </div>
+                                <input type="hidden" id="rating" name="rating" value="0">
+                            </div>
+                            
+                            <div>
+                                <label for="feedback-message" class="block text-sm font-medium text-gray-700 mb-1">Il tuo feedback</label>
+                                <textarea id="feedback-message" name="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-md">
+                                <span id="submit-text">Invia Feedback</span>
+                                <span id="loading-text" class="hidden">Invio in corso...</span>
+                            </button>
+                        </form>
+                        
+                        <div id="feedback-success" class="hidden mt-4 p-3 bg-green-100 text-green-700 rounded-md">
+                            <p>Grazie per il tuo feedback!</p>
+                        </div>
+                        
+                        <div id="feedback-error" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-md">
+                            <p id="error-message">Si è verificato un errore. Riprova più tardi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold mb-4">Cosa dicono di noi</h3>
+                        
+                        <div id="feedback-loading" class="text-center py-8">
+                            <p class="text-gray-500">Caricamento feedback...</p>
+                        </div>
+                        
+                        <div id="feedback-list" class="space-y-4 max-h-80 overflow-y-auto pr-2 hidden">
+                            <!-- I feedback verranno caricati qui dinamicamente -->
+                        </div>
+                        
+                        <div id="no-feedback" class="hidden text-center py-8">
+                            <p class="text-gray-500">Nessun feedback disponibile al momento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center playfair text-blue-900">Domande Frequenti (FAQ)</h2>
+            <div class="max-w-2xl mx-auto space-y-6">
+                <div class="faq-item border border-blue-100 rounded-lg shadow-sm">
+                    <button class="faq-question w-full text-left px-6 py-4 text-lg font-semibold text-blue-800 flex justify-between items-center focus:outline-none">
+                        <span>Come si prenota?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-4 pt-0 text-gray-700 hidden">
+                        Puoi prenotare un tavolo compilando il modulo nella sezione "Prenota un Tavolo" di questa pagina. Riceverai una conferma appena possibile.
+                    </div>
+                </div>
+                <div class="faq-item border border-blue-100 rounded-lg shadow-sm">
+                    <button class="faq-question w-full text-left px-6 py-4 text-lg font-semibold text-blue-800 flex justify-between items-center focus:outline-none">
+                        <span>Cosa succede se piove?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-4 pt-0 text-gray-700 hidden">
+                        In caso di pioggia la festa si svolge comunque: sono disponibili aree coperte per mangiare e per gli eventi principali.
+                    </div>
+                </div>
+                <div class="faq-item border border-blue-100 rounded-lg shadow-sm">
+                    <button class="faq-question w-full text-left px-6 py-4 text-lg font-semibold text-blue-800 flex justify-between items-center focus:outline-none">
+                        <span>A che ora apre la cucina?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-4 pt-0 text-gray-700 hidden">
+                        La cucina apre ogni sera alle ore 19:00 e resta attiva fino alle 23:00. Dopo quest'orario è comunque garantito il posto al tavolo e la possibilità di acquistare cibo e bevande fino alle 24:00, in base alle disponibilità rimaste.
+                    </div>
+                </div>
+                <div class="faq-item border border-blue-100 rounded-lg shadow-sm">
+                    <button class="faq-question w-full text-left px-6 py-4 text-lg font-semibold text-blue-800 flex justify-between items-center focus:outline-none">
+                        <span>Come funziona il servizio al tavolo?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-4 pt-0 text-gray-700 hidden">
+                        Quando ci si siede al tavolo, il cameriere responsabile consegna una lista/menu per scegliere cosa ordinare. Dopo aver scelto, si va in cassa a pagare e si ricevono gli scontrini. Tornati al tavolo, si consegnano gli scontrini al proprio cameriere, segnalando eventuali esigenze particolari sugli alimenti scelti. Il cameriere porterà poi i diversi ordini direttamente al tavolo.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- TODO:Togliere rettangolo sotto testo lasciando solo il BG-->
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Festa dello Sport di Capralba</h3>
+                    <p class="mb-4">Una celebrazione di sport, cibo e divertimento per tutta la comunità.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/share/1CZR9jFETs/?mibextid=wwXIfr" target="_blank" rel="noopener" class="text-white hover:text-yellow-400 transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="https://www.instagram.com/us_capralbese?igsh=MWk5cDd2bm5nMjlyMQ==" target="_blank" rel="noopener" class="text-white hover:text-yellow-400 transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contatti</h3>
+                    <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i> Oratorio San Pio X, Via Caravaggio, 10, Capralba (CR)</p>
+                    <p class="mb-2"><i class="fas fa-phone-alt mr-2"></i> 347 8429812</p>
+                    <p><i class="fas fa-envelope mr-2"></i> info@sportcapralba.it</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Orari</h3>
+                    <p class="mb-2">Ultimo Weekend di Maggio e Primi 2 di Giugno.</p>
+                    <p>Venerdì - Domenica: 19:00 - 24:00</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 border-t border-blue-800 rounded-3xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                    <!-- Google Maps -->
+                    <div class="footer-map-container">
+                        <div class="footer-map-wrapper">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1793.14066069155!2d9.645812633888227!3d45.445994936718144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sit!4v1750318550173!5m2!1sen!2sit"
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="yes" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="footer-map-iframe">
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Informazioni Come Raggiungerci -->
+                    <div class="footer-info-container">
+                        <h3 class="text-2xl font-bold mb-6 text-yellow-400">Come Raggiungerci</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-yellow-400 mr-3 mt-1 text-lg"></i>
+                                <p class="text-blue-100 leading-relaxed">L'Oratorio di Capralba si trova in <strong class="text-white">via Caravaggio, 10</strong>, facilmente raggiungibile in auto.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-parking text-yellow-400 mr-3 mt-1 text-lg"></i>
+                                <div>
+                                    <p class="text-blue-100 mb-1"><strong class="text-white">Dove Parcheggiare:</strong></p>
+                                    <p class="text-blue-100 leading-relaxed">Il parcheggio gratuito è disponibile presso l'oratorio e in tutte le vie circostanti, facendo attenzione ai divieti di sosta.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-wheelchair text-yellow-400 mr-3 mt-1 text-lg"></i>
+                                <p class="text-blue-100 leading-relaxed">L'accesso alla festa è aperto a tutti e senza difficoltà: l'area è facilmente accessibile anche per famiglie, bambini e persone con mobilità ridotta.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center text-sm text-blue-300">
+                <p>&copy; 2026 Festa dello Sport di Capralba. Tutti i diritti riservati. | <a href="privacy.html" class="hover:text-yellow-400 transition duration-300 underline">Privacy Policy</a></p>
+                <p class="mt-4 text-xs text-blue-400">
+                    Sito creato da <a href="https://linktr.ee/gabriele.rossoni_" target="_blank" rel="noopener" class="text-blue-400 hover:text-yellow-300 transition duration-300 underline font-semibold">Gabriele Rossoni</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-blue-700 hover:bg-blue-800 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition duration-300 opacity-0 invisible">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    
+    <!--Se il sito non ha risposta per 5 minuto scrivere frase divertente per mantenere attenzione-->
+    <div id="attention-popup" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-xs w-full text-center border-4 border-yellow-400">
+            <h3 class="text-2xl font-bold mb-3 text-blue-900">Ehi! 👋</h3>
+            <p id="attention-message" class="text-lg text-gray-800 mb-6"></p>
+            <button id="close-attention-popup" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-full shadow transition duration-200">Ok!</button>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script type="module" src="src/js/config.js"></script>
+    <script type="module" src="src/js/script.js"></script>
+</body>
+</html>

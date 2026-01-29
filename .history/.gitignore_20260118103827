@@ -1,0 +1,8 @@
+.history
+.dist
+
+# Backup database
+backend/backups/
+backend/festa_sport.db
+*.db.backup
+node_modules

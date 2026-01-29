@@ -1,0 +1,16 @@
+.history
+.dist
+
+# Backup database
+backend/backups/
+*.db.backup
+
+# Node modules
+node_modules/
+
+# Build output (opzionale - puoi committare il CSS compilato)
+# css/style.css
+
+# Environment files
+.env
+.env.local

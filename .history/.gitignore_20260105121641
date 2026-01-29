@@ -1,0 +1,7 @@
+.history
+.dist
+../backend/festa_
+
+# Backup database
+backend/backups/
+*.db.backup
