@@ -1,0 +1,7 @@
+.history
+.dist
+../backend/
+
+# Backup database
+backend/backups/
+*.db.backup

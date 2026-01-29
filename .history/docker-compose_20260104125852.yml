@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: festa-sport-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - FLASK_ENV=development
+      - PORT=3001
+    volumes:
+      # Monta la cartella backend per sviluppo (hot reload)
+      - ./backend:/app/backend
+      # Persistenza database
+      - ./backend/festa_sport.db:/app/backend/festa_sport.db
+      - ./backend/backups:/app/backend/backups
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:3001/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+

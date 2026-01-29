@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - Festa dello Sport</title>
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Dashboard Admin</h1>
+            <p class="text-gray-600">Accedi per gestire la Festa dello Sport</p>
+        </div>
+
+        <div class="space-y-4">
+            <a href="/login/google"
+               class="w-full flex items-center justify-center px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                <i class="fab fa-google mr-3"></i>
+                Login con Google
+            </a>
+        </div>
+
+        <div class="mt-8 text-center text-sm text-gray-500">
+            <p>Solo email autorizzate possono accedere</p>
+        </div>
+    </div>
+
+    <script>
+        // Verifica se già loggato
+        fetch('/api/admin/check', {
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.logged_in) {
+                window.location.href = '/dashboard';
+            }
+        })
+        .catch(err => console.log('Non loggato'));
+    </script>
+</body>
+</html>
