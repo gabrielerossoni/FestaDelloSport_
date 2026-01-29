@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Admin - Festa dello Sport</title>
+    <link rel="stylesheet" href="/static/css/admin-style.css" />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .login-card {
+        background-color: var(--sidebar-bg);
+        padding: 2.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 400px;
+        border: 1px solid var(--border-color);
+        text-align: center;
+      }
+      .login-card h2 {
+        margin-bottom: 2rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+        border-bottom: none;
+      }
+      .login-btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 1rem;
+        font-size: 1rem;
+      }
+      .error-message {
+        color: var(--danger-color);
+        margin-bottom: 1rem;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-card">
+      <h2>Amministrazione</h2>
+      <div id="error-msg" class="error-message">Credenziali non valide</div>
+      <form id="login-form" action="/admin-login" method="POST">
+        <div class="form-group" style="text-align: left">
+          <label>Username</label>
+          <input type="text" name="username" required autocomplete="username" />
+        </div>
+        <div class="form-group" style="text-align: left">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            required
+            autocomplete="current-password"
+          />
+        </div>
+        <button type="submit" class="btn login-btn">Accedi</button>
+      </form>
+    </div>
+  </body>
+</html>
