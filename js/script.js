@@ -1158,10 +1158,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!attentionPopup || !closeAttentionPopup) return;
 
   const messages = [
-    "Stai ancora qui? Non perdere l'occasione di prenotare un tavolo! 🍽️",
+    "Sport, amici e buon cibo: il mix perfetto! 🍟",
+    "La festa continua… e il bello deve ancora arrivare! 🚀",
     "La Festa dello Sport ti aspetta! Controlla il programma eventi! ⚽",
     "Hai visto il nostro menu? C'è qualcosa di delizioso per tutti! 🍕",
-    "Non dimenticare di prenotare il tuo tavolo per non perdere il tuo posto! 🎉",
     "Scopri tutti gli eventi in programma per la Festa dello Sport! 🎊",
   ];
 
