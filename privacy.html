@@ -11,36 +11,35 @@
     />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-      
+
       body {
         font-family: 'Inter', sans-serif;
       }
-      
+
       .section-border {
         border-left: 3px solid #3b82f6;
         transition: border-color 0.3s ease;
       }
-      
+
       .section-border:hover {
         border-left-color: #60a5fa;
       }
-      
+
       nav {
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
-      
+
       .contact-link {
         transition: all 0.2s ease;
       }
-      
+
       .contact-link:hover {
         color: #60a5fa;
       }
     </style>
   </head>
   <body class="bg-gray-900 text-gray-100">
-    <!-- Navigation -->
     <nav class="bg-gray-800/95 shadow-lg border-b border-gray-700 sticky top-0 z-50">
       <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition">
@@ -60,21 +59,19 @@
     </nav>
 
     <div class="container mx-auto px-4 py-12 max-w-4xl">
-      <!-- Header -->
       <div class="mb-12">
         <h1 class="text-4xl font-bold mb-4 text-white">
           Informativa sulla Privacy
         </h1>
         <p class="text-gray-400">
           <i class="far fa-calendar-alt mr-2"></i>
-          Ultimo aggiornamento: <span id="last-update">Gennaio 2026</span>
+          Ultimo aggiornamento: <span id="last-update">Maggio 2026</span>
         </p>
       </div>
 
       <div class="bg-gray-800 rounded-lg shadow-xl border border-gray-700">
         <div class="p-8 space-y-12">
-          
-          <!-- Titolare del Trattamento -->
+
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
               1. Titolare del Trattamento
@@ -94,125 +91,93 @@
             </div>
           </section>
 
-          <!-- Dati Raccolti -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
-              2. Dati Raccolti
+              2. Dati trattati
             </h2>
-            <p class="text-gray-300 mb-4">
-              Raccogliamo i seguenti dati personali:
-            </p>
-            <ul class="space-y-3 text-gray-300">
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span><strong class="text-white">Nome e Cognome</strong> - per identificare la prenotazione</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span><strong class="text-white">Numero di telefono</strong> - per contattarti per conferme o comunicazioni</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span><strong class="text-white">Data e ora della prenotazione</strong> - per gestire le prenotazioni dei tavoli</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span><strong class="text-white">Numero di persone</strong> - per organizzare i tavoli</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span><strong class="text-white">Note opzionali</strong> - informazioni aggiuntive sulla prenotazione</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span><strong class="text-white">Feedback e recensioni</strong> - se decidi di lasciare un commento</span>
-              </li>
-            </ul>
+            <div class="text-gray-300 leading-relaxed space-y-4">
+              <p>
+                Questo sito ha finalità esclusivamente informative e non raccoglie dati personali
+                tramite moduli di prenotazione, registrazione o richiesta tavoli.
+              </p>
+              <p>
+                Durante la navigazione possono essere trattati esclusivamente dati tecnici
+                strettamente necessari al funzionamento del sito, alla sicurezza e
+                all’erogazione dei contenuti da parte del servizio di hosting.
+              </p>
+            </div>
           </section>
 
-          <!-- Finalità del Trattamento -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
-              3. Finalità del Trattamento
+              3. Finalità del trattamento
             </h2>
             <p class="text-gray-300 mb-4">
-              I tuoi dati personali vengono utilizzati per:
+              I dati tecnici eventualmente trattati sono utilizzati esclusivamente per:
             </p>
             <ul class="space-y-2 text-gray-300">
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Gestire e confermare le prenotazioni dei tavoli</span>
+                <span>consentire il corretto funzionamento del sito;</span>
               </li>
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Contattarti per comunicazioni relative alla prenotazione</span>
+                <span>garantire sicurezza, stabilità e manutenzione tecnica;</span>
               </li>
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Migliorare i nostri servizi attraverso feedback e recensioni</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span>Rispettare obblighi di legge</span>
+                <span>adempiere a eventuali obblighi di legge.</span>
               </li>
             </ul>
           </section>
 
-          <!-- Base Giuridica -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
-              4. Base Giuridica
+              4. Base giuridica
             </h2>
             <p class="text-gray-300 leading-relaxed">
-              Il trattamento dei dati si basa sul consenso espresso
-              dall'interessato (art. 6, comma 1, lett. a GDPR) e sull'esecuzione
-              di misure precontrattuali (art. 6, comma 1, lett. b GDPR).
+              Il trattamento dei dati tecnici necessari al funzionamento del sito si basa
+              sul legittimo interesse del titolare a garantire la corretta fruizione,
+              la sicurezza e la manutenzione della piattaforma.
             </p>
           </section>
 
-          <!-- Conservazione dei Dati -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
-              5. Conservazione dei Dati
+              5. Conservazione dei dati
             </h2>
             <p class="text-gray-300 leading-relaxed">
-              I dati delle prenotazioni vengono conservati per il tempo necessario
-              alla gestione dell'evento e per adempiere agli obblighi di legge
-              (massimo 24 mesi). I feedback anonimi possono essere conservati più
-              a lungo per scopi statistici.
+              Gli eventuali dati tecnici di navigazione sono conservati per il tempo
+              strettamente necessario al funzionamento del sito e secondo i tempi
+              previsti dal fornitore di hosting o da eventuali obblighi di legge.
             </p>
           </section>
 
-          <!-- Diritti dell'Interessato -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
-              6. Diritti dell'Interessato
+              6. Diritti dell’interessato
             </h2>
             <p class="text-gray-300 mb-4">Hai il diritto di:</p>
             <ul class="space-y-2 text-gray-300 mb-4">
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Accedere ai tuoi dati personali</span>
+                <span>accedere ai tuoi dati personali;</span>
               </li>
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Richiedere la rettifica o la cancellazione</span>
+                <span>richiedere la rettifica o la cancellazione, nei casi previsti;</span>
               </li>
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Opporti al trattamento</span>
+                <span>opporti al trattamento o chiederne la limitazione;</span>
               </li>
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Richiedere la limitazione del trattamento</span>
+                <span>richiedere la portabilità dei dati, ove applicabile;</span>
               </li>
               <li class="flex items-start">
                 <span class="text-blue-500 mr-3">•</span>
-                <span>Richiedere la portabilità dei dati</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3">•</span>
-                <span>Revocare il consenso in qualsiasi momento</span>
+                <span>proporre reclamo all’Autorità Garante per la protezione dei dati personali.</span>
               </li>
             </ul>
             <div class="bg-gray-700/50 p-4 rounded border border-gray-600 mt-4">
@@ -223,60 +188,55 @@
             </div>
           </section>
 
-          <!-- Sicurezza dei Dati -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
-              7. Sicurezza dei Dati
+              7. Sicurezza dei dati
             </h2>
             <p class="text-gray-300 leading-relaxed">
-              Adottiamo misure tecniche e organizzative appropriate per proteggere
-              i tuoi dati personali da accessi non autorizzati, perdite o
-              distruzioni.
+              Adottiamo misure tecniche e organizzative adeguate per proteggere i dati
+              trattati da accessi non autorizzati, perdita, alterazione o distruzione.
             </p>
           </section>
 
-          <!-- Comunicazione dei Dati -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
-              8. Comunicazione dei Dati
+              8. Comunicazione dei dati
             </h2>
             <p class="text-gray-300 leading-relaxed">
-              I tuoi dati non vengono comunicati a terzi, salvo obblighi di legge
-              o per fornire il servizio richiesto (es. hosting del sito web).
+              I dati non vengono diffusi. Possono essere trattati da fornitori tecnici
+              strettamente necessari all’erogazione del sito, come il servizio di hosting,
+              nei limiti necessari al funzionamento della piattaforma.
             </p>
           </section>
 
-          <!-- Cookie -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">9. Cookie</h2>
             <p class="text-gray-300 leading-relaxed">
-              Questo sito utilizza solo cookie tecnici necessari per il
-              funzionamento del sito. Non utilizziamo cookie di profilazione o di
-              marketing.
+              Questo sito non utilizza cookie di profilazione o di marketing. Possono
+              essere utilizzati esclusivamente cookie tecnici o strumenti tecnici equivalenti,
+              se necessari al corretto funzionamento del sito e alla fruizione dei contenuti.
             </p>
           </section>
 
-          <!-- Modifiche alla Privacy Policy -->
           <section class="section-border pl-6">
             <h2 class="text-2xl font-semibold mb-4 text-white">
               10. Modifiche alla Privacy Policy
             </h2>
             <p class="text-gray-300 leading-relaxed">
-              Questa privacy policy può essere aggiornata. Ti informeremo di
-              eventuali modifiche pubblicando la nuova versione su questa pagina.
+              La presente informativa può essere aggiornata nel tempo. Eventuali modifiche
+              saranno pubblicate su questa pagina con indicazione della data di aggiornamento.
             </p>
           </section>
 
         </div>
 
-        <!-- Footer Contatti -->
         <div class="border-t border-gray-700 p-8">
           <div class="bg-gray-700/50 p-6 rounded text-center">
             <p class="text-gray-300 mb-4">
               Per ulteriori informazioni, contattaci all'indirizzo
             </p>
-            <a 
-              href="mailto:info@sportcapralba.it" 
+            <a
+              href="mailto:info@sportcapralba.it"
               class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded transition"
             >
               <i class="fas fa-envelope"></i>
@@ -286,7 +246,6 @@
         </div>
       </div>
 
-      <!-- Bottone Torna al Sito -->
       <div class="mt-8 text-center">
         <a
           href="index.html"

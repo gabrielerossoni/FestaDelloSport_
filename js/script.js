@@ -491,10 +491,12 @@ document.addEventListener("DOMContentLoaded", function () {
 // ===== COUNTDOWN =====
 document.addEventListener("DOMContentLoaded", function () {
   const festaDate = new Date("2026-05-29T19:00:00");
+  const festaEndDate = new Date("2026-06-19T24:00:00");
 
   function updateCountdown() {
     const now = new Date();
     const diff = festaDate - now;
+    const diffEnd = festaEndDate - now;
 
     if (diff > 0) {
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -512,6 +514,20 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("cd-seconds").textContent = seconds
         .toString()
         .padStart(2, "0");
+    } else if (diffEnd > 0) {
+      const timer = document.getElementById("countdown-timer");
+      const subtitle = document.querySelector("#countdown p");
+      if (timer) {
+        timer.innerHTML = '<p class="text-2xl md:text-3xl font-extrabold text-yellow-500 text-center" style="text-shadow: 0 0 20px rgba(248,180,0,0.45);">🎉 La Festa è in corso!</p>';
+      }
+      if (subtitle) {
+        subtitle.innerHTML = 'La festa durer\u00e0 fino al <span class="font-bold text-yellow-600">19 Giugno 2026</span>. Vieni a trovarci!';
+      }
+    } else {
+      const timer = document.getElementById("countdown-timer");
+      const subtitle = document.querySelector("#countdown p");
+      if (timer) timer.innerHTML = '<p class="text-xl font-semibold text-blue-700 text-center">La festa si è conclusa. Ci vediamo l\'anno prossimo! 🏆</p>';
+      if (subtitle) subtitle.textContent = "Grazie a tutti per aver partecipato!";
     }
   }
 
