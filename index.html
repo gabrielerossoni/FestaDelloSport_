@@ -81,49 +81,54 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section min-h-screen flex items-center justify-center text-white pt-20 relative" id="main-content">
         <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 playfair drop-shadow-lg tracking-tight animate-fade-in-down">Festa dello Sport di Capralba</h1>
-            <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-medium bg-white/20 rounded-xl px-6 py-4 shadow-lg backdrop-blur-md animate-fade-in-up">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 playfair tracking-tight animate-fade-in-down" style="text-shadow: 0 4px 24px rgba(0,0,0,0.45);">Festa dello Sport di Capralba</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-medium rounded-2xl px-8 py-5 animate-fade-in-up" style="background: rgba(255,255,255,0.13); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1.5px solid rgba(255,255,255,0.22); box-shadow: 0 8px 32px rgba(0,0,0,0.18);">
                 Unisciti a noi per una celebrazione di <span class="text-yellow-400 font-bold">sport</span>, <span class="text-blue-200 font-bold">cibo</span> e <span class="text-yellow-300 font-bold">divertimento</span> per tutta la comunità!
             </p>
-            <div class="flex flex-col md:flex-row justify-center gap-4 animate-fade-in-up">
-                <a href="#info" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 text-lg rounded-full shadow-xl transition duration-300">Scopri di più</a>
+            <div class="flex justify-center animate-fade-in-up">
+                <a href="#info" class="btn-shimmer bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-4 px-12 text-lg rounded-full shadow-2xl transition duration-300" style="box-shadow: 0 8px 32px rgba(37,99,235,0.45);">Scopri di più</a>
                 <!-- <a href="#reservation" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 text-lg rounded-full shadow-xl transition duration-300">Prenota un tavolo</a> -->
+            </div>
         </div>
         <!-- Decorative shapes -->
-        <div class="absolute top-0 left-0 w-40 h-40 bg-yellow-400/30 rounded-full blur-3xl -z-1 animate-float"></div>
-        <div class="absolute bottom-0 right-0 w-56 h-56 bg-blue-400/20 rounded-full blur-3xl -z-1 animate-float2"></div>
+        <div class="absolute top-0 left-0 w-64 h-64 bg-yellow-400/20 rounded-full blur-3xl -z-1 animate-float"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-blue-300/20 rounded-full blur-3xl -z-1 animate-float2"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl -z-1"></div>
     </section>
     <!-- Countdown Section -->
-    <section id="countdown" class="py-16 bg-gradient-to-br from-yellow-50 via-blue-50 to-white">
+    <section id="countdown" class="py-16" style="background: linear-gradient(135deg, #eff6ff 0%, #fefce8 50%, #eff6ff 100%);">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto bg-white/80 rounded-3xl shadow-xl p-10 flex flex-col items-center glass">
                 <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-center playfair text-blue-900 tracking-tight drop-shadow-lg">
                     <span>Countdown 46ª Festa dello Sport</span>
                 </h2>
                 <p class="mb-8 text-lg text-blue-800 text-center">La prossima edizione sarà il <span class="font-bold text-yellow-600">29 Maggio 2026</span>! Mancano:</p>
-                <div id="countdown-timer" class="flex gap-6 justify-center text-center text-2xl md:text-4xl font-bold text-blue-900">
-                    <div>
-                        <span id="cd-days" class="block text-4xl md:text-5xl text-yellow-500">--</span>
-                        <span class="text-base font-medium text-blue-700">Giorni</span>
+                <div id="countdown-timer" class="flex items-center gap-3 md:gap-5 justify-center text-center">
+                    <div class="flex flex-col items-center">
+                        <span id="cd-days" class="block text-4xl md:text-6xl font-extrabold text-yellow-500" style="text-shadow: 0 0 20px rgba(248,180,0,0.45);">--</span>
+                        <span class="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-widest mt-1">Giorni</span>
                     </div>
-                    <div>
-                        <span id="cd-hours" class="block text-4xl md:text-5xl text-yellow-500">--</span>
-                        <span class="text-base font-medium text-blue-700">Ore</span>
+                    <span class="text-3xl md:text-5xl font-bold text-blue-200 mb-4">:</span>
+                    <div class="flex flex-col items-center">
+                        <span id="cd-hours" class="block text-4xl md:text-6xl font-extrabold text-yellow-500" style="text-shadow: 0 0 20px rgba(248,180,0,0.45);">--</span>
+                        <span class="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-widest mt-1">Ore</span>
                     </div>
-                    <div>
-                        <span id="cd-minutes" class="block text-4xl md:text-5xl text-yellow-500">--</span>
-                        <span class="text-base font-medium text-blue-700">Minuti</span>
+                    <span class="text-3xl md:text-5xl font-bold text-blue-200 mb-4">:</span>
+                    <div class="flex flex-col items-center">
+                        <span id="cd-minutes" class="block text-4xl md:text-6xl font-extrabold text-yellow-500" style="text-shadow: 0 0 20px rgba(248,180,0,0.45);">--</span>
+                        <span class="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-widest mt-1">Minuti</span>
                     </div>
-                    <div>
-                        <span id="cd-seconds" class="block text-4xl md:text-5xl text-yellow-500">--</span>
-                        <span class="text-base font-medium text-blue-700">Secondi</span>
+                    <span class="text-3xl md:text-5xl font-bold text-blue-200 mb-4">:</span>
+                    <div class="flex flex-col items-center">
+                        <span id="cd-seconds" class="block text-4xl md:text-6xl font-extrabold text-yellow-500" style="text-shadow: 0 0 20px rgba(248,180,0,0.45);">--</span>
+                        <span class="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-widest mt-1">Secondi</span>
                     </div>
                 </div>
                 <div class="mt-8 text-blue-700 text-center">
                     <i class="fas fa-calendar-alt mr-2"></i>
                     <span>
-                        <button id="reminder-btn" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-4 py-2 rounded-full shadow transition duration-200">
-                            Segna la data e preparati a festeggiare con noi!
+                        <button id="reminder-btn" class="btn-shimmer bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300" style="box-shadow: 0 4px 20px rgba(248,180,0,0.35);">
+                            <i class="fas fa-bell mr-2"></i>Segna la data e preparati a festeggiare con noi!
                         </button>
                     </span>
                     <!-- Reminder Modal -->
@@ -152,57 +157,45 @@
     </section>
     
     <!-- Info Section -->
-    <section id="info" class="py-20 bg-white">
+    <section id="info" class="py-20" style="background: linear-gradient(135deg, #f0f9ff 0%, #fffbeb 50%, #f0f9ff 100%);">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-extrabold mb-12 text-center playfair text-blue-900 tracking-tight">Informazioni</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                 <!-- Dove -->
-                <div class="relative group bg-gradient-to-br from-blue-100 via-blue-50 to-white p-7 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <div class="absolute -top-6 -right-6 opacity-10 text-blue-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-blue-200 group-hover:border-yellow-400 transition-all duration-300">
+                <div class="relative group p-5 md:p-7 rounded-2xl text-center overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="background: rgba(255,255,255,0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1.5px solid rgba(37,99,235,0.12); box-shadow: 0 4px 24px rgba(37,99,235,0.08); border-top: 4px solid #2563eb;">
+                    <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-lg" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
                         <i class="fas fa-map-marker-alt text-2xl text-blue-700"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Dove</h3>
-                    <p class="text-gray-700 leading-relaxed">Oratorio San Pio X,<br>Via Caravaggio, 10<br>Capralba (CR)</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-blue-900 tracking-wide">Dove</h3>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">Oratorio San Pio X,<br>Via Caravaggio, 10<br>Capralba (CR)</p>
                 </div>
                 <!-- Quando -->
-                <div class="relative group bg-gradient-to-br from-yellow-100 via-blue-50 to-white p-6 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <div class="absolute -top-6 -right-6 opacity-10 text-yellow-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-yellow-200 group-hover:border-blue-400 transition-all duration-300">
+                <div class="relative group p-5 md:p-6 rounded-2xl text-center overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="background: rgba(255,255,255,0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1.5px solid rgba(248,180,0,0.18); box-shadow: 0 4px 24px rgba(248,180,0,0.08); border-top: 4px solid #f8b400;">
+                    <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-lg" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
                         <i class="fas fa-calendar-alt text-2xl text-yellow-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Quando</h3>
-                    <p class="text-gray-700 leading-relaxed">Ultimo week-end di Maggio<br>e i primi 2 di Giugno</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-blue-900 tracking-wide">Quando</h3>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">Ultimo week-end di Maggio<br>e i primi 2 di Giugno</p>
                 </div>
                 <!-- Orari -->
-                <div class="relative group bg-gradient-to-br from-blue-50 via-yellow-50 to-white p-6 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <div class="absolute -top-6 -right-6 opacity-10 text-blue-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-blue-200 group-hover:border-yellow-400 transition-all duration-300">
+                <div class="relative group p-5 md:p-6 rounded-2xl text-center overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="background: rgba(255,255,255,0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1.5px solid rgba(37,99,235,0.12); box-shadow: 0 4px 24px rgba(37,99,235,0.08); border-top: 4px solid #2563eb;">
+                    <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-lg" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
                         <i class="fas fa-clock text-2xl text-blue-700"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Orari</h3>
-                    <p class="text-gray-700 leading-relaxed">Venerdi, Sabato, Domenica:<br>19:00 - 24:00</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-blue-900 tracking-wide">Orari</h3>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">Ven, Sab, Dom:<br>19:00 - 24:00</p>
                 </div>
                 <!-- Contatti -->
-                <div class="relative group bg-gradient-to-br from-yellow-50 via-blue-50 to-white p-6 rounded-2xl shadow-xl text-center overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <div class="absolute -top-6 -right-6 opacity-10 text-yellow-400 text-8xl pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-300">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <div class="bg-white w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-yellow-200 group-hover:border-blue-400 transition-all duration-300">
+                <div class="relative group p-5 md:p-6 rounded-2xl text-center overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="background: rgba(255,255,255,0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1.5px solid rgba(248,180,0,0.18); box-shadow: 0 4px 24px rgba(248,180,0,0.08); border-top: 4px solid #f8b400;">
+                    <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-lg" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
                         <i class="fas fa-phone-alt text-2xl text-yellow-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-blue-900 tracking-wide">Contatti</h3>
-                    <p class="text-gray-700 leading-relaxed">Tel:  347 8429812<br>Email: info@sportcapralba.it</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-blue-900 tracking-wide">Contatti</h3>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">Tel: 347 8429812<br>info@sportcapralba.it</p>
                 </div>
             </div>
             
-    <div class="mt-16 bg-gradient-to-br from-blue-100 via-yellow-50 to-white p-10 rounded-3xl shadow-2xl border border-blue-200/40">
+    <div class="organizzatori-container mt-16 p-8 md:p-10 rounded-3xl" style="background: rgba(255,255,255,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(255,255,255,0.4); box-shadow: 0 8px 40px rgba(37,99,235,0.1);">
         <h3 class="text-3xl md:text-4xl font-extrabold mb-10 text-center text-blue-900 playfair tracking-tight drop-shadow-lg">
             <span">Organizzatori</span>
         </h3>
@@ -2078,34 +2071,15 @@
     -->
 
     <!-- Events Schedule Section -->
-    <section id="events" class="py-20 bg-gray-50">
+    <section id="events" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold mb-12 text-center playfair text-blue-900">Programma Eventi</h2>
             
-            <div class="mb-8 hidden sm:flex justify-center">
-                <div class="inline-flex rounded-md shadow-sm flex-wrap w-auto" role="group" style="flex-wrap:nowrap;">
-                    <button type="button" class="event-day-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white" data-day="29">Ven 29/5</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="30">Sab 30/5</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="31">Dom 31/5</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="5">Ven 5/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="6">Sab 6/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="7">Dom 7/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="12">Ven 12/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="13">Sab 13/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="14">Dom 14/6</button>
-                </div>
-            </div>
-            <div class="mb-8 sm:hidden overflow-x-auto pb-2">
-                <div class="inline-flex rounded-md shadow-sm flex-wrap w-auto" role="group" style="flex-wrap:nowrap;">
-                    <button type="button" class="event-day-btn active px-6 py-2 text-sm font-medium bg-blue-700 text-white" data-day="29">Ven 29/5</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="30">Sab 30/5</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="31">Dom 31/5</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="5">Ven 5/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="6">Sab 6/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300 mr-2" data-day="7">Dom 7/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="12">Ven 12/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="13">Sab 13/6</button>
-                    <button type="button" class="event-day-btn px-6 py-2 text-sm font-medium bg-gray-200 hover:bg-gray-300" data-day="14">Dom 14/6</button>
+            <div class="mb-8 flex justify-center overflow-x-auto pb-2">
+                <div class="events-tab-bar inline-flex gap-2 p-1.5 rounded-2xl" style="background: rgba(255,255,255,0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1.5px solid rgba(37,99,235,0.1); box-shadow: 0 4px 16px rgba(37,99,235,0.08);">
+                    <button type="button" class="event-day-btn active px-5 py-2.5 text-sm font-semibold rounded-xl text-white whitespace-nowrap" data-day="29" style="background: linear-gradient(135deg,#2563eb,#1e40af); box-shadow: 0 4px 12px rgba(37,99,235,0.35);">Ven 29/5</button>
+                    <button type="button" class="event-day-btn px-5 py-2.5 text-sm font-semibold rounded-xl text-blue-800 hover:bg-white/80 whitespace-nowrap transition-all duration-200" data-day="30" style="background: rgba(255,255,255,0.4);">Sab 30/5</button>
+                    <button type="button" class="event-day-btn px-5 py-2.5 text-sm font-semibold rounded-xl text-blue-800 hover:bg-white/80 whitespace-nowrap transition-all duration-200" data-day="31" style="background: rgba(255,255,255,0.4);">Dom 31/5</button>
                 </div>
             </div>
             
