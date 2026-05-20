@@ -56,7 +56,6 @@ body {
 .calendar-day {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1.5px solid #f8b4001a;
-  background: linear-gradient(120deg, #f8fafc 80%, #f8b4001a 100%);
 }
 .calendar-day:hover {
   transform: translateY(-7px) scale(1.03);
